@@ -1,5 +1,5 @@
 <template>
-  <div :id="playerName" class="vchat-aplayer"></div>
+    <div :id="playerName" class="vchat-aplayer"></div>
 </template>
 
 <script>

@@ -1,9 +1,9 @@
 <template>
-  <div :id="playerName" class="vchat-dplayer"></div>
+    <div :id="playerName" class="vchat-dplayer"></div>
 </template>
 
 <script>
-  import 'dplayer/dist/DPlayer.min.css';
+  // import 'dplayer/dist/DPlayer.min.css';
   import Hls from 'hls.js';
   import DPlayer from 'dplayer';
 

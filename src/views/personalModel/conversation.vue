@@ -1,5 +1,5 @@
 <template>
-  <div>conversation</div>
+    <div>conversation</div>
 </template>
 
 <script>

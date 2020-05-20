@@ -9,7 +9,6 @@ import uploadPopover from './uploadPopover/uploadPopover.vue';
 import PhotoSwipe from './PhotoSwipe/PhotoSwipe.vue';
 import bscroll from './bscroll/bscroll.vue';
 import vScroll from './vScroll/vScroll.vue';
-
 let fullCalendar = require('./fullCalendar/fullCalendar');
 const install = {
   install: function (Vue) {

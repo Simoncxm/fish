@@ -1,6 +1,6 @@
 <template>
-  <i :class="[{'iconfont': name}, 'vchat-noUser', className]"
-     :style="{fontSize: size + 'px', color: color, cursor: cursor}" @click.stop="clickIcon"></i>
+    <i :class="[{'iconfont': name}, 'vchat-noUser', className]"
+       :style="{fontSize: size + 'px', color: color, cursor: cursor}" @click.stop="clickIcon"></i>
 </template>
 <script>
   export default {

@@ -21,7 +21,6 @@
 .moveIn-leave-to {
   transform: translateX(-100%);
 }
-
 // 离开
 .moveOut-enter-active, .moveOut-leave-active {
   position: absolute;
@@ -45,7 +44,6 @@
 .moveOut-leave-to {
   transform: translateX(100%);
 }
-
 // chat展示动画
 //.chat-enter-active{
 //     transition: all .5s cubic-bezier(.71,.21,.28,.82);

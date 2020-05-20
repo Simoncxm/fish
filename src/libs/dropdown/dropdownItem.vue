@@ -1,9 +1,9 @@
 <template>
-  <li class="vchat-dropdown-item" @click.stop="dropdownClick">
+    <li class="vchat-dropdown-item" @click.stop="dropdownClick">
         <span>
             <slot></slot>
         </span>
-  </li>
+    </li>
 </template>
 
 <script>

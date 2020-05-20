@@ -24,7 +24,6 @@
   -2.1875em 0.6875em 0 -0.3125em #fff,
   2.0625em 0.9375em 0 -0.5625em #fff;
 }
-
 .cloud:after {
   content: '';
   position: absolute;
@@ -36,7 +35,6 @@
   background: currentColor;
   box-shadow: 0 0.4375em 0 -0.0625em #fff;
 }
-
 .cloud:nth-child(2) {
   z-index: 0;
   background: #fff;
@@ -69,7 +67,6 @@
   -webkit-animation: spin 12s infinite linear;
   animation: spin 12s infinite linear;
 }
-
 .rays {
   position: absolute;
   top: -2em;
@@ -82,7 +79,6 @@
   border-radius: 0.25em;
   box-shadow: 0 5.375em #fff;
 }
-
 .rays:before,
 .rays:after {
   content: '';
@@ -100,12 +96,10 @@
   border-radius: 0.25em;
   box-shadow: 0 5.375em #fff;
 }
-
 .rays:before {
   -webkit-transform: rotate(120deg);
   transform: rotate(120deg);
 }
-
 .cloud + .sun {
   margin: -2em 1em;
 }
@@ -153,7 +147,6 @@
   -webkit-animation: lightning 2s linear infinite;
   animation: lightning 2s linear infinite;
 }
-
 .bolt:nth-child(2) {
   width: 0.5em;
   height: 0.25em;
@@ -164,7 +157,6 @@
   -webkit-animation: lightning 1.5s linear infinite;
   animation: lightning 1.5s linear infinite;
 }
-
 .bolt:before,
 .bolt:after {
   content: '';
@@ -180,7 +172,6 @@
   -webkit-transform: skewX(-10deg);
   transform: skewX(-10deg);
 }
-
 .bolt:after {
   margin: -0.25em 0 0 -0.25em;
   border-top: 0.75em solid;
@@ -190,7 +181,6 @@
   -webkit-transform: skewX(-10deg);
   transform: skewX(-10deg);
 }
-
 .bolt:nth-child(2):before {
   margin: -0.75em 0 0 -0.5em;
   border-top: 0.625em solid transparent;
@@ -198,7 +188,6 @@
   border-bottom: 0.375em solid;
   border-left: 0.25em solid transparent;
 }
-
 .bolt:nth-child(2):after {
   margin: -0.125em 0 0 -0.125em;
   border-top: 0.375em solid;
@@ -220,7 +209,6 @@
   -webkit-animation: spin 8s linear infinite reverse;
   animation: spin 8s linear infinite reverse;
 }
-
 .flake:after {
   margin: 0.125em 0 0 -1em;
   font-size: 1.5em;
@@ -228,7 +216,6 @@
   -webkit-animation: spin 14s linear infinite;
   animation: spin 14s linear infinite;
 }
-
 .flake:nth-child(2):before {
   margin: -0.5em 0 0 0.25em;
   font-size: 1.25em;
@@ -236,7 +223,6 @@
   -webkit-animation: spin 10s linear infinite;
   animation: spin 10s linear infinite;
 }
-
 .flake:nth-child(2):after {
   margin: 0.375em 0 0 0.125em;
   font-size: 2em;

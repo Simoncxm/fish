@@ -12,7 +12,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/v': {
-        target: 'http://localhost:9988',
+        target: 'http://123.57.203.185:3389',
         changeOrigin: true // 是否在本机创建target地址的虚拟服务，避免跨域问题
       },
       '/api': {
