@@ -5,16 +5,6 @@
         <div class="vchat-content-left-content">
           <router-view></router-view>
         </div>
-        <div class="vchat-content-left-footer">
-          <ul>
-            <li v-for="v in nav" :key="v.id" :class="{active: $route.path.indexOf(v.link) > -1}">
-              <router-link :to="{path: v.link}">
-                <i class="iconfont" :class="[$route.path.indexOf(v.link) === -1 ? v.class : v.activeClass]"></i>
-                <p>{{v.name}}</p>
-              </router-link>
-            </li>
-          </ul>
-        </div>
       </div>
     </div>
     <div class="vchat-content-right-view">
@@ -29,22 +19,6 @@
     name: '',
     data() {
       return {
-        nav: [
-          {
-            name: '好友',
-            class: 'icon-people',
-            activeClass: 'icon-people_fill',
-            id: 2,
-            link: '/main/personalMain/friendly'
-          },
-          {
-            name: '群聊',
-            class: 'icon-group',
-            activeClass: 'icon-group_fill',
-            id: 3,
-            link: '/main/personalMain/group'
-          }
-        ]
       }
     },
     components: {
