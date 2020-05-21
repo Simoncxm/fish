@@ -1,10 +1,7 @@
 <template>
   <div class="vchat-login" v-bgInmage="bg">
-    <div class="fork-me-on-github">
-      <a href="https://github.com/wuyawei" target="_blank"></a>
-    </div>
     <div class="logo" :class="{active: showSign}">
-      <h3 class="title">Hi, Vchat !</h3>
+      <h3 class="title">Hi, E-CHAT !</h3>
       <span class="begain" @click="experience">立即体验</span>
     </div>
     <div class="sign" v-if="showSign">
@@ -37,17 +34,12 @@
           </el-input>
           <canvas ref="regcode" width="90" height="38"></canvas>
         </el-form-item>
-
+        <el-switch v-if="islogin" active-color="#3EB4CB" v-model="rememberMe" active-text="记住我"></el-switch>
       </el-form>
       <button @click="enter(islogin)">
         <v-icon class="el-icon-loading" color="#fff" :size="14" v-if="loading"></v-icon>
         {{islogin ? '登录' : '注册'}}
       </button>
-      <div class="login-foot" v-if="islogin">
-        <span></span>
-        第三方登录
-        <span></span>
-      </div>
     </div>
   </div>
 </template>
@@ -118,6 +110,7 @@
         IMGURL: process.env.IMG_URL,
         islogin: true, // 登录 or 注册
         showSign: false, // 登录框显示
+        rememberMe: false, // 是否记住当前用户
         regcode: '', // 验证码
         regCodeClass: null, // 验证码类
         signRules: {
