@@ -8,12 +8,12 @@
       </div>
     </div>
     <div class="vchat-content-right-view">
-      <app-center></app-center>
+      <v-chat></v-chat>
     </div>
   </div>
 </template>
 <script>
-  import appCenter from './personalModel/appCenter.vue';
+  import vChat from "./components/chat/vChat";
 
   export default {
     name: '',
@@ -22,7 +22,7 @@
       }
     },
     components: {
-      appCenter
+      vChat
     },
     methods: {},
     mounted() {
