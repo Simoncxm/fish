@@ -204,6 +204,8 @@
     }
 
     .chat-header {
+      background-color: rgba(0, 0, 0, 0.4);
+      opacity: 0.9;
       width: 100%;
       height: 40px;
       text-align: center;

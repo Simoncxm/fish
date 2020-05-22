@@ -417,13 +417,14 @@
           height: 35%;
           min-height: 135.8px;
           box-sizing: border-box;
+          background-color: rgba(0, 0, 0, 0.2);
 
           .tool {
             width: 100%;
             height: 28px;
             line-height: 28px;
             text-align: left;
-            background-color: rgba(0, 0, 0, 0.3);
+            background-color: rgba(0, 0, 0, 0.2);
             padding: 0 10px;
             box-sizing: border-box;
 
