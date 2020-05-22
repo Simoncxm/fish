@@ -2,7 +2,7 @@
   <div class="vchat-login" v-bgInmage="bg">
     <div class="logo" :class="{active: showSign}">
       <h3 class="title">Hi, E-CHAT !</h3>
-      <span class="begain" @click="experience">立即体验</span>
+      <span class="begain" v-if="!showSign" @click="experience">立即体验</span>
     </div>
     <div class="sign" v-if="showSign">
       <div class="title">
@@ -34,8 +34,8 @@
           </el-input>
           <canvas ref="regcode" width="90" height="38"></canvas>
         </el-form-item>
-        <el-switch v-if="islogin" active-color="#3EB4CB" v-model="rememberMe" active-text="记住我"></el-switch>
       </el-form>
+      <el-switch v-if="islogin" active-color="#3EB4CB" v-model="rememberMe" active-text="记住我"></el-switch>
       <button @click="enter(islogin)">
         <v-icon class="el-icon-loading" color="#fff" :size="14" v-if="loading"></v-icon>
         {{islogin ? '登录' : '注册'}}
