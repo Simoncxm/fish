@@ -68,7 +68,12 @@
 
       <div class="detail-button">
         <button @click="apply" class="vchat-full-button minor" v-if="!applyFlag">申请加群</button>
-        <button @click="quit" class="vchat-full-button error" v-else>退出群聊</button>
+        <div v-else>
+          <button @click="send" class="vchat-full-button minor">发消息</button>
+          <button @click="quit" class="vchat-full-button error" >退出群聊</button>
+
+        </div>
+
       </div>
     </div>
     <div class="Qr-dialog" :class="{active: showGroupQr}">
@@ -83,7 +88,7 @@
   import api from '@/api';
   import utils from '@/utils/utils';
   import {mapState} from 'vuex';
-
+  import Msg from '@/views/components/msg.js'
   export default {
     data() {
       return {
@@ -128,6 +133,10 @@
           groupPhoto: this.groupInfo.img
         });
         this.$router.push({name: 'applyGroup', params: {id: this.holderId}});
+      },
+      send(){
+        // console.log('send');
+        Msg.$emit("val", this.groupInfo.title);
       },
       quit() {
       }

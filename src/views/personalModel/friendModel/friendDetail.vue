@@ -40,7 +40,12 @@
       </div>
       <div class="detail-button" v-if="friendInfo.code !== user.code">
         <button @click="apply" class="vchat-full-button minor" v-if="!myFriendFlag">加为好友</button>
-        <button @click="remove" class="vchat-full-button error" v-else>删除好友</button>
+        <div v-else>
+          <button @click="send" class="vchat-full-button minor">发消息</button>
+          <button @click="remove" class="vchat-full-button error">删除好友</button>
+
+        </div>
+
       </div>
     </div>
     <div class="Qr-dialog" :class="{active: showFriendQr}">
@@ -55,7 +60,7 @@
   import api from '@/api';
   import utils from '@/utils/utils';
   import {mapState} from 'vuex';
-
+  import Msg from '@/views/components/msg.js'
   export default {
     data() {
       return {
@@ -81,6 +86,10 @@
         this.$router.push({name: 'applyFriend', params: {id: this.$route.params.id}, query: {}});
       },
       remove() {
+      },
+      send(){
+          // console.log('send');
+          Msg.$emit("val", this.friendInfo.name);
       },
       getUserInfo() {
         let params = {

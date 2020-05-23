@@ -1,6 +1,8 @@
 <template>
   <div class="vchat-item">
+    chat
     <div class="vchat-item-header">
+
       <span :class="{active: currNav === v.id}" v-for="(v, i) in navList" :key="i" @click="setCurrNav(v.id)"
             v-if="v.type.indexOf(currSation.type) > -1">{{v.name}}</span>
     </div>

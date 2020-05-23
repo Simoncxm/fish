@@ -3,6 +3,7 @@
     <v-header></v-header>
     <div class="vchat-content">
       <div class="vchat-content-nav">
+
         <ul>
           <li v-for="v in nav" :key="v.id" :class="{active: $route.path.indexOf(v.link) > -1}">
             <router-link :to="{path: v.link}">
