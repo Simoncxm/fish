@@ -28,6 +28,20 @@
           </el-input>
         </el-form-item>
 
+        <el-form-item prop="email" v-if="!islogin">
+          <el-input v-model="signForm.email" placeholder="邮箱">
+            <i class="iconfont icon-wenjian1" slot="prepend"></i>
+            <i @click="sendEmail" v-if="!eloading" class="iconfont" style="font-size: 10px" slot="append">发送验证码</i>
+            <i v-if="eloading" class="iconfont" style="font-size: 10px" slot="append">{{time}}秒后重新发送</i>
+          </el-input>
+        </el-form-item>
+
+        <el-form-item prop="emailCaptcha" v-if="!islogin">
+          <el-input v-model="signForm.emailCaptcha" placeholder="邮箱验证码">
+            <i class="iconfont icon-mima3" slot="prepend"></i>
+          </el-input>
+        </el-form-item>
+
         <el-form-item prop="regcode" class="regcode-box">
           <el-input v-model="signForm.regcode" placeholder="验证码" @keyup.enter.native="enter(islogin)">
             <i class="iconfont icon-mima3" slot="prepend"></i>
@@ -99,12 +113,26 @@
           callback();
         }
       };
+      let validateEmail = (rule, value, callback) => {
+        if (value === '') {
+          callback(new Error('请输入邮箱'));
+        } else {
+          let reg = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+          if (!reg.test(value)) {
+            callback(new Error('请输入正确格式的邮箱'));
+            return;
+          }
+          callback();
+        }
+      };
       return {
         signForm: {
           name: '',
           pass: '',
           regcode: '',
-          repass: ''
+          repass: '',
+          email: '',
+          emailCaptcha: ''
         },
         bg: bg,
         IMGURL: process.env.IMG_URL,
@@ -125,13 +153,18 @@
           ],
           regcode: [
             {validator: validateRegcode, trigger: 'blur'}
+          ],
+          email: [
+            {validator: validateEmail, trigger: 'blur'}
           ]
         },
         signSuccess: { // 注册成功提示框
           code: '',
           Visible: false
         },
-        loading: false
+        loading: false,
+        eloading: false,
+        time: 60
       }
     },
     watch: {
@@ -199,7 +232,9 @@
       signUp() {
         let params = {
           name: this.signForm.name,
-          pass: this.signForm.pass
+          pass: this.signForm.pass,
+          email: this.signForm.email,
+          emailCaptcha: this.signForm.emailCaptcha
         };
         this.loading = true;
         api.signUp(params).then(r => {
@@ -220,9 +255,28 @@
           this.loading = false;
         });
       },
-      handelClose(done) {
-        this.islogin = true;
-        done();
+      sendEmail() {
+        console.log(this.signForm.email);
+        let params = {
+          email: this.signForm.email
+        };
+        this.eloading = true;
+        let me = this;
+        let interval = window.setInterval(function() {
+          --me.time;
+          if(me.time < 0) {
+            me.time = 60;
+            me.eloading = false;
+            window.clearInterval(interval);
+          }
+        }, 1000);
+        api.checkEmail(params).then(r => {
+          if (r.code === 0) {
+            alert("发送成功");
+          } else if (r.code === -1) {
+            this.$message.error(r.msg);
+          }
+        });
       }
     },
     mounted() {
@@ -304,7 +358,7 @@
   }
 
   .sign {
-    width: 350px;
+    width: 400px;
     // height: 370px;
     padding: 15px 25px 25px;
     background-color: #fff;
@@ -313,7 +367,7 @@
     position: absolute;
     left: 50%;
     top: 50%;
-    margin-left: -175px;
+    margin-left: -200px;
     margin-top: -175px;
     animation: move 1.2s;
   }
@@ -397,7 +451,7 @@
 
   .regcode-box {
     .el-input {
-      width: 205px;
+      width: 255px;
     }
 
     canvas {
