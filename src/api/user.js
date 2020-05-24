@@ -8,7 +8,10 @@ export default {
     return fetch.post('v/user/login', params);
   },
   signUp(params) { // 注册
-    return fetch.post('v/user/signUp', params);
+    return fetch.post('v/user/register', params);
+  },
+  checkEmail(params) { // 发送邮箱验证
+    return fetch.post('v/user/emailCheck', params);
   },
   loginOut() { // 注册
     return fetch.post('v/user/loginOut');

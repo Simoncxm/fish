@@ -14,7 +14,9 @@
         layout="prev, pager, next"
         :current-page.sync="offset"
         @current-change="getMessageLog"
-        :total="total">
+        :total="total"
+        :background="true"
+      >
       </el-pagination>
     </div>
   </div>
