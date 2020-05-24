@@ -1,6 +1,5 @@
 <template>
   <div class="vchat-item">
-    chat
     <div class="vchat-item-header">
 
       <span :class="{active: currNav === v.id}" v-for="(v, i) in navList" :key="i" @click="setCurrNav(v.id)"
@@ -59,7 +58,7 @@
         <div class="handel-member">
           <h3>
             <span>群成员 ( {{onlineNum}}/{{groupUsers.length}} )</span>
-            <v-icon class="el-icon-search" :color="user.chatColor" :size="18" @clickIcon="spreadInput"></v-icon>
+<!--            <v-icon class="el-icon-search" :color="user.chatColor" :size="18" @clickIcon="spreadInput"></v-icon>-->
           </h3>
           <input type="text" v-show="spread" ref="searchMember">
           <ul>
@@ -103,11 +102,13 @@
     data() {
       return {
         // type 0 共有 1 群聊 2 好友
-        navList: [{name: '聊天', type: 'group,friend', id: 0}, {name: '公告', type: 'group', id: 1}, {
-          name: '聊天记录',
-          type: 'group,friend',
-          id: 2
-        }],
+        navList: [{name: '聊天', type: 'group,friend', id: 0},
+          // {name: '公告', type: 'group', id: 1},
+          {
+            name: '聊天记录',
+            type: 'group,friend',
+            id: 2
+          }],
         IMG_URL: process.env.IMG_URL,
         currNav: 0,
         spread: false,

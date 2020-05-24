@@ -30,11 +30,11 @@
             link: '/mySetting/means',
             class: 'icon-gerenziliao3'
           },
-          {
-            name: '主题设置',
-            link: '/mySetting/theme',
-            class: 'icon-zhuti'
-          }
+          // {
+          //   name: '主题设置',
+          //   link: '/mySetting/theme',
+          //   class: 'icon-zhuti'
+          // }
         ]
       }
     },

@@ -5,7 +5,7 @@
       <div class="chat-header">
         <a v-fontColor="user.chatColor">{{currSation.name}}</a>
         <div class="chat-handel">
-          <v-icon class="el-icon-minus" :color="user.chatColor" cursor="pointer" @clickIcon="close"></v-icon>
+<!--          <v-icon class="el-icon-minus" :color="user.chatColor" cursor="pointer" @clickIcon="close"></v-icon>-->
           <v-icon class="el-icon-setting" :color="user.chatColor" cursor="pointer"
                   @clickIcon="settingFlag.f = true"></v-icon>
         </div>

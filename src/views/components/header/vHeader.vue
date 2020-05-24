@@ -4,18 +4,18 @@
       <div class="vchat-header-container">
         <div class="vchat-logo">Vchat</div>
         <div class="vchat-mine">
-          <nav class="vchat-noUser">
-            <!--class="animated" :class="{bounceIn: hover}" @mouseover="mouseover" ref="showChat"-->
-            <div>
-              <el-badge :value="unReadCount" :max="99" :hidden="unReadCount === 0" class="headerBadg">
-                <span class="nav-btn">消息</span>
-              </el-badge>
-              <ul class="handleList">
-                <li @click="showChat = !showChat"><span>会话列表</span></li>
-                <li @click="reset"><span>会话窗口复位</span></li>
-              </ul>
-            </div>
-          </nav>
+          <!--          <nav class="vchat-noUser">-->
+          <!--            &lt;!&ndash;class="animated" :class="{bounceIn: hover}" @mouseover="mouseover" ref="showChat"&ndash;&gt;-->
+          <!--            <div>-->
+          <!--              <el-badge :value="unReadCount" :max="99" :hidden="unReadCount === 0" class="headerBadg">-->
+          <!--                <span class="nav-btn">消息</span>-->
+          <!--              </el-badge>-->
+          <!--              <ul class="handleList">-->
+          <!--                <li @click="showChat = !showChat"><span>会话列表</span></li>-->
+          <!--                <li @click="reset"><span>会话窗口复位</span></li>-->
+          <!--              </ul>-->
+          <!--            </div>-->
+          <!--          </nav>-->
           <div>
             <a href="javascript:;">
               <img :src="avatar" alt="">
@@ -91,16 +91,16 @@
 //                hover: false,
         draggable: true, // 允许拖拽
         handleList: [
-          {
-            name: '个人空间',
-            icon: 'icon-zhanghaoguanli1',
-            link: '/mine'
-          },
-          {
-            name: '日程管理',
-            icon: 'icon-huihuajilu',
-            link: '/todo'
-          },
+          // {
+          //   name: '个人空间',
+          //   icon: 'icon-zhanghaoguanli1',
+          //   link: '/mine'
+          // },
+          // {
+          //   name: '日程管理',
+          //   icon: 'icon-huihuajilu',
+          //   link: '/todo'
+          // },
           {
             name: '设置',
             icon: 'icon-shezhi1',
