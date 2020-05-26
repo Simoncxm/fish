@@ -101,16 +101,16 @@
         this.$refs['groupForm'].validate((valid) => {
           if (valid) {
             let params = {
-              groupImage: this.groupImage,
               groupName: this.groupForm.groupName,
               groupDesc: this.groupForm.groupDesc,
+              groupAvatar: this.groupImage
             };
             api.createGroup(params).then(r => {
               if (r.code === 0) {
                 let params = {
                   name: this.groupForm.groupName,
                   photo: this.groupImage,
-                  id: r.data,
+                  id: r.id,
                   type: 'group'
                 };
                 api.addConversitionList(params).then(r => {

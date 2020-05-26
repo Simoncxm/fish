@@ -5,13 +5,13 @@ export default {
     return fetch.post('v/group/createGroup', params);
   },
   getMyGroup() { //查找我的群
-    return fetch.post('v/group/getMyGroup');
+    return fetch.get('v/group/getMyGroup');
   },
-  getGroupUsers(params) {
-    return fetch.post('v/group/getGroupUsers', params);
+  getGroupUser(params) {
+    return fetch.get('v/group/getGroupUser', params);
   },
-  huntGroups(params) {
-    return fetch.post('v/group/huntGroups', params);
+  searchGroup(params) {
+    return fetch.post('v/group/searchGroup', params);
   },
   getGroupInfo(params) {
     return fetch.post('v/group/getGroupInfo', params);

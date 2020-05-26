@@ -32,7 +32,7 @@
           <div>
             <p>
               <span class="vchat-line1" :title="user.nickname">{{user.nickname}}</span>
-              <span @click="loginOut" class="logout">[退出]</span>
+              <span @click="logout" class="logout">[退出]</span>
             </p>
             <p class="vchat-line2" :title="user.signature">{{user.signature ? '个性签名：' + user.signature :
               '这个人很懒，暂时没有签名哦！'}}</p>
@@ -65,7 +65,7 @@
         <a href="javascipt:;">
           <img :src="avatar" alt="">
         </a>
-        <span @click="loginOut" class="logout">[退出]</span>
+        <span @click="logout" class="logout">[退出]</span>
       </div>
     </div>
   </div>
@@ -144,9 +144,9 @@
         window.localStorage.x = 100;
         window.localStorage.y = 100;
       },
-      loginOut() {
+      logout() {
         this.leaveRoom();
-        api.loginOut().then(r => {
+        api.logout().then(r => {
           if (r.code === 0) {
             this.$message.success('退出成功');
             this.$store.commit('setUser', 'out');

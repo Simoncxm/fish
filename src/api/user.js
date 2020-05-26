@@ -7,14 +7,14 @@ export default {
   login(params) { // 登录
     return fetch.post('v/user/login', params);
   },
-  signUp(params) { // 注册
+  register(params) { // 注册
     return fetch.post('v/user/register', params);
   },
-  checkEmail(params) { // 发送邮箱验证
-    return fetch.post('v/user/emailCheck', params);
+  sendEmail(params) { // 发送邮箱验证
+    return fetch.post('v/user/sendEmail', params);
   },
-  loginOut() { // 注册
-    return fetch.post('v/user/loginOut');
+  logout() { // 注册
+    return fetch.get('v/user/logout');
   },
   getUserInfo(params) { //获取用户信息
     return fetch.post('v/user/getUserInfo', params);

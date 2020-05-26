@@ -203,7 +203,7 @@
             if (f) {
               this.login();
             } else {
-              this.signUp();
+              this.register();
             }
           } else {
             return false;
@@ -213,7 +213,7 @@
       login() {
         let params = {
           name: this.signForm.name,
-          pass: this.signForm.pass
+          password: this.signForm.pass
         };
         this.loading = true;
         api.login(params).then(r => {
@@ -221,7 +221,7 @@
             this.$message.success('登录成功');
             this.$store.dispatch('getUserInfo', this);
           } else if (r.code === -1) {
-            this.$message.error('账号不存在或密码错误');
+            this.$message.error(r.msg);
             this.loading = false;
           } else {
             this.$message.error('登录失败');
@@ -229,15 +229,15 @@
           }
         });
       },
-      signUp() {
+      register() {
         let params = {
           name: this.signForm.name,
-          pass: this.signForm.pass,
+          password: this.signForm.pass,
           email: this.signForm.email,
-          emailCaptcha: this.signForm.emailCaptcha
+          captcha: this.signForm.emailCaptcha
         };
         this.loading = true;
-        api.signUp(params).then(r => {
+        api.register(params).then(r => {
           if (r.code === 0) {
             this.$refs['signForm'].resetFields();
             this.$notify({
@@ -247,8 +247,8 @@
               type: 'success'
             });
             this.islogin = true;
-          } else if (r.code === 1) {
-            this.$message.error('账号已存在')
+          } else if (r.code === -1) {
+            this.$message.error(r.msg)
           } else {
             this.$message.error('注册失败')
           }
@@ -256,7 +256,6 @@
         });
       },
       sendEmail() {
-        console.log(this.signForm.email);
         let params = {
           email: this.signForm.email
         };
@@ -270,7 +269,7 @@
             window.clearInterval(interval);
           }
         }, 1000);
-        api.checkEmail(params).then(r => {
+        api.sendEmail(params).then(r => {
           if (r.code === 0) {
             alert("发送成功");
           } else if (r.code === -1) {

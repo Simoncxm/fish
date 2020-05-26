@@ -2,7 +2,7 @@
   <div class="vchat-searchGroup">
     <v-apheader title="查找群聊" back="/main/personalMain/group/own"></v-apheader>
     <div class="vchat-search group-search">
-      <el-select v-model="type" placeholder="请选择搜索方式" @change="huntGroups">
+      <el-select v-model="type" placeholder="请选择搜索方式" @change="searchGroup">
         <el-option
           v-for="item in searchOptions"
           :key="item.value"
@@ -16,7 +16,7 @@
         v-model="huntKey"
         clearable
       >
-        <i slot="append" class="el-input__icon el-icon-search" @click="huntGroups('click')"></i>
+        <i slot="append" class="el-input__icon el-icon-search" @click="searchGroup('click')"></i>
       </el-input>
     </div>
     <div class="search-contianer" v-loading="loadingSearch">
@@ -80,14 +80,14 @@
     },
     watch: {
       huntKey() {
-        this.huntGroups();
+        this.searchGroup();
       }
     },
     methods: {
       goGroupDetail(id) {
         this.$router.push({name: 'groupDetail', params: {id: id}});
       },
-      huntGroups(t) { // 搜索群聊
+      searchGroup(t) { // 搜索群聊
         if (this.loadingSearch) {
           return;
         }
@@ -115,12 +115,12 @@
 
         this.loadingSearch = true;
         let params = {
-          key: this.huntKey,
+          keyword: this.huntKey,
           offset: 1,
           limit: 8,
           type: this.type
         };
-        api.huntGroups(params).then(r => {
+        api.searchGroup(params).then(r => {
           if (r.code === 0) {
             this.groupList = r.data;
           }
