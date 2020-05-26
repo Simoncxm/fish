@@ -32,14 +32,14 @@
             <div class="chat-conversation-li-right">
               <p>{{v.newMesTime}}</p>
             </div>
-            <p class="delete"  >
-              <el-tooltip class="item" effect="dark" :content="'移除'" placement="top-start" >
+            <p class="delete" >
+              <el-tooltip class="item" effect="dark" :content="'移除'" placement="top-start" v-if="v.name !== 'Vchat'">
                 <el-button icon="el-icon-close" circle size="mini" @click="remove(v,i)"></el-button>
               </el-tooltip>
             </p>
           </li>
         </ul>
-        <div class="chat-content-box">
+        <div class="chat-content-box" v-if="update">
           <chat-item :currSation="currSation" @NewMes="getNewMes" v-show="currSation.type !== 'vchat'"></chat-item>
           <vchat-message v-show="currSation.type === 'vchat'" :currSation="currSation"></vchat-message>
         </div>
@@ -59,8 +59,10 @@
   import Msg from '@/views/components/msg.js'
   export default {
     name: 'vChat',
+    inject:['reload'],
     data() {
       return {
+        update:true,//没能实现，bug还存在
         initVchatFlag: true,
         currSation: {}, //当前会话
         contactsList :[], // 会话列表
@@ -86,10 +88,15 @@
           var allList = JSON.parse(JSON.stringify(list));
           //保证只初始化一次
           if(this.initVchatFlag){
-            this.contactsList.push(allList[allList.length - 1]);
+            for(var i = 0; i < allList.length; i++){
+              if(allList[i].name === 'Vchat') {
+                _this.contactsList.push(allList[i]);
+              }
+            }
             this.initVchatFlag = false;
           }
-          // console.log(this.initVchatFlag);
+          // console.log(allList.length);
+          // console.log(allList[allList.length - 1]);
           Msg.$on('val', function(m){
             var flag = 0;
             for(var j = 0; j < _this.contactsList.length; j++){
@@ -98,11 +105,13 @@
             if(flag === 0){
               for(var i = 0; i < allList.length; i++){
                 if(allList[i].name === m) {
-                  // console.log('recieve');
-                  // console.log(m);
-                  // console.log(i);
                   _this.contactsList.push(allList[i]);
                 }
+              }
+            }
+            for(var x = 0; x < _this.contactsList.length; x++){
+              if(_this.contactsList[x].name === m){
+                _this.currSation = _this.contactsList[x];
               }
             }
 
@@ -124,9 +133,9 @@
       },
       contactsList: {
         handler(list) {
-          if (!list.length) {
-            this.currSation = {};
-          }
+          // if (!list.length) {
+          //   this.currSation = {};
+          // }
         },
         deep: true
       },
@@ -154,11 +163,13 @@
       close() {
         this.$emit('closeChat');
       },
-      setCurrSation(v) {
+       setCurrSation(v){
+         console.log(this.currSation.name);
         if (v.id === this.currSation.id) {
           return;
         }
         this.currSation = v;
+         console.log(this.currSation.name);
       },
       getNewMes(m) { // 获取最新一条消息
         this.contactsList.forEach((v, i) => {
@@ -170,7 +181,28 @@
       remove(v,i) {
         // console.log("remove");
         // console.log(v.id);
+        var _this = this;
+        if(this.contactsList[this.contactsList.length - 1].id === v.id){
+          //console.log(this.contactsList[this.contactsList.length - 1].id===v.id);
+            this.currSation = this.contactsList[this.contactsList.length - 1];
+        }
         this.contactsList = this.contactsList.filter(m => m.id !== v.id);
+        //bug
+       //  console.log(this.currSation.name);
+       // // this.currSation = this.contactsList[i] || this.contactsList[i - 1] || this.contactsList[i + 1];
+       //  console.log(this.currSation.name);
+        // this.update = this.update ? false:true;
+        // this.$nextTick(function(){
+        //   this.update = this.update ? false:true;
+        //   setCurrSation(this.contactsList[this.contactsList.length - 1]);
+        // })
+        // this.$forceUpdate();
+        //this.reload();
+
+
+        //   console.log(this.currSation.name);
+        // setCurrSation(this.contactsList[this.contactsList.length - 1]);
+
         // if (v.type === 'vchat') { // 只做显示列表移除
         //   this.contactsList = this.contactsList.filter(m => m.id !== v.id);
         //   if (this.currSation.id === v.id && this.contactsList.length !== 0) {
@@ -275,7 +307,7 @@
       justify-content: flex-start;
 
       .chat-conversation-ul {
-        width: 20%;
+        width: 25%;
         min-width: 147.2px;
         padding-bottom: 20px;
         box-sizing: border-box;
@@ -310,7 +342,7 @@
           text-align: center;
           /*transition: transform 0.3s;*/
           transform: scale(0);
-
+          margin-right: 5px;
           i {
             margin: 0;
           }
@@ -338,7 +370,7 @@
         min-width: 36px;
         font-size: 12px;
         text-align: right;
-
+  margin-right: 5px;
         p {
           margin-bottom: 5px;
         }

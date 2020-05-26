@@ -51,11 +51,11 @@
         </p>
       </v-nodata>
     </div>
-    <v-dropdown :command="currFriend" :x="x" :y="y" :visible="visible" @upVisible="upVisible">
-      <v-dropdown-item slot-scope="{command}" @dropdownClick="handleConversitionList(command)" slot="dropdown">
-        {{addOrDel ? '从会话列表移除' : '添加到会话列表'}}
-      </v-dropdown-item>
-    </v-dropdown>
+<!--    <v-dropdown :command="currFriend" :x="x" :y="y" :visible="visible" @upVisible="upVisible">-->
+<!--      <v-dropdown-item slot-scope="{command}" @dropdownClick="handleConversitionList(command)" slot="dropdown">-->
+<!--        {{addOrDel ? '从会话列表移除' : '添加到会话列表'}}-->
+<!--      </v-dropdown-item>-->
+<!--    </v-dropdown>-->
   </div>
 </template>
 
