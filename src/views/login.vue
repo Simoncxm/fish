@@ -213,7 +213,7 @@
       login() {
         let params = {
           name: this.signForm.name,
-          pass: this.signForm.pass
+          password: this.signForm.pass
         };
         this.loading = true;
         api.login(params).then(r => {
@@ -232,7 +232,7 @@
       signUp() {
         let params = {
           name: this.signForm.name,
-          pass: this.signForm.pass,
+          password: this.signForm.pass,
           email: this.signForm.email,
           emailCaptcha: this.signForm.emailCaptcha
         };
