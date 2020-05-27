@@ -65,8 +65,8 @@
       getMessageLog() {
         this.chatLoading = true;
         this.messageLog = [];
-        let params = {roomid: this.currSation.id, offset: this.offset, limit: this.limit};
-        api.loadMoreMessages(params).then(r => {
+        let params = {conversationId: this.currSation.id, offset: this.offset, limit: this.limit};
+        api.getMoreMessage(params).then(r => {
           if (r.code === 0) {
             this.messageLog = r.data;
             this.total = r.count;

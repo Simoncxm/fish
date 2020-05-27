@@ -28,11 +28,11 @@ export default {
   getVchatInfo() { // 获取vchat官方账号信息
     return fetch.post('v/user/getVchatInfo');
   },
-  addConversitionList(params) { // 添加会话
-    return fetch.post('v/user/addConversitionList', params);
+  addConversation(params) { // 添加会话
+    return fetch.post('user/addConversation', params);
   },
-  removeConversitionList(params) { // 移除会话
-    return fetch.post('v/user/removeConversitionList', params);
+  removeConversation(params) { // 移除会话
+    return fetch.delete('user/removeConversation', params);
   },
   huntFriends(params) { // 添加好友
     return fetch.post('v/user/huntFriends', params);
