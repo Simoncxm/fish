@@ -17,16 +17,22 @@ export default {
     return fetch.get('v/user/logout');
   },
   getUserInfo(params) { //获取用户信息
-    return fetch.post('v/user/getUserInfo', params);
+    return fetch.get('v/user/getUserInfo', params);
   },
-  upUserInfo(params) { // 设置主题
-    return fetch.post('v/user/upUserInfo', params);
+  updateUserInfo(params) { // 修改个人信息
+    return fetch.post('v/user/updateUserInfo', params);
+  },
+  updateUserGender(params) { // 修改个人性别
+    return fetch.get('v/user/updateUserGender', params);
+  },
+  updateBgOpa(params) { // 修改聊天透明度
+    return fetch.get('v/user/updateBgOpa', params);
   },
   getUserDetail() { // 获取个人设置用户信息
     return fetch.post('v/user/getUserDetail');
   },
-  getVchatInfo() { // 获取vchat官方账号信息
-    return fetch.post('v/user/getVchatInfo');
+  getSystemInfo() { // 获取系统信息
+    return fetch.get('v/user/getSystemInfo');
   },
   addConversitionList(params) { // 添加会话
     return fetch.post('v/user/addConversitionList', params);
@@ -34,8 +40,8 @@ export default {
   removeConversitionList(params) { // 移除会话
     return fetch.post('v/user/removeConversitionList', params);
   },
-  huntFriends(params) { // 添加好友
-    return fetch.post('v/user/huntFriends', params);
+  searchFriend(params) { // 添加好友
+    return fetch.post('v/user/searchFriend', params);
   }
 }
 

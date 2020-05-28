@@ -113,7 +113,7 @@
           limit: 8,
           type: this.type
         };
-        api.huntFriends(params).then(r => {
+        api.searchFriend(params).then(r => {
           if (r.code === 0) {
             this.friendList = r.data;
           }

@@ -192,7 +192,7 @@
       getAvatar(url) { // 裁剪后的图像路径
         this.imageUrl = process.env.IMG_URL + url;
         this.showCrop = false;
-        api.upUserInfo({photo: url, unlink: this.$store.state.user.photo}).then(r => {
+        api.updateUserInfo({type:'头像',content: url}).then(r => {
           if (r.code === 0) {
             this.$message({
               message: '保存头像成功',
@@ -218,26 +218,50 @@
       saveInfo() { // 保存修改
         this.$refs['personForm'].validate((valid) => {
           if (valid) {
-            api.upUserInfo(this.personForm).then(r => {
-              if (r.code === 0) {
-                this.$message({
-                  message: '保存成功',
-                  type: 'success'
-                });
-                this.$store.commit('setUser', {
-                  nickname: this.personForm.nickname,
-                  signature: this.personForm.signature,
-                  province: this.personForm.province,
-                  city: this.personForm.city,
-                  town: this.personForm.town
-                });
-              } else {
-                this.$message({
-                  message: '保存失败',
-                  type: 'warning'
-                })
+            let sygnal=1;
+            api.updateUserInfo({type:'nickname',content:this.personForm.nickname}).then(r => {
+              if (r.code !== 0) {
+                sygnal=0;
               }
             });
+            api.updateUserInfo({type:'签名',content:this.personForm.signature}).then(r => {
+              if (r.code !== 0) {
+                sygnal=0;
+              }
+            });
+            let sexnum=0;
+            if(this.personForm.sex==='男'){
+              sexnum=1;
+            }
+            else if(this.personForm.sex==='女'){
+              sexnum=2;
+            }
+            else{
+              sexnum=0;
+            }
+            api.updateUserGender({gender:sexnum}).then(r => {
+              if (r.code !== 0) {
+                sygnal=0;
+              }
+            });
+            if (sygnal=== 1) {
+              this.$message({
+                message: '保存成功',
+                type: 'success'
+              });
+              this.$store.commit('setUser', {
+                nickname: this.personForm.nickname,
+                signature: this.personForm.signature,
+                province: this.personForm.province,
+                city: this.personForm.city,
+                town: this.personForm.town
+              });
+            } else {
+              this.$message({
+                message: '保存失败',
+                type: 'warning'
+              })
+            }
           } else {
             return false;
           }

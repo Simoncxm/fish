@@ -86,6 +86,17 @@
         this.$router.push({name: 'applyFriend', params: {id: this.$route.params.id}, query: {}});
       },
       remove() {
+        let params={
+          userid: this.user.id
+        };
+        api.deleteMyFriend(params).then(r =>{
+          if(r.code===0){
+            this.$message.success('删除成功');
+          }
+          else{
+            this.$message.error(r.mes);
+          }
+        })
       },
       send(){
           // console.log('send');
@@ -106,11 +117,10 @@
       },
       checkMyfriends() {
         let params = {
-          userM: this.$route.params.id,
-          userY: this.user.id
+          userid: this.user.id
         };
-        api.checkMyfriends(params).then(r => {
-          if (r.code === 0) {
+        api.checkMyfriend(params).then(r => {
+          if (r.isMyfriend===true) {
             this.myFriendFlag = r.data;
           }
         })

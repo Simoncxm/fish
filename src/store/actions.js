@@ -8,7 +8,6 @@ export default {
       if (r.code === 0) {
         commit('setUser', r.data);
         commit('setConversationsList', r.data.conversationsList);
-        document.body.id = 'theme-' + r.data.projectTheme;
         dispatch('getVchatInfo');
         if (that) {
           that.loading = false;

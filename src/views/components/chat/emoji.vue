@@ -116,7 +116,7 @@
         let params = {
           emoji: this.user.emoji
         };
-        api.upUserInfo(params).then(r => {
+        api.updateUserInfo(params).then(r => {
           if (r.code === 0) {
             this.$message({
               message: '添加成功',

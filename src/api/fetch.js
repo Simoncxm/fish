@@ -48,5 +48,12 @@ export default {
         resolve(r.data);
       })
     })
+  },
+  delete(url, params) {
+    return new Promise((resolve, reject) => {
+      instance.delete(url, {params}).then(r => {
+        resolve(r.data);
+      })
+    })
   }
 }

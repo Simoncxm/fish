@@ -161,10 +161,7 @@
         });
       },
       findMyfriends() {
-        let params = {
-          userId: this.user.id
-        };
-        api.findMyfriends(params).then(r => {
+        api.getMyfriend().then(r => {
           if (r.code === 0) {
             this.friendList = r.data;
           }
