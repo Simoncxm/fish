@@ -119,12 +119,10 @@
       },
       addConversitionList(v) { // 加入会话列表
         let params = {
-          name: v.nickname,
-          photo: v.photo,
-          id: v.roomid,
+          itemId: v.id,
           type: 'friend'
         };
-        api.addConversitionList(params).then(r => {
+        api.addConversation(params).then(r => {
           if (r.code === 0) {
             this.$message({
               type: 'success',
@@ -144,7 +142,7 @@
         let params = {
           id: v.roomid
         };
-        api.removeConversitionList(params).then(r => {
+        api.removeConversation(params).then(r => {
           if (r.code === 0) {
             this.$message({
               type: 'success',
@@ -161,10 +159,7 @@
         });
       },
       findMyfriends() {
-        let params = {
-          userId: this.user.id
-        };
-        api.findMyfriends(params).then(r => {
+        api.getMyfriend().then(r => {
           if (r.code === 0) {
             this.friendList = r.data;
           }

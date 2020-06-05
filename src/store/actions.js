@@ -8,8 +8,7 @@ export default {
       if (r.code === 0) {
         commit('setUser', r.data);
         commit('setConversationsList', r.data.conversationsList);
-        document.body.id = 'theme-' + r.data.projectTheme;
-        dispatch('getVchatInfo');
+        dispatch('getSystemInfo');
         if (that) {
           that.loading = false;
           that.$router.replace('/main/personalMain');
@@ -28,8 +27,8 @@ export default {
       state.transitionName = '';
     }, 500)
   },
-  getVchatInfo({commit, state}) { // 获取官方账号信息
-    api.getVchatInfo().then(r => {
+  getSystemInfo({commit, state}) { // 获取官方账号信息
+    api.getSystemInfo().then(r => {
       if (r.code === 0) {
         let id = state.user.id + '-' + r.data.id;
         state.Vchat = Object.assign({}, r.data, {type: 'vchat'}, {id});

@@ -4,11 +4,14 @@
 import fetch from './fetch';
 
 export default {
-  findMyfriends(params) { //查找我的好友
-    return fetch.post('v/friend/findMyfriends', params);
+  getMyfriend() { //获取我的好友
+    return fetch.get('friend/getMyfriend');
   },
-  checkMyfriends(params) { //查找我的好友
-    return fetch.post('v/friend/checkMyfriends', params);
+  checkMyfriend(params) { //验证是否为我的好友
+    return fetch.get('friend/checkMyfriend', params);
+  },
+  deleteMyFriend(params){//删除好友
+    return fetch.delete('friend/deleteMyFriend',params);
   }
 }
 

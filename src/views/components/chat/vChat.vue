@@ -210,7 +210,7 @@
         //   }
         // }
         //  else {
-        //   api.removeConversitionList(v).then(r => {
+        //   api.removeConversation(v._id).then(r => {
         //     if (r.code === 0) {
         //       this.$message({
         //         type: 'success',

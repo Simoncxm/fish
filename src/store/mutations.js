@@ -2,6 +2,10 @@
  * Created by wyw on 2018/8/4.
  */
 export default {
+  setToken(state, data) {
+    state.token = data.token;
+    sessionStorage.setItem('token', data.token);
+  },
   setUser(state, data) {
     if (data === 'out') {
       state.user = {};

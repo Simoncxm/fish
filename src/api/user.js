@@ -2,40 +2,46 @@ import fetch from './fetch';
 
 export default {
   getUser(params) { // 获取所有用户
-    return fetch.get('v/user/getUser', params);
+    return fetch.get('user/getUser', params);
   },
   login(params) { // 登录
-    return fetch.post('v/user/login', params);
+    return fetch.post('login', params);
   },
   register(params) { // 注册
-    return fetch.post('v/user/register', params);
+    return fetch.post('register', params);
   },
   sendEmail(params) { // 发送邮箱验证
-    return fetch.post('v/user/sendEmail', params);
+    return fetch.get('sendEmail', params);
   },
-  logout() { // 注册
-    return fetch.get('v/user/logout');
+  logout() { // 登出
+    return fetch.get('user/logout');
   },
   getUserInfo(params) { //获取用户信息
-    return fetch.post('v/user/getUserInfo', params);
+    return fetch.get('user/getUserInfo', params);
   },
-  upUserInfo(params) { // 设置主题
-    return fetch.post('v/user/upUserInfo', params);
+  updateUserInfo(params) { // 修改个人信息
+    return fetch.post('user/updateUserInfo', params);
+  },
+  updateUserGender(params) { // 修改个人性别
+    return fetch.get('user/updateUserGender', params);
+  },
+  updateBgOpa(params) { // 修改聊天透明度
+    return fetch.get('user/updateBgOpa', params);
   },
   getUserDetail() { // 获取个人设置用户信息
-    return fetch.post('v/user/getUserDetail');
+    return fetch.post('user/getUserDetail');
   },
-  getVchatInfo() { // 获取vchat官方账号信息
-    return fetch.post('v/user/getVchatInfo');
+  getSystemInfo() { // 获取系统信息
+    return fetch.get('user/getSystemInfo');
   },
-  addConversitionList(params) { // 添加会话
-    return fetch.post('v/user/addConversitionList', params);
+  addConversation(params) { // 添加会话
+    return fetch.post('user/addConversation', params);
   },
-  removeConversitionList(params) { // 移除会话
-    return fetch.post('v/user/removeConversitionList', params);
+  removeConversation(params) { // 移除会话
+    return fetch.delete('user/removeConversation', params);
   },
-  huntFriends(params) { // 添加好友
-    return fetch.post('v/user/huntFriends', params);
+  searchFriend(params) { // 添加好友
+    return fetch.post('user/searchFriend', params);
   }
 }
 

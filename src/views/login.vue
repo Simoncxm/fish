@@ -219,6 +219,9 @@
         api.login(params).then(r => {
           if (r.code === 0) {
             this.$message.success('登录成功');
+            this.$store.commit('setToken', r)
+            // alert(sessionStorage.getItem('token'))
+            // alert(r.token)
             this.$store.dispatch('getUserInfo', this);
           } else if (r.code === -1) {
             this.$message.error(r.msg);
@@ -242,7 +245,7 @@
             this.$refs['signForm'].resetFields();
             this.$notify({
               title: '注册成功',
-              message: `您的Vchat号为：${r.data}，您可以凭此登录，祝您生活愉快！`,
+              message: `希望您在EChat聊的愉快！`,
               duration: 5000,
               type: 'success'
             });
@@ -271,7 +274,12 @@
         }, 1000);
         api.sendEmail(params).then(r => {
           if (r.code === 0) {
-            alert("发送成功");
+            this.$notify({
+              title: '发送成功',
+              message: `请注意查收邮件！`,
+              duration: 5000,
+              type: 'success'
+            });
           } else if (r.code === -1) {
             this.$message.error(r.msg);
           }

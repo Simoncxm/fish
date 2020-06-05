@@ -101,13 +101,26 @@
         let params = {
           bgOpa: this.aphSlider / 100
         };
-        this.upUserInfo(params);
+        api.updateBgOpa(params).then(r => {
+          if (r.code === 0) {
+            this.$store.commit('setUser', params);
+            this.$message({
+              message: '设置成功',
+              type: 'success'
+            });
+          } else {
+            this.$message({
+              message: '设置失败',
+              type: 'warning'
+            })
+          }
+        });
       },
       formatTooltip(val) {
         return val / 100;
       },
       upUserInfo(params) {
-        api.upUserInfo(params).then(r => {
+        api.updateUserInfo(params).then(r => {
           if (r.code === 0) {
             this.$store.commit('setUser', params);
             this.$message({
@@ -134,12 +147,13 @@
           return;
         }
         let params = {
-          wallpaper: v.url + (this.user.wallpaper.split(',')[1] ? ',' + this.user.wallpaper.split(',')[1] : '')
+          type: '聊天背景',
+          content: v.url + (this.user.wallpaper.split(',')[1] ? ',' + this.user.wallpaper.split(',')[1] : '')
         };
         this.upUserInfo(params);
       },
       colorChange() {
-        this.upUserInfo({chatColor: this.chooseColor});
+        this.upUserInfo({type:'chatcolor',content: this.chooseColor});
       },
       fileChange() {
         let f = this.$refs['wallpaperFile'].files[0];
@@ -159,7 +173,7 @@
             if (this.user.wallpaper.split(',')[1]) {
               params.unlink = this.user.wallpaper.split(',')[1];
             }
-            api.upUserInfo(params).then(res => {
+            api.updateUserInfo(params).then(res => {
               if (res.code === 0) {
                 this.$store.commit('setUser', {wallpaper: r.data + ',' + r.data});
                 this.$message({

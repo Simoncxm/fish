@@ -127,7 +127,7 @@
     },
     methods: {
       del(v) {
-        api.removeMessage({'_id': v['_id']}).then(r => {
+        api.removeMessage({'id': v['_id']}).then(r => {
           if (r.code === 0) {
             this.$message({
               message: '删除成功',

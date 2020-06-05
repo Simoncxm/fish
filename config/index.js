@@ -11,9 +11,37 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/v': {
-        target: 'http://123.57.203.185:3389',
-        changeOrigin: true // 是否在本机创建target地址的虚拟服务，避免跨域问题
+      '/user': {
+        target: 'http://localhost:8081',
+        // changeOrigin: true // 是否在本机创建target地址的虚拟服务，避免跨域问题
+      },
+      '/sendEmail': {
+        target: 'http://localhost:8081',
+        // changeOrigin: true // 是否在本机创建target地址的虚拟服务，避免跨域问题
+      },
+      '/login': {
+        target: 'http://localhost:8081',
+        // changeOrigin: true // 是否在本机创建target地址的虚拟服务，避免跨域问题
+      },
+      '/register': {
+        target: 'http://localhost:8081',
+        // changeOrigin: true // 是否在本机创建target地址的虚拟服务，避免跨域问题
+      },
+      '/group': {
+        target: 'http://localhost:8081',
+        // changeOrigin: true // 是否在本机创建target地址的虚拟服务，避免跨域问题
+      },
+      '/mes': {
+        target: 'http://localhost:8081',
+        // changeOrigin: true // 是否在本机创建target地址的虚拟服务，避免跨域问题
+      },
+      '/friend': {
+        target: 'http://localhost:8081',
+        // changeOrigin: true // 是否在本机创建target地址的虚拟服务，避免跨域问题
+      },
+      '/expre': {
+        target: 'http://localhost:8081',
+        // changeOrigin: true // 是否在本机创建target地址的虚拟服务，避免跨域问题
       },
       '/api': {
         target: 'http://api.budejie.com',

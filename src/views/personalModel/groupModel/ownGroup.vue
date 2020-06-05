@@ -157,12 +157,10 @@
       },
       addConversitionList(v) { // 加入会话列表
         let params = {
-          name: v.title,
-          photo: v.img,
-          id: v._id,
+          itemId: v._id,
           type: 'group'
         };
-        api.addConversitionList(params).then(r => {
+        api.addConversation(params).then(r => {
           if (r.code === 0) {
             this.$message({
               type: 'success',
@@ -182,7 +180,7 @@
         let params = {
           id: v._id
         };
-        api.removeConversitionList(params).then(r => {
+        api.removeConversation(params).then(r => {
           if (r.code === 0) {
             this.$message({
               type: 'success',
