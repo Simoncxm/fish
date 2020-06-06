@@ -41,7 +41,7 @@
           name: this.user.name,
           mes: this.introduce,
           time: utils.formatTime(new Date()),
-          avatar: this.user.photo,
+          avatar: this.user.avatar,
           nickname: this.user.nickname,
           signature: this.user.signature,
           groupName: group.groupName,

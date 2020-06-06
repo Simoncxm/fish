@@ -21,7 +21,7 @@
             <span class="vchat-line1 todoTitle">{{p.event.title}}</span>
             <span>
                                 <v-icon class="el-icon-delete" cursor="pointer" :size="14"
-                                        @clickIcon="delTodo(p.event['_id'])"></v-icon>
+                                        @clickIcon="delTodo(p.event['id'])"></v-icon>
                                 <v-icon class="el-icon-edit" cursor="pointer" :size="14"
                                         @clickIcon="upTodo(p.event)"></v-icon>
                             </span>
@@ -63,7 +63,7 @@
       },
       up(o) {
         this.fcEvents.forEach(v => {
-          if (v['_id'] === o['_id']) {
+          if (v['id'] === o['id']) {
             v = o;
           }
         });
@@ -91,9 +91,9 @@
       delTodo(id) {
         this.$confirm('确认删除该日程记录吗？', '确认信息')
           .then(() => {
-            api.delTodo({'_id': id}).then(r => {
+            api.delTodo({'id': id}).then(r => {
               if (r.code === 0) {
-                this.fcEvents = this.fcEvents.filter(v => id !== v['_id']);
+                this.fcEvents = this.fcEvents.filter(v => id !== v['id']);
                 this.$message({
                   message: '删除成功',
                   type: 'success'

@@ -83,7 +83,7 @@
           Object.keys(this.todoForm).forEach(k => {
             this.todoForm[k] = info[k];
           });
-          this.todoForm['_id'] = info['_id'];
+          this.todoForm['id'] = info['id'];
         } else {
           this.logTitle = '新建活动';
         }

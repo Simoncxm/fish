@@ -34,7 +34,7 @@
         let params = {
           id: this.$route.params.id
         };
-        api.getUserInfo(params).then(r => {
+        api.getOtherUserInfo(params).then(r => {
           if (r.code === 0) {
             this.coverList = r.data.cover;
           }

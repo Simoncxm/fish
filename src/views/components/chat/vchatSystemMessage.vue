@@ -2,7 +2,7 @@
   <div class="vchat-system-Message" v-fontColor="user.chatColor">
     <ul v-if="InfoList.length">
       <template v-for="v in InfoList">
-        <li v-if="v.type === 'validate'" :key="v['_id']">
+        <li v-if="v.type === 'validate'" :key="v['id']">
           <span class="vchat-line1 info">{{v.state === 'friend' ? '验证消息：' + v.nickname + '申请加您为好友' : '验证消息：' + v.nickname + '申请加入' + v.groupName}}</span>
           <span class="time">{{v.time}}</span>
           <el-popover
@@ -45,7 +45,7 @@
             <span slot="reference" class="del">删除</span>
           </el-popover>
         </li>
-        <li v-if="v.type === 'info'" :key="v['_id']">
+        <li v-if="v.type === 'info'" :key="v['id']">
           <p>
             <span class="vchat-line1 info">{{v.mes}}</span>
             <span class="time">{{v.time}}</span>
@@ -127,13 +127,13 @@
     },
     methods: {
       del(v) {
-        api.removeMessage({'id': v['_id']}).then(r => {
+        api.removeMessage({'id': v['id']}).then(r => {
           if (r.code === 0) {
             this.$message({
               message: '删除成功',
               type: 'success'
             });
-            this.InfoList = this.InfoList.filter(m => m._id !== v._id);
+            this.InfoList = this.InfoList.filter(m => m.id !== v.id);
           } else {
             this.$message({
               message: '删除失败',
@@ -143,7 +143,7 @@
         })
       },
       agree(v) {
-        v.userYphoto = this.user.photo;
+        v.userYavatar = this.user.avatar;
         v.userYname = this.user.nickname;
         this.$socket.emit('agreeValidate', v);
         this.InfoList.forEach(m => { // 更新同一申请人的所有相同请求
@@ -154,7 +154,7 @@
         });
       },
       refuse(v) {
-        v.userYphoto = this.user.photo;
+        v.userYavatar = this.user.avatar;
         v.userYname = this.user.nickname;
         this.$socket.emit('refuseValidate', v);
         v.visible = !v.visible;

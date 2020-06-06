@@ -19,6 +19,9 @@ export default {
   getUserInfo(params) { //获取用户信息
     return fetch.get('user/getUserInfo', params);
   },
+  getOtherUserInfo(params) { //获取用户信息
+    return fetch.get('user/getOtherUserInfo', params);
+  },
   updateUserInfo(params) { // 修改个人信息
     return fetch.post('user/updateUserInfo', params);
   },

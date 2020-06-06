@@ -62,9 +62,9 @@
           </h3>
           <input type="text" v-show="spread" ref="searchMember">
           <ul>
-            <li v-for="v in groupUserList" :key="v.userId['_id']">
+            <li v-for="v in groupUserList" :key="v.userId['id']">
               <a class="vchat-photo" :class="{lineOf: !v.status}">
-                <img :src="IMG_URL + v.userId.photo" alt="">
+                <img :src="IMG_URL + v.userId.avatar" alt="">
               </a>
               <span class="vchat-line1">{{v.userId.nickname}}</span>
             </li>
@@ -297,7 +297,7 @@
           name: this.user.name,
           mes: this.message,
           time: utils.formatTime(new Date()),
-          avatar: this.user.photo,
+          avatar: this.user.avatar,
           nickname: this.user.nickname,
           read: [this.user.name],
           roomid: this.currSation.id,

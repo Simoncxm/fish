@@ -16,7 +16,7 @@
               :class="{active: currSation.id === v.id}" @click="setCurrSation(v)">
             <el-badge :value="v.unRead" :max="99" class="mesBadge" :hidden="v.unRead === 0">
               <a class="vchat-photo">
-                <img :src="IMGURL + v.photo" alt="">
+                <img :src="IMGURL + v.avatar" alt="">
               </a>
             </el-badge>
             <div class="chat-conversation-li-center">
@@ -210,7 +210,7 @@
         //   }
         // }
         //  else {
-        //   api.removeConversation(v._id).then(r => {
+        //   api.removeConversation(v.id).then(r => {
         //     if (r.code === 0) {
         //       this.$message({
         //         type: 'success',

@@ -11,7 +11,7 @@
     <div class="vchat-myFriend-container">
       <div class="me-li" @click="goFriendDetail(user.id)">
         <a href="javascript:;">
-          <img :src="IMG_URL + user.photo" alt="">
+          <img :src="IMG_URL + user.avatar" alt="">
         </a>
         <div>
           <span class="vchat-line1" :title="user.nickname">{{user.nickname}}</span>
@@ -27,10 +27,10 @@
           <span>{{friendList.length}}</span>
         </h3>
         <ul class="vchat-linkman-list">
-          <li v-for="v in friendList" :key="v._id" @click="goFriendDetail(v.id)"
+          <li v-for="v in friendList" :key="v.id" @click="goFriendDetail(v.id)"
               @contextmenu="contextmenuClick($event, v)">
             <a href="javascript:;">
-              <img :src="IMG_URL + v.photo" alt="">
+              <img :src="IMG_URL + v.avatar" alt="">
             </a>
             <div>
               <p>
