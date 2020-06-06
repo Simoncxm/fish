@@ -44,8 +44,8 @@
 <!--          <v-icon name="enter" color="#d5d5d5"></v-icon>-->
 <!--        </p>-->
 <!--      </div>-->
-      <div class="detail-button" v-if="friendInfo.id !== user.id">
-        <button @click="apply" class="echat-full-button minor" v-if="!myFriendFlag">加为好友</button>
+      <div class="detail-button" v-if="typeof(friendInfo.id) !== undefined && friendInfo.id !== user.id">
+        <button @click="apply" class="echat-full-button minor" v-if="typeof(myFriendFlag) !== undefined && !myFriendFlag">加为好友</button>
         <div v-else>
           <button @click="send" class="echat-full-button minor">发消息</button>
           <button @click="remove" class="echat-full-button error">删除好友</button>
@@ -54,10 +54,10 @@
 
       </div>
     </div>
-    <div class="Qr-dialog" :class="{active: showFriendQr}">
-      <v-icon class="el-icon-circle-close-outline QrClose" @clickIcon="showFriendQr = false" color="#f5f5f5" :size="28"
-              cursor="pointer"></v-icon>
-    </div>
+<!--    <div class="Qr-dialog" :class="{active: showFriendQr}">-->
+<!--      <v-icon class="el-icon-circle-close-outline QrClose" @clickIcon="showFriendQr = false" color="#f5f5f5" :size="28"-->
+<!--              cursor="pointer"></v-icon>-->
+<!--    </div>-->
   </div>
 </template>
 
@@ -71,10 +71,10 @@
     data() {
       return {
         IMG_URL: process.env.IMG_URL,
-        friendInfo: {province: {}, city: {}, town: {}}, // user详情
+        friendInfo: {}, // user详情
         cover:['/display/20200603000000_cover.jpg','/display/20200603000000_cover1.jpg'],
-        showFriendQr: false, // 二维码开关
-        myFriendFlag: false // 是否为我的好友
+        // showFriendQr: false, // 二维码开关
+        // myFriendFlag: true // 是否为我的好友
       }
     },
     components: {
