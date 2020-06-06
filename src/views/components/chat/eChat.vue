@@ -86,15 +86,17 @@
         handler(list) {
           var _this=this;
           var allList = JSON.parse(JSON.stringify(list));
-          // alert(JSON.stringify(list));
+          // alert(JSON.stringify(this.user.wallpaper));
           //保证只初始化一次
           if(this.initEchatFlag){
+            // alert(JSON.stringify(allList));
             for(var i = 0; i < allList.length; i++){
               if(allList[i].name === 'Echat') {
                 _this.contactsList.push(allList[i]);
+                this.initEchatFlag = false;
               }
             }
-            this.initEchatFlag = false;
+            // this.initEchatFlag = false;
           }
           // console.log(allList.length);
           // console.log(allList[allList.length - 1]);
