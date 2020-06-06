@@ -7,9 +7,9 @@
         </div>
       </el-form-item>
       <el-form-item label="性别">
-        <el-radio v-model="personForm.sex" label="1">男</el-radio>
-        <el-radio v-model="personForm.sex" label="2">女</el-radio>
-        <el-radio v-model="personForm.sex" label="3">保密</el-radio>
+        <el-radio v-model="personForm.gender" label="1">男</el-radio>
+        <el-radio v-model="personForm.gender" label="2">女</el-radio>
+        <el-radio v-model="personForm.gender" label="3">保密</el-radio>
       </el-form-item>
       <el-form-item label="昵称" prop="nickname">
         <el-input v-model="personForm.nickname" placeholder="名称">
@@ -117,11 +117,11 @@
         }
       };
       return {
-        imageUrl: process.env.IMG_URL + this.$store.state.user.photo, // 显示图片路径
+        imageUrl: process.env.IMG_URL + this.$store.state.user.avatar, // 显示图片路径
         personForm: {
           nickname: '',
           signature: '',
-          sex: '',
+          gender: '',
           email: '',
           phone: '',
           province: '',
@@ -229,17 +229,17 @@
                 sygnal=0;
               }
             });
-            let sexnum=0;
-            if(this.personForm.sex==='男'){
-              sexnum=1;
+            let gendernum=0;
+            if(this.personForm.gender==='男'){
+              gendernum=1;
             }
-            else if(this.personForm.sex==='女'){
-              sexnum=2;
+            else if(this.personForm.gender==='女'){
+              gendernum=2;
             }
             else{
-              sexnum=0;
+              gendernum=0;
             }
-            api.updateUserGender({gender:sexnum}).then(r => {
+            api.updateUserGender({gender:gendernum}).then(r => {
               if (r.code !== 0) {
                 sygnal=0;
               }

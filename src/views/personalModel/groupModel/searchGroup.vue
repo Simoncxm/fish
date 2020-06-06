@@ -21,7 +21,7 @@
     </div>
     <div class="search-contianer" v-loading="loadingSearch">
       <ul class="search-group-list" v-show="groupList.length">
-        <li v-for="v in groupList" :key="v['_id']" @click="goGroupDetail(v['_id'])">
+        <li v-for="v in groupList" :key="v['id']" @click="goGroupDetail(v['id'])">
           <a href="javascript:;">
             <img :src="IMG_URL + v.img" alt="">
           </a>

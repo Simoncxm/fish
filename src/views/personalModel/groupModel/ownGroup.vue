@@ -19,7 +19,7 @@
           <span>{{mySetGroups.length}}</span>
         </h3>
         <ul class="vchat-linkman-list">
-          <li v-for="v in mySetGroups" :key="v._id" @click="goGroupDetail(v.groupId._id)"
+          <li v-for="v in mySetGroups" :key="v.id" @click="goGroupDetail(v.groupId.id)"
               @contextmenu="contextmenuClick($event, v.groupId)">
             <a href="javascript:;">
               <img :src="IMG_URL + v.groupId.img" alt="">
@@ -44,7 +44,7 @@
           <span>{{myJoinGroups.length}}</span>
         </h3>
         <ul class="vchat-linkman-list">
-          <li v-for="v in myJoinGroups" :key="v._id" @click="goGroupDetail(v.groupId._id)"
+          <li v-for="v in myJoinGroups" :key="v.id" @click="goGroupDetail(v.groupId.id)"
               @contextmenu="contextmenuClick($event, v.groupId)">
             <a href="javascript:;">
               <img :src="IMG_URL + v.groupId.img" alt="">
@@ -106,7 +106,7 @@
     computed: {
       ...mapState(['conversationsList']),
       addOrDel() {
-        return this.conversationsList.filter(v => v.id === this.currGroup._id).length;
+        return this.conversationsList.filter(v => v.id === this.currGroup.id).length;
       }
     },
     methods: {
@@ -157,7 +157,7 @@
       },
       addConversitionList(v) { // 加入会话列表
         let params = {
-          itemId: v._id,
+          itemId: v.id,
           type: 'group'
         };
         api.addConversation(params).then(r => {
@@ -178,7 +178,7 @@
       },
       removeConversitionList(v) {
         let params = {
-          id: v._id
+          id: v.id
         };
         api.removeConversation(params).then(r => {
           if (r.code === 0) {

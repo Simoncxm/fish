@@ -33,7 +33,7 @@
         <ul class="group-users-liitte-list">
           <li v-for="(v, i) in groupUsers" :key="v.code" v-if="i < 9">
             <a class="vchat-photo">
-              <img :src="IMG_URL + v.userId.photo" alt="">
+              <img :src="IMG_URL + v.userId.avatar" alt="">
             </a>
             <span class="vchat-line1">{{v.userId.nickname}}</span>
           </li>
@@ -56,8 +56,8 @@
       <div class="group-managers detail-item" v-if="!applyFlag">
         <div>
           <span>管理员</span>
-          <a v-for="(v, i) in managers" :key="v['_id']" class="vchat-photo" v-if="i < 3">
-            <img :src="IMG_URL + v.userId.photo" alt="">
+          <a v-for="(v, i) in managers" :key="v['id']" class="vchat-photo" v-if="i < 3">
+            <img :src="IMG_URL + v.userId.avatar" alt="">
           </a>
         </div>
         <p class="many">
@@ -122,7 +122,7 @@
             this.groupUsers = r.users;
             this.applyFlag = this.groupUsers.filter(v => v.userName === this.user.name).length;
             this.managers = this.groupUsers.filter(v => v.holder === 1 || v.manager === 1);
-            this.holderId = this.groupUsers.filter(v => v.holder === 1)[0].userId['_id'];
+            this.holderId = this.groupUsers.filter(v => v.holder === 1)[0].userId['id'];
           }
         })
       },

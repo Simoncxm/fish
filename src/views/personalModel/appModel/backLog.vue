@@ -17,7 +17,7 @@
             <span><i class="address">{{v.address}} </i> {{formatTime(v.start)}} 至 {{formatTime(v.end)}}</span>
             <span>
                             <v-icon class="el-icon-delete" cursor="pointer" :size="14"
-                                    @clickIcon="delTodo(v['_id'])"></v-icon>
+                                    @clickIcon="delTodo(v['id'])"></v-icon>
               <!--<v-icon class="el-icon-edit" cursor="pointer" :size="14"></v-icon>-->
                         </span>
           </p>
@@ -59,9 +59,9 @@
       delTodo(id) {
         this.$confirm('确认删除该日程记录吗？', '确认信息')
           .then(() => {
-            api.delTodo({'_id': id}).then(r => {
+            api.delTodo({'id': id}).then(r => {
               if (r.code === 0) {
-                this.todoList = this.todoList.filter(v => id !== v['_id']);
+                this.todoList = this.todoList.filter(v => id !== v['id']);
                 this.$message({
                   message: '删除成功',
                   type: 'success'

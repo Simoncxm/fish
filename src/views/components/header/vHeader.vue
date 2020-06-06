@@ -120,7 +120,7 @@
     },
     computed: {
       avatar() {
-        return process.env.IMG_URL + this.$store.state.user.photo; // 用户头像avatar:
+        return process.env.IMG_URL + this.$store.state.user.avatar; // 用户头像avatar:
       },
       ...mapState(['user', 'conversationsList']),
       ...mapGetters(['unReadCount'])
@@ -159,7 +159,7 @@
           let val = {
             name: this.user.name,
             time: utils.formatTime(new Date()),
-            avatar: this.user.photo,
+            avatar: this.user.avatar,
             roomid: v.id
           };
           this.$socket.emit('leave', val);

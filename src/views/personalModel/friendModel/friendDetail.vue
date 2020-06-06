@@ -18,19 +18,19 @@
     </el-carousel>
     <div class="vchat-Detail-container friend-detail-container">
       <a class="detail-avatar">
-        <img :src="IMG_URL + friendInfo.photo" alt="">
+        <img :src="IMG_URL + friendInfo.avatar" alt="">
       </a>
       <div class="firend-info">
         <p>
           Vchat：{{friendInfo.code}}
         </p>
         <p>
-          性别：{{friendInfo.sex === '1' ? '男' : friendInfo.sex === '2' ? '女' : '保密'}}
+          性别：{{friendInfo.gender === '1' ? '男' : friendInfo.gender === '2' ? '女' : '保密'}}
         </p>
-        <p>
-          所在地：{{friendInfo.province.name + (friendInfo.city.name === '市辖区' ? '' : ' - ' + friendInfo.city.name) + ' - '
-          + friendInfo.town.name}}
-        </p>
+<!--        <p>-->
+<!--          所在地：{{friendInfo.province.name + (friendInfo.city.name === '市辖区' ? '' : ' - ' + friendInfo.city.name) + ' - '-->
+<!--          + friendInfo.town.name}}-->
+<!--        </p>-->
       </div>
       <div class="detail-item" v-if="friendInfo.code === user.code" @click="toPhoto">
         <span>照片墙</span>
@@ -81,7 +81,7 @@
         localStorage.friend = JSON.stringify({
           userYname: this.friendInfo.nickname,
           userYloginName: this.friendInfo.name,
-          userYphoto: this.friendInfo.photo
+          userYphoto: this.friendInfo.avatar
         });
         this.$router.push({name: 'applyFriend', params: {id: this.$route.params.id}, query: {}});
       },
@@ -102,11 +102,11 @@
           // console.log('send');
           Msg.$emit("val", this.friendInfo.name);
       },
-      getUserInfo() {
+      getOtherUserInfo() {
         let params = {
           id: this.$route.params.id
         };
-        api.getUserInfo(params).then(r => {
+        api.getOtherUserInfo(params).then(r => {
           if (r.code === 0) {
             this.friendInfo = r.data;
           }
@@ -127,7 +127,7 @@
       }
     },
     created() {
-      this.getUserInfo();
+      this.getOtherUserInfo();
       this.checkMyfriends();
     }
   }

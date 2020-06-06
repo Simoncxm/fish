@@ -21,9 +21,9 @@
     </div>
     <div class="vchat-linkman-container friend-container" v-loading="loadingSearch">
       <ul class="vchat-linkman-list" v-show="friendList.length">
-        <li v-for="v in friendList" :key="v['_id']" @click="goFriendDetail(v['_id'])">
+        <li v-for="v in friendList" :key="v['id']" @click="goFriendDetail(v['id'])">
           <a href="javascript:;">
-            <img :src="IMG_URL + v.photo" alt="">
+            <img :src="IMG_URL + v.avatar" alt="">
           </a>
           <div>
             <p>
