@@ -160,7 +160,7 @@
             name: this.user.name,
             time: utils.formatTime(new Date()),
             avatar: this.user.avatar,
-            roomid: v.id
+            conversationId: v.id
           };
           this.$socket.emit('leave', val);
         });

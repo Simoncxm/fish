@@ -82,7 +82,7 @@
     computed: {
       ...mapState(['conversationsList', 'user']),
       addOrDel() {
-        return this.conversationsList.filter(v => v.id === this.currFriend.roomid).length;
+        return this.conversationsList.filter(v => v.id === this.currFriend.conversationId).length;
       }
     },
     methods: {
@@ -140,7 +140,7 @@
       },
       removeConversitionList(v) {
         let params = {
-          id: v.roomid
+          id: v.conversationId
         };
         api.removeConversation(params).then(r => {
           if (r.code === 0) {

@@ -138,15 +138,15 @@
     },
     sockets: {
       org(r) {
-        if (r.roomid === this.currSation.id) {
+        if (r.conversationId === this.currSation.id) {
           this.chatList.push(Object.assign({}, r, {type: 'org'}));
         }
       },
       mes(r) {
-        if (r.roomid === this.currSation.id) {
+        if (r.conversationId === this.currSation.id) {
           this.chatList.push(Object.assign({}, r, {type: 'other'}));
-          this.$socket.emit('setReadStatus', {roomid: r.roomid, name: this.user.name});
-          this.$store.commit('setUnRead', {roomid: r.roomid, clear: true});
+          this.$socket.emit('setReadStatus', {conversationId: r.conversationId, name: this.user.name});
+          this.$store.commit('setUnRead', {conversationId: r.conversationId, clear: true});
         }
       },
       getHistoryMessages(r) { // 获取历史消息
@@ -182,9 +182,9 @@
             if (v.type === 'group') {
               this.getGroupUser(v.id);
             }
-            this.$socket.emit('setReadStatus', {roomid: v.id, name: this.user.name});
-            this.$store.commit('setUnRead', {roomid: v.id, clear: true});
-            this.$socket.emit('getHistoryMessages', {roomid: v.id, offset: 1, limit: 100});
+            this.$socket.emit('setReadStatus', {conversationId: v.id, name: this.user.name});
+            this.$store.commit('setUnRead', {conversationId: v.id, clear: true});
+            this.$socket.emit('getHistoryMessages', {conversationId: v.id, offset: 1, limit: 100});
           }
         },
         deep: true,
@@ -300,7 +300,7 @@
           avatar: this.user.avatar,
           nickname: this.user.nickname,
           read: [this.user.name],
-          roomid: this.currSation.id,
+          conversationId: this.currSation.id,
           style: 'mess',
           userM: this.user.id
         };

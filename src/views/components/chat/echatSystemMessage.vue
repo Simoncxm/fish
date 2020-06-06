@@ -111,9 +111,9 @@
       currSation: { // 当前会话
         handler(v) {
           if (v.id) {
-            this.$socket.emit('setReadStatus', {roomid: v.id, name: this.user.name});
-            this.$store.commit('setUnRead', {roomid: v.id, clear: true});
-            this.$socket.emit('getSystemMessages', {roomid: v.id, offset: this.offset, limit: this.limit});
+            this.$socket.emit('setReadStatus', {conversationId: v.id, name: this.user.name});
+            this.$store.commit('setUnRead', {conversationId: v.id, clear: true});
+            this.$socket.emit('getSystemMessages', {conversationId: v.id, offset: this.offset, limit: this.limit});
           } else {
             this.InfoList = [];
           }

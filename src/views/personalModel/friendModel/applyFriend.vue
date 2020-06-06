@@ -50,7 +50,7 @@
           userYphoto: friend.userYphoto,
           userYloginName: friend.userYloginName,
           friendRoom: this.user.id + '-' + this.$route.params.id,
-          roomid: this.$route.params.id + '-' + this.Echat.id.split('-')[1],
+          conversationId: this.$route.params.id + '-' + this.Echat.id.split('-')[1],
           state: 'friend',
           type: 'validate',
           status: '0'
