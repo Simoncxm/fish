@@ -1,5 +1,5 @@
 <template>
-  <div class="vchat-ownGroup vchat-noUser">
+  <div class="echat-ownGroup echat-noUser">
     <v-apheader title="我的群聊">
       <el-dropdown trigger="click" @command="handleCommand">
         <v-icon cursor="pointer" name="hanbaobao" color="#fff"></v-icon>
@@ -9,8 +9,8 @@
         </el-dropdown-menu>
       </el-dropdown>
     </v-apheader>
-    <div class="vchat-ownGroup-container" v-if="Groups.length" v-loading="loadingWait">
-      <div class="vchat-linkman-container" :class="{active: showList.indexOf('set') > -1}">
+    <div class="echat-ownGroup-container" v-if="Groups.length" v-loading="loadingWait">
+      <div class="echat-linkman-container" :class="{active: showList.indexOf('set') > -1}">
         <h3 @click="setShowList('set')">
           <p>
             <v-icon name="fanhui" :size="16" color="#b7b6b6" class="list-icon"></v-icon>
@@ -18,7 +18,7 @@
           </p>
           <span>{{mySetGroups.length}}</span>
         </h3>
-        <ul class="vchat-linkman-list">
+        <ul class="echat-linkman-list">
           <li v-for="v in mySetGroups" :key="v.id" @click="goGroupDetail(v.groupId.id)"
               @contextmenu="contextmenuClick($event, v.groupId)">
             <a href="javascript:;">
@@ -26,16 +26,16 @@
             </a>
             <div>
               <p>
-                <span class="vchat-line1" :title="v.groupId.title">{{v.groupId.title}}</span>
+                <span class="echat-line1" :title="v.groupId.title">{{v.groupId.title}}</span>
               </p>
               <p>
-                <span :title="v.groupId.desc" class="vchat-line1">{{v.groupId.desc}}</span>
+                <span :title="v.groupId.desc" class="echat-line1">{{v.groupId.desc}}</span>
               </p>
             </div>
           </li>
         </ul>
       </div>
-      <div class="vchat-linkman-container" :class="{active: showList.indexOf('join') > -1}">
+      <div class="echat-linkman-container" :class="{active: showList.indexOf('join') > -1}">
         <h3 @click="setShowList('join')">
           <p>
             <v-icon name="fanhui" :size="16" color="#b7b6b6" class="list-icon"></v-icon>
@@ -43,7 +43,7 @@
           </p>
           <span>{{myJoinGroups.length}}</span>
         </h3>
-        <ul class="vchat-linkman-list">
+        <ul class="echat-linkman-list">
           <li v-for="v in myJoinGroups" :key="v.id" @click="goGroupDetail(v.groupId.id)"
               @contextmenu="contextmenuClick($event, v.groupId)">
             <a href="javascript:;">
@@ -51,10 +51,10 @@
             </a>
             <div>
               <p>
-                <span class="vchat-line1" :title="v.groupId.title">{{v.groupId.title}}</span>
+                <span class="echat-line1" :title="v.groupId.title">{{v.groupId.title}}</span>
               </p>
               <p>
-                <span :title="v.groupId.desc" class="vchat-line1">{{v.groupId.desc}}</span>
+                <span :title="v.groupId.desc" class="echat-line1">{{v.groupId.desc}}</span>
               </p>
             </div>
           </li>
@@ -62,7 +62,7 @@
       </div>
     </div>
     <v-nodata v-else>
-      <p class="vchat-no-have">
+      <p class="echat-no-have">
         还没有加入群聊哦，去
         <router-link to="/main/personalMain/group/search">查找</router-link>
         ， 去
@@ -204,11 +204,11 @@
 </script>
 
 <style lang="scss" scoped>
-  .vchat-ownGroup {
+  .echat-ownGroup {
     width: 100%;
     height: 100%;
 
-    .vchat-ownGroup-container {
+    .echat-ownGroup-container {
       width: 100%;
       padding-top: 10px;
       height: calc(100% - 40px);

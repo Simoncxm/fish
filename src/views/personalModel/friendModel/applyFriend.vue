@@ -1,5 +1,5 @@
 <template>
-  <div class="vchat-apply">
+  <div class="echat-apply">
     <v-apheader title="验证信息" back="-1">
       <!--<router-link :to="{name: 'sendGroupValidate'}">发送</router-link>-->
       <span @click="send">发送</span>
@@ -28,7 +28,7 @@
       }
     },
     computed: {
-      ...mapState(['user', 'Vchat'])
+      ...mapState(['user', 'Echat'])
     },
     components: {
       vApheader
@@ -50,7 +50,7 @@
           userYphoto: friend.userYphoto,
           userYloginName: friend.userYloginName,
           friendRoom: this.user.id + '-' + this.$route.params.id,
-          roomid: this.$route.params.id + '-' + this.Vchat.id.split('-')[1],
+          roomid: this.$route.params.id + '-' + this.Echat.id.split('-')[1],
           state: 'friend',
           type: 'validate',
           status: '0'
@@ -65,5 +65,5 @@
 </script>
 
 <style lang="scss" scoped>
-  @import "../vchatDetail";
+  @import "../echatDetail";
 </style>

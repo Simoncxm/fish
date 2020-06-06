@@ -1,10 +1,10 @@
 <template>
-  <div class="vchat-header">
-    <div class="vchat-main-header" v-if="isMainHeader">
-      <div class="vchat-header-container">
-        <div class="vchat-logo">Vchat</div>
-        <div class="vchat-mine">
-          <!--          <nav class="vchat-noUser">-->
+  <div class="echat-header">
+    <div class="echat-main-header" v-if="isMainHeader">
+      <div class="echat-header-container">
+        <div class="echat-logo">Echat</div>
+        <div class="echat-mine">
+          <!--          <nav class="echat-noUser">-->
           <!--            &lt;!&ndash;class="animated" :class="{bounceIn: hover}" @mouseover="mouseover" ref="showChat"&ndash;&gt;-->
           <!--            <div>-->
           <!--              <el-badge :value="unReadCount" :max="99" :hidden="unReadCount === 0" class="headerBadg">-->
@@ -31,10 +31,10 @@
           </div>
           <div>
             <p>
-              <span class="vchat-line1" :title="user.nickname">{{user.nickname}}</span>
+              <span class="echat-line1" :title="user.nickname">{{user.nickname}}</span>
               <span @click="logout" class="logout">[退出]</span>
             </p>
-            <p class="vchat-line2" :title="user.signature">{{user.signature ? '个性签名：' + user.signature :
+            <p class="echat-line2" :title="user.signature">{{user.signature ? '个性签名：' + user.signature :
               '这个人很懒，暂时没有签名哦！'}}</p>
           </div>
         </div>
@@ -50,15 +50,15 @@
                                  :draggable="draggable" :resizable="true"
                                  :x="x" :y="y" :z="2001"
                                  :drag-handle="'.chat-header, .chat-conversation-ul'"
-                                 :drag-cancel="'a, .chat-conversation-li, .chat-handel, .vchat-scroll'"
+                                 :drag-cancel="'a, .chat-conversation-li, .chat-handel, .echat-scroll'"
         >
           <chat @closeChat="showChat = false"></chat>
         </vue-draggable-resizable>
       </transition>
     </div>
-    <div class="vchat-little-header" v-else>
+    <div class="echat-little-header" v-else>
       <div>
-        <router-link to="/main/personalMain">vchat</router-link>
+        <router-link to="/main/personalMain">echat</router-link>
         <span class="logout" @click="$router.push({name: 'personalMain'})">[返回]</span>
       </div>
       <div class="avatar">
@@ -73,7 +73,7 @@
 
 <script>
   import api from '@/api';
-  import chat from '@/views/components/chat/vChat';
+  import chat from '@/views/components/chat/eChat';
   import VueDraggableResizable from 'vue-draggable-resizable';
   import utils from '@/utils/utils';
   import {mapState, mapGetters} from 'vuex';
@@ -185,12 +185,12 @@
   }
 </script>
 <style lang="scss">
-  .vchat-header {
-    .vchat-main-header {
+  .echat-header {
+    .echat-main-header {
       width: 100%;
       height: 80px;
 
-      .vchat-header-container {
+      .echat-header-container {
         width: 100%;
         height: 80px;
         display: flex;
@@ -201,7 +201,7 @@
         z-index: 2002;
       }
 
-      .vchat-logo {
+      .echat-logo {
         width: 120px;
         height: 80px;
         /*color: #fff;*/
@@ -209,7 +209,7 @@
         line-height: 80px;
       }
 
-      .vchat-mine {
+      .echat-mine {
         display: flex;
         justify-content: flex-start;
         align-items: center;
@@ -400,7 +400,7 @@
       }
     }
 
-    .vchat-little-header {
+    .echat-little-header {
       width: 100%;
       height: 40px;
       padding: 0 30px;

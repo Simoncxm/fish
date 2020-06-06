@@ -1,0 +1,25 @@
+// projectTheme
+/*********************************************************/
+/*主题名称*/
+$theme: echat;
+
+/*personalMain.vue*/
+/*头部颜色*/
+$echat-header-backgroudColor: #27cac7;
+$echat-logo-color: #fff;
+$echat-header-handleList-i-color: #1fbeca;
+$echat-header-handleList-a-color: #595959;
+$echat-header-handleList-hover-bgcolor: #e9faf9;
+$echat-header-handleList-hover-color: #52d5d2;
+$echat-header-logout: #a4f5f6;
+$echat-header-logout-hover: #63f6f5;
+$echat-header-online: #1cffc5;
+/*内容*/
+$echat-content-bgcolor: #f5f5f5;
+$echat-content-nav-bgcolor: #fff;
+$echat-content-nav-box-shadow: 2px 0 10px #d5d5d5;
+$echat-content-nav-color: #d5d5d5;
+$echat-content-nav-active-color: #27cac7;
+$echat-content-view-bgcolor: #f5f5f5;
+/* mySetting.vue */
+$echat-little-header-bgcolor: #27cac7;

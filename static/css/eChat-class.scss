@@ -1,10 +1,10 @@
-.vchat-line1 { // 单行文字超出省略号
+.echat-line1 { // 单行文字超出省略号
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.vchat-bg {
+.echat-bg {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -19,7 +19,7 @@
   background-position: center;
 }
 
-.vchat-photo {
+.echat-photo {
   display: block;
   width: 40px;
   height: 40px;
@@ -33,7 +33,7 @@
   }
 }
 
-.vchat-line2 { // 2行文字超出省略号
+.echat-line2 { // 2行文字超出省略号
   display: -webkit-box;
   -webkit-line-clamp: 2;
   overflow: hidden;
@@ -42,7 +42,7 @@
   /* autoprefixer: on */
 }
 
-.vchat-noUser { // 禁止用户选中
+.echat-noUser { // 禁止用户选中
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -51,7 +51,7 @@
   user-select: none;
 }
 
-.vchat-button { // 按钮样式
+.echat-button { // 按钮样式
   display: inline-block;
   padding: 0 20px;
   background-color: #27cac7;
@@ -63,7 +63,7 @@
   outline: none;
 }
 
-.vchat-button-mini {
+.echat-button-mini {
   display: inline-block;
   padding: 0 12px;
   background-color: #27cac7;
@@ -77,7 +77,7 @@
   height: 26px;
 }
 
-.vchat-full-button {
+.echat-full-button {
   width: 100%;
   background-color: #27cac7;
   border: none;
@@ -90,23 +90,23 @@
   margin-bottom: 10px;
 }
 
-.vchat-button:hover, .vchat-button-mini:hover, .vchat-full-button:hover {
+.echat-button:hover, .echat-button-mini:hover, .echat-full-button:hover {
   opacity: 0.9;
 }
 
-.vchat-full-button.minor, .vchat-button.minor, .vchat-button-mini.minor {
+.echat-full-button.minor, .echat-button.minor, .echat-button-mini.minor {
   background-color: #3aa1ca;
 }
 
-.vchat-full-button.error, .vchat-button.error, .vchat-button-mini.error {
+.echat-full-button.error, .echat-button.error, .echat-button-mini.error {
   background-color: #f56c6c;
 }
 
-.vchat-button.info, .vchat-button-mini.info, .vchat-full-button.info {
+.echat-button.info, .echat-button-mini.info, .echat-full-button.info {
   background-color: #bdbdbd;
 }
 
-.vchat-no-have { // 没有想要的样式
+.echat-no-have { // 没有想要的样式
   font-size: 12px;
   text-align: left;
   padding: 5px 15px;
@@ -119,40 +119,40 @@
 }
 
 
-.vchat-breakAll { // 强制换行 只对英文起作用，以字母作为换行依据。
+.echat-breakAll { // 强制换行 只对英文起作用，以字母作为换行依据。
   word-break: break-all;
 }
 
-.vchat-breakWord { // 强制换行 只对英文起作用，以单词作为换行依据。
+.echat-breakWord { // 强制换行 只对英文起作用，以单词作为换行依据。
   word-wrap: break-word
 }
 
-.vchat-preWord { // 强制换行 只对中文起作用，强制换行。
+.echat-preWord { // 强制换行 只对中文起作用，强制换行。
   white-space: pre-wrap;
 }
 
-.vchat-noWarp { // 禁止换行
+.echat-noWarp { // 禁止换行
   white-space: nowrap;
 }
 
-.vchat-flexCenter { // 居中
+.echat-flexCenter { // 居中
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.vchat-flexBetween { // 两端
+.echat-flexBetween { // 两端
   display: flex;
   justify-content: space-between;
 }
 
-.vchat-flexAround { // 均分
+.echat-flexAround { // 均分
   display: flex;
   justify-content: space-around;
   align-items: center;
 }
 
-.vchat-application {
+.echat-application {
   width: 100%;
   height: calc(100% - 15px);
   box-sizing: border-box;
@@ -164,11 +164,11 @@
   }
 }
 
-.vchat-fr {
+.echat-fr {
   float: right;
 }
 
-.vchat-linkman-list {
+.echat-linkman-list {
   li {
     width: 100%;
     display: flex;
@@ -224,7 +224,7 @@
   }
 }
 
-.vchat-linkman-container {
+.echat-linkman-container {
   height: 32px;
   overflow: hidden;
 
@@ -251,7 +251,7 @@
   }
 }
 
-.vchat-linkman-container.active {
+.echat-linkman-container.active {
   height: auto;
 
   h3 {
@@ -260,7 +260,7 @@
     }
   }
 
-  .vchat-linkman-list {
+  .echat-linkman-list {
     animation: scaleH 0.6s cubic-bezier(.11, .74, .83, 1.45);
   }
 }

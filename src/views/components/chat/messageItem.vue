@@ -1,5 +1,5 @@
 <template>
-  <div class="vchat-messageItem mes-box">
+  <div class="echat-messageItem mes-box">
     <p v-if="type === 'other'" class="avatar">
       <img :src="IMG_URL + v.avatar" alt="">
     </p>

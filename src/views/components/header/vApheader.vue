@@ -1,5 +1,5 @@
 <template>
-  <h3 class="vchat-apheader" :style="{backgroundColor: bgColor}">
+  <h3 class="echat-apheader" :style="{backgroundColor: bgColor}">
     <a v-if="back">
       <v-icon name="fanhui" cursor="pointer" color="#fff" @clickIcon="goBack"></v-icon>
     </a>
@@ -43,7 +43,7 @@
 </script>
 
 <style lang="scss" scoped>
-  h3.vchat-apheader {
+  h3.echat-apheader {
     width: 100%;
     font-size: 14px;
     color: #fff;

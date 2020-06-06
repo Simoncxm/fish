@@ -1,6 +1,6 @@
 <template>
-  <div class="vchat-Detail">
-    <v-apheader back="-1" bgColor="transparent" class="vchat-Detail-header">
+  <div class="echat-Detail">
+    <v-apheader back="-1" bgColor="transparent" class="echat-Detail-header">
       <v-icon name="erweima" color="#f5f5f5" cursor="pointer" @clickIcon="showGroupQr = true"></v-icon>
     </v-apheader>
     <el-carousel trigger="click" height="200px" arrow="never" indicator-position="none">
@@ -21,7 +21,7 @@
         </p>
       </div>
     </el-carousel>
-    <div class="vchat-Detail-container">
+    <div class="echat-Detail-container">
       <div class="group-users" v-if="applyFlag">
         <h3 class="group-users-title detail-item">
           <span>群聊成员</span>
@@ -32,10 +32,10 @@
         </h3>
         <ul class="group-users-liitte-list">
           <li v-for="(v, i) in groupUsers" :key="v.id" v-if="i < 9">
-            <a class="vchat-photo">
+            <a class="echat-photo">
               <img :src="IMG_URL + v.userId.avatar" alt="">
             </a>
-            <span class="vchat-line1">{{v.userId.nickname}}</span>
+            <span class="echat-line1">{{v.userId.nickname}}</span>
           </li>
         </ul>
       </div>
@@ -56,7 +56,7 @@
       <div class="group-managers detail-item" v-if="!applyFlag">
         <div>
           <span>管理员</span>
-          <a v-for="(v, i) in managers" :key="v['id']" class="vchat-photo" v-if="i < 3">
+          <a v-for="(v, i) in managers" :key="v['id']" class="echat-photo" v-if="i < 3">
             <img :src="IMG_URL + v.userId.avatar" alt="">
           </a>
         </div>
@@ -67,10 +67,10 @@
       </div>
 
       <div class="detail-button">
-        <button @click="apply" class="vchat-full-button minor" v-if="!applyFlag">申请加群</button>
+        <button @click="apply" class="echat-full-button minor" v-if="!applyFlag">申请加群</button>
         <div v-else>
-          <button @click="send" class="vchat-full-button minor">发消息</button>
-          <button @click="quit" class="vchat-full-button error" >退出群聊</button>
+          <button @click="send" class="echat-full-button minor">发消息</button>
+          <button @click="quit" class="echat-full-button error" >退出群聊</button>
 
         </div>
 
@@ -148,5 +148,5 @@
 </script>
 
 <style lang="scss" scoped>
-  @import "../vchatDetail";
+  @import "../echatDetail";
 </style>

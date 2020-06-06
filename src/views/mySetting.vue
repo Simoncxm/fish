@@ -1,8 +1,8 @@
 <template>
-  <div class="vchat-mySetting">
+  <div class="echat-mySetting">
     <vHeader :isMainHeader="false"></vHeader>
-    <div class="vchat-mySetting-container vchat-flexBetween">
-      <ul class="vchat-setingList">
+    <div class="echat-mySetting-container echat-flexBetween">
+      <ul class="echat-setingList">
         <li v-for="(v, i) in setingList" :key="i" :class="{active: $route.path === v.link}">
           <router-link :to="v.link">
             <i class="iconfont" :class="[v.class ? v.class : '']"></i>
@@ -10,7 +10,7 @@
           </router-link>
         </li>
       </ul>
-      <div class="vchat-seting-container">
+      <div class="echat-seting-container">
         <router-view></router-view>
       </div>
     </div>
@@ -44,16 +44,16 @@
   }
 </script>
 <style lang="scss" scoped>
-  .vchat-mySetting {
+  .echat-mySetting {
     width: 100%;
   }
 
-  .vchat-mySetting-container {
+  .echat-mySetting-container {
     width: 1200px;
     margin: 0 auto;
     padding: 30px 0;
 
-    .vchat-setingList {
+    .echat-setingList {
       width: 320px;
       padding: 0 30px;
       box-sizing: border-box;
@@ -92,7 +92,7 @@
       }
     }
 
-    .vchat-seting-container {
+    .echat-seting-container {
       width: 880px;
       background-color: #f5f5f5;
       border-radius: 2px;

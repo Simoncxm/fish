@@ -1,5 +1,5 @@
 <template>
-  <div class="vchat-application-main">
+  <div class="echat-application-main">
     <div class="back" v-if="$route.name !== 'appSpace'">
       <el-breadcrumb separator-class="el-icon-arrow-right">
         <el-breadcrumb-item :to="{ name: v.meta.name }" v-for="(v, i) in breadcrumb" :key="i">{{v.meta.title}}
@@ -27,7 +27,7 @@
 </script>
 
 <style lang="scss" scoped>
-  .vchat-application-main {
+  .echat-application-main {
     width: 100%;
     height: 100%;
     padding: 10px 15px 15px;

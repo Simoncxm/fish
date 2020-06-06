@@ -1,5 +1,5 @@
 <template>
-    <li class="vchat-dropdown-item" @click.stop="dropdownClick">
+    <li class="echat-dropdown-item" @click.stop="dropdownClick">
         <span>
             <slot></slot>
         </span>
@@ -20,7 +20,7 @@
 </script>
 
 <style lang="scss" scoped>
-  .vchat-dropdown-item {
+  .echat-dropdown-item {
     list-style: none;
     line-height: 36px;
     padding: 0 20px;
@@ -32,7 +32,7 @@
     box-sizing: border-box;
   }
 
-  .vchat-dropdown-item:hover {
+  .echat-dropdown-item:hover {
     border-radius: 4px;
     background-color: #e9faf9;
     color: #52d5d2;

@@ -1,5 +1,5 @@
 <template>
-  <div class="vchat-messageLog"
+  <div class="echat-messageLog"
        v-loading="chatLoading"
        element-loading-text="拼命加载中"
        element-loading-spinner="el-icon-loading"
@@ -82,7 +82,7 @@
 </script>
 
 <style lang="scss" scoped>
-  .vchat-messageLog {
+  .echat-messageLog {
     width: 100%;
     height: 100%;
     overflow-y: auto;

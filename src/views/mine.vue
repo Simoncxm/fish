@@ -1,5 +1,5 @@
 <template>
-  <div class="vchat-mine">
+  <div class="echat-mine">
     <vHeader :isMainHeader="false"></vHeader>
     努力开发中...
   </div>

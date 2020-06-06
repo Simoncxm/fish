@@ -1,5 +1,5 @@
 <template>
-    <i :class="[{'iconfont': name}, 'vchat-noUser', className]"
+    <i :class="[{'iconfont': name}, 'echat-noUser', className]"
        :style="{fontSize: size + 'px', color: color, cursor: cursor}" @click.stop="clickIcon"></i>
 </template>
 <script>

@@ -1,7 +1,7 @@
 <template>
-  <div class="vchat-searchGroup">
+  <div class="echat-searchGroup">
     <v-apheader title="查找群聊" back="/main/personalMain/group/own"></v-apheader>
-    <div class="vchat-search group-search">
+    <div class="echat-search group-search">
       <el-select v-model="type" placeholder="请选择搜索方式" @change="searchGroup">
         <el-option
           v-for="item in searchOptions"
@@ -33,14 +33,14 @@
               <i class="icon-zhanghao iconfont"></i>
               {{v.userNum}}
             </p>
-            <p :title="v.desc" class="vchat-line1">
+            <p :title="v.desc" class="echat-line1">
               {{v.desc}}
             </p>
           </div>
         </li>
       </ul>
       <v-nodata v-show="!groupList.length && !loadingSearch">
-        <p class="vchat-no-have">
+        <p class="echat-no-have">
           没有查询到想要的，
           <router-link to="/main/personalMain/group/set">新建</router-link>
           一个吧！
@@ -134,7 +134,7 @@
 </script>
 
 <style lang="scss" scoped>
-  .vchat-searchGroup {
+  .echat-searchGroup {
     width: 100%;
     height: 100%;
 

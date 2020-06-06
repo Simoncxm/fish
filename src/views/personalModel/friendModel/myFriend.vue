@@ -1,5 +1,5 @@
 <template>
-  <div class="vchat-myFriend vchat-noUser">
+  <div class="echat-myFriend echat-noUser">
     <v-apheader title="我的好友">
       <el-dropdown trigger="click" @command="handleCommand">
         <v-icon cursor="pointer" name="hanbaobao" color="#fff"></v-icon>
@@ -8,17 +8,17 @@
         </el-dropdown-menu>
       </el-dropdown>
     </v-apheader>
-    <div class="vchat-myFriend-container">
+    <div class="echat-myFriend-container">
       <div class="me-li" @click="goFriendDetail(user.id)">
         <a href="javascript:;">
           <img :src="IMG_URL + user.avatar" alt="">
         </a>
         <div>
-          <span class="vchat-line1" :title="user.nickname">{{user.nickname}}</span>
+          <span class="echat-line1" :title="user.nickname">{{user.nickname}}</span>
           <v-icon name="enter" color="#d5d5d5"></v-icon>
         </div>
       </div>
-      <div class="vchat-linkman-container" :class="{active: showList.indexOf('mine') > -1}" v-if="friendList.length">
+      <div class="echat-linkman-container" :class="{active: showList.indexOf('mine') > -1}" v-if="friendList.length">
         <h3 @click="setShowList('mine')">
           <p>
             <v-icon name="fanhui" :size="16" color="#b7b6b6" class="list-icon"></v-icon>
@@ -26,7 +26,7 @@
           </p>
           <span>{{friendList.length}}</span>
         </h3>
-        <ul class="vchat-linkman-list">
+        <ul class="echat-linkman-list">
           <li v-for="v in friendList" :key="v.id" @click="goFriendDetail(v.id)"
               @contextmenu="contextmenuClick($event, v)">
             <a href="javascript:;">
@@ -34,17 +34,17 @@
             </a>
             <div>
               <p>
-                <span class="vchat-line1" :title="v.nickname">{{v.nickname}}</span>
+                <span class="echat-line1" :title="v.nickname">{{v.nickname}}</span>
               </p>
               <p>
-                <span :title="v.signature" class="vchat-line1">{{v.signature}}</span>
+                <span :title="v.signature" class="echat-line1">{{v.signature}}</span>
               </p>
             </div>
           </li>
         </ul>
       </div>
       <v-nodata v-else>
-        <p class="vchat-no-have">
+        <p class="echat-no-have">
           还没有添加好友哦，去
           <router-link to="/main/personalMain/friendly/search">添加</router-link>
           。
@@ -173,11 +173,11 @@
 </script>
 
 <style lang="scss" scoped>
-  .vchat-myFriend {
+  .echat-myFriend {
     width: 100%;
     height: 100%;
 
-    .vchat-myFriend-container {
+    .echat-myFriend-container {
       width: 100%;
       padding-top: 10px;
       height: calc(100% - 40px);

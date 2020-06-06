@@ -1,5 +1,5 @@
 <template>
-  <div class="vchat-no-data">
+  <div class="echat-no-data">
     <div class="no-data-bg" :style="{backgroundImage: 'url(' + src + ')'}"></div>
     <slot></slot>
   </div>
@@ -9,7 +9,7 @@
 
   export default {
     props: ['url'],
-    name: 'vchatNodata',
+    name: 'echatNodata',
     data() {
       return {};
     },
@@ -21,7 +21,7 @@
   }
 </script>
 <style lang="scss" scoped>
-  .vchat-no-data {
+  .echat-no-data {
     width: 100%;
     margin-bottom: 10px;
     display: flex;

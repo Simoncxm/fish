@@ -1,5 +1,5 @@
 <template>
-  <div class="vchat-scroll" v-loadMore="loadMore" :data-scrollWay="scrollWay" :data-nodata="nodata">
+  <div class="echat-scroll" v-loadMore="loadMore" :data-scrollWay="scrollWay" :data-nodata="nodata">
     <slot name="down"></slot>
     <span id="loadmoreIcon" style="overflow: hidden" v-show="!nodata">
             <v-icon class="el-icon-loading" :size="28" color="#fff"></v-icon>
@@ -80,7 +80,7 @@
 </script>
 
 <style lang="scss" scoped>
-  .vchat-scroll {
+  .echat-scroll {
     width: 100%;
     height: 100%;
     overflow: hidden;

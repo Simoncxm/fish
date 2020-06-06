@@ -31,8 +31,8 @@ export default {
     api.getSystemInfo().then(r => {
       if (r.code === 0) {
         let id = state.user.id + '-' + r.data.id;
-        state.Vchat = Object.assign({}, r.data, {type: 'vchat'}, {id});
-        commit('setConversationsList', state.Vchat);
+        state.Echat = Object.assign({}, r.data, {type: 'echat'}, {id});
+        commit('setConversationsList', state.Echat);
       }
     })
   }

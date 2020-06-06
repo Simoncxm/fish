@@ -1,5 +1,5 @@
 <template>
-  <div class="vchat-photoWall">
+  <div class="echat-photoWall">
     <v-apheader title="照片墙" back="-1"></v-apheader>
     <ul class="photoWall-ul">
       <li v-for="(v, i) in coverList" :key="i" :style="{backgroundImage: 'url('+ IMG_URL + v +')'}">
@@ -109,7 +109,7 @@
 </script>
 
 <style lang="scss" scoped>
-  .vchat-photoWall {
+  .echat-photoWall {
     width: 100%;
     height: 100%;
 

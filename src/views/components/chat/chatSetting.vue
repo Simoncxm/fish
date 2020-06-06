@@ -1,5 +1,5 @@
 <template>
-  <div class="vchat-chatSetting">
+  <div class="echat-chatSetting">
     <h3>聊天设置</h3>
     <v-icon class="el-icon-circle-close-outline deClose" @clickIcon="$emit('clickIcon')" color="#323232" :size="24"
             cursor="pointer"></v-icon>
@@ -11,7 +11,7 @@
                 v-if="user.wallpaper.split(',')[0] === v.url"></v-icon>
       </li>
       <li class="upload-btn">
-        <span class="vchat-button-mini minor">上传</span>
+        <span class="echat-button-mini minor">上传</span>
         <input type="file" @change="fileChange" ref="wallpaperFile"
                accept="image/png, image/jpeg, image/gif, image/jpg">
       </li>
@@ -21,7 +21,7 @@
     <div class="aphSlider-container">
       <el-slider v-model="aphSlider" :format-tooltip="formatTooltip" tooltip-class="aphTooltip"
                  @change="Sliderchange"></el-slider>
-      <span class="vchat-button-mini minor" @click="saveBgopa">保存</span>
+      <span class="echat-button-mini minor" @click="saveBgopa">保存</span>
     </div>
     <h5>文字颜色</h5>
     <p class="isColor-container">
@@ -201,7 +201,7 @@
 </script>
 
 <style lang="scss" scoped>
-  .vchat-chatSetting {
+  .echat-chatSetting {
     width: 100%;
 
     .aphSlider-container {
