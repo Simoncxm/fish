@@ -21,9 +21,9 @@
         <img :src="IMG_URL + friendInfo.avatar" alt="">
       </a>
       <div class="firend-info">
-        <p>
-          Vchat：{{friendInfo.code}}
-        </p>
+<!--        <p>-->
+<!--          Vchat：{{friendInfo.id}}-->
+<!--        </p>-->
         <p>
           性别：{{friendInfo.gender === '1' ? '男' : friendInfo.gender === '2' ? '女' : '保密'}}
         </p>
@@ -32,13 +32,13 @@
 <!--          + friendInfo.town.name}}-->
 <!--        </p>-->
       </div>
-      <div class="detail-item" v-if="friendInfo.code === user.code" @click="toPhoto">
+      <div class="detail-item" v-if="friendInfo.id === user.id" @click="toPhoto">
         <span>照片墙</span>
         <p>
           <v-icon name="enter" color="#d5d5d5"></v-icon>
         </p>
       </div>
-      <div class="detail-button" v-if="friendInfo.code !== user.code">
+      <div class="detail-button" v-if="friendInfo.id !== user.id">
         <button @click="apply" class="vchat-full-button minor" v-if="!myFriendFlag">加为好友</button>
         <div v-else>
           <button @click="send" class="vchat-full-button minor">发消息</button>
@@ -115,7 +115,7 @@
       toPhoto() {
         this.$router.push({name: 'photoWall', params: this.$route.params});
       },
-      checkMyfriends() {
+      checkMyfriend() {
         let params = {
           userid: this.user.id
         };
@@ -128,7 +128,7 @@
     },
     created() {
       this.getOtherUserInfo();
-      this.checkMyfriends();
+      this.checkMyfriend();
     }
   }
 </script>

@@ -13,7 +13,7 @@
           {{groupInfo.title}}
         </p>
         <p>
-          {{groupInfo.code}}
+          {{groupInfo.id}}
         </p>
         <p>本群创建于{{createDate}}</p>
         <p>
@@ -31,7 +31,7 @@
           </p>
         </h3>
         <ul class="group-users-liitte-list">
-          <li v-for="(v, i) in groupUsers" :key="v.code" v-if="i < 9">
+          <li v-for="(v, i) in groupUsers" :key="v.id" v-if="i < 9">
             <a class="vchat-photo">
               <img :src="IMG_URL + v.userId.avatar" alt="">
             </a>
