@@ -96,6 +96,7 @@
         this.InfoList = r;
       },
       takeValidate(r) {
+        alert("in");
         this.$emit('NewMes', r);
         r.visible = false;
         this.InfoList.unshift(r);
@@ -111,6 +112,7 @@
       currSation: { // 当前会话
         handler(v) {
           if (v.id) {
+            // alert("ok");
             this.$socket.emit('setReadStatus', {conversationId: v.id, name: this.user.name});
             this.$store.commit('setUnRead', {conversationId: v.id, clear: true});
             this.$socket.emit('getSystemMessages', {conversationId: v.id, offset: this.offset, limit: this.limit});
@@ -145,6 +147,7 @@
       agree(v) {
         v.userYavatar = this.user.avatar;
         v.userYname = this.user.nickname;
+        // alert(JSON.stringify(v))
         this.$socket.emit('agreeValidate', v);
         this.InfoList.forEach(m => { // 更新同一申请人的所有相同请求
           if (m.userM === v.userM && m.type === "validate" && (v.state === 'friend' || v.state === 'group')) {

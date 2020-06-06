@@ -1,11 +1,17 @@
 <template>
   <div class="echat-Detail">
     <v-apheader back="-1" bgColor="transparent" class="echat-Detail-header">
-      <v-icon name="erweima" color="#f5f5f5" cursor="pointer" @clickIcon="showFriendQr = true"></v-icon>
+<!--      <v-icon name="erweima" color="#f5f5f5" cursor="pointer" @clickIcon="showFriendQr = true"></v-icon>-->
     </v-apheader>
+<!--    <el-carousel trigger="click" height="200px" arrow="never"-->
+<!--                 :indicator-position="friendInfo.cover.length > 1 ? '' : 'none'" :autoplay="false">-->
+<!--      <el-carousel-item v-for="item in friendInfo.cover" :key="item">-->
+<!--        <a class="DetailImage-a" :style="{backgroundImage: 'url('+ IMG_URL + item +')'}">-->
+<!--        </a>-->
+<!--      </el-carousel-item>-->
     <el-carousel trigger="click" height="200px" arrow="never"
-                 :indicator-position="friendInfo.cover.length > 1 ? '' : 'none'" :autoplay="false">
-      <el-carousel-item v-for="item in friendInfo.cover" :key="item">
+                 :indicator-position="cover.length > 1 ? '' : 'none'" :autoplay="true">
+      <el-carousel-item v-for="item in cover" :key="item">
         <a class="DetailImage-a" :style="{backgroundImage: 'url('+ IMG_URL + item +')'}">
         </a>
       </el-carousel-item>
@@ -32,14 +38,14 @@
 <!--          + friendInfo.town.name}}-->
 <!--        </p>-->
       </div>
-      <div class="detail-item" v-if="friendInfo.id === user.id" @click="toPhoto">
-        <span>照片墙</span>
-        <p>
-          <v-icon name="enter" color="#d5d5d5"></v-icon>
-        </p>
-      </div>
-      <div class="detail-button" v-if="friendInfo.id !== user.id">
-        <button @click="apply" class="echat-full-button minor" v-if="!myFriendFlag">加为好友</button>
+<!--      <div class="detail-item" v-if="friendInfo.id === user.id" @click="toPhoto">-->
+<!--        <span>照片墙</span>-->
+<!--        <p>-->
+<!--          <v-icon name="enter" color="#d5d5d5"></v-icon>-->
+<!--        </p>-->
+<!--      </div>-->
+      <div class="detail-button" v-if="typeof(friendInfo.id) !== undefined && friendInfo.id !== user.id">
+        <button @click="apply" class="echat-full-button minor" v-if="typeof(myFriendFlag) !== undefined && !myFriendFlag">加为好友</button>
         <div v-else>
           <button @click="send" class="echat-full-button minor">发消息</button>
           <button @click="remove" class="echat-full-button error">删除好友</button>
@@ -48,10 +54,10 @@
 
       </div>
     </div>
-    <div class="Qr-dialog" :class="{active: showFriendQr}">
-      <v-icon class="el-icon-circle-close-outline QrClose" @clickIcon="showFriendQr = false" color="#f5f5f5" :size="28"
-              cursor="pointer"></v-icon>
-    </div>
+<!--    <div class="Qr-dialog" :class="{active: showFriendQr}">-->
+<!--      <v-icon class="el-icon-circle-close-outline QrClose" @clickIcon="showFriendQr = false" color="#f5f5f5" :size="28"-->
+<!--              cursor="pointer"></v-icon>-->
+<!--    </div>-->
   </div>
 </template>
 
@@ -65,9 +71,10 @@
     data() {
       return {
         IMG_URL: process.env.IMG_URL,
-        friendInfo: {cover: [], province: {}, city: {}, town: {}}, // user详情
-        showFriendQr: false, // 二维码开关
-        myFriendFlag: false // 是否为我的好友
+        friendInfo: {}, // user详情
+        cover:['/display/20200603000000_cover.jpg','/display/20200603000000_cover1.jpg'],
+        // showFriendQr: false, // 二维码开关
+        // myFriendFlag: true // 是否为我的好友
       }
     },
     components: {
