@@ -38,16 +38,16 @@ export default {
   setUnRead(state, data) {
     if (data.clear) {
       state.unRead.forEach(v => {
-        if (v.roomid === data.roomid) {
+        if (v.conversationId === data.conversationId) {
           v.count = 0;
         }
       });
       return;
     }
-    let unRead = state.unRead.filter(v => v.roomid === data.roomid);
+    let unRead = state.unRead.filter(v => v.conversationId === data.conversationId);
     if (unRead.length) {
       state.unRead.forEach(v => {
-        if (v.roomid === data.roomid) {
+        if (v.conversationId === data.conversationId) {
           if (data.add) {
             v.count++;
           } else {
@@ -56,7 +56,7 @@ export default {
         }
       });
     } else {
-      state.unRead.push({roomid: data.roomid, count: data.count});
+      state.unRead.push({conversationId: data.conversationId, count: data.count});
     }
   }
 }

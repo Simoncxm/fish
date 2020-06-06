@@ -81,14 +81,14 @@
       getHistoryMessages(mesdata) { // 获取未读消息数量
         let data = mesdata.filter(v => v.read.indexOf(this.user.name) === -1);
         if (data.length) {
-          this.$store.commit('setUnRead', {roomid: data[0].roomid, count: data.length});
+          this.$store.commit('setUnRead', {conversationId: data[0].conversationId, count: data.length});
         }
       },
       mes(r) { //更改未读消息数量
-        this.$store.commit('setUnRead', {roomid: r.roomid, add: true, count: 1});
+        this.$store.commit('setUnRead', {conversationId: r.conversationId, add: true, count: 1});
       },
       takeValidate(r) {
-        this.$store.commit('setUnRead', {roomid: r.roomid, add: true, count: 1});
+        this.$store.commit('setUnRead', {conversationId: r.conversationId, add: true, count: 1});
         if (r.type === 'info') {
           this.$store.dispatch('getUserInfo');
         }
@@ -104,9 +104,9 @@
             name: this.user.name,
             time: utils.formatTime(new Date()),
             avatar: this.user.avatar,
-            roomid: v.id
+            conversationId: v.id
           };
-          let room = {roomid: v.id, offset: 1, limit: 200};
+          let room = {conversationId: v.id, offset: 1, limit: 200};
           this.$socket.emit('join', val);
           this.$socket.emit('getHistoryMessages', room);
         });

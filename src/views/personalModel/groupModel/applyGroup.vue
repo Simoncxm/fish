@@ -49,7 +49,7 @@
           groupPhoto: group.groupPhoto,
           userM: this.user.id, // 申请人id
           read: [],
-          roomid: this.$route.params.id + '-' + this.Echat.id.split('-')[1],
+          conversationId: this.$route.params.id + '-' + this.Echat.id.split('-')[1],
           state: 'group',
           type: 'validate',
           status: '0'

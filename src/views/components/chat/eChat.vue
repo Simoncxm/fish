@@ -146,7 +146,7 @@
         handler(list) {
           this.contactsList.forEach((v, i) => {
             list.forEach(m => {
-              if (v.id === m.roomid) {
+              if (v.id === m.conversationId) {
                 this.$set(this.contactsList, i, Object.assign({}, v, {unRead: m.count}));
               }
             });
@@ -176,7 +176,7 @@
       },
       getNewMes(m) { // 获取最新一条消息
         this.contactsList.forEach((v, i) => {
-          if (v.id === m.roomid) {
+          if (v.id === m.conversationId) {
             this.$set(this.contactsList, i, Object.assign({}, v, {newMes: m.mes, newMesTime: m.time.split(' ')[1]}));
           }
         })
