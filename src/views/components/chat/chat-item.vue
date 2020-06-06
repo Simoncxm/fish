@@ -1,11 +1,11 @@
 <template>
-  <div class="vchat-item">
-    <div class="vchat-item-header">
+  <div class="echat-item">
+    <div class="echat-item-header">
 
       <span :class="{active: currNav === v.id}" v-for="(v, i) in navList" :key="i" @click="setCurrNav(v.id)"
             v-if="v.type.indexOf(currSation.type) > -1">{{v.name}}</span>
     </div>
-    <div class="vchat-item-container" v-show="currNav === 0">
+    <div class="echat-item-container" v-show="currNav === 0">
       <div class="container-chat">
         <div class="chat-room"
              v-loading="chatLoading"
@@ -41,8 +41,8 @@
           </div>
           <textarea v-model="message" @keyup.enter="send(false)" v-fontColor="user.chatColor"></textarea>
           <div class="enter">
-            <button class="vchat-button-mini info" @click="clear">清空</button>
-            <button class="vchat-button-mini" @click="send(false)">发送</button>
+            <button class="echat-button-mini info" @click="clear">清空</button>
+            <button class="echat-button-mini" @click="send(false)">发送</button>
           </div>
         </div>
       </div>
@@ -50,7 +50,7 @@
         <div class="handel-notice">
           <h3>群通知</h3>
           <ul>
-            <li class="vchat-line1" title="求star❤❤❤，点击跳转源码"><a href="https://github.com/wuyawei/Vchat" target="_blank"
+            <li class="echat-line1" title="求star❤❤❤，点击跳转源码"><a href="https://github.com/wuyawei/Echat" target="_blank"
                                                                style="color: #fff">期待你的star <i
               :style="{color: 'red', fontStyle: 'normal'}">❤❤❤</i></a></li>
           </ul>
@@ -63,10 +63,10 @@
           <input type="text" v-show="spread" ref="searchMember">
           <ul>
             <li v-for="v in groupUserList" :key="v.userId['id']">
-              <a class="vchat-photo" :class="{lineOf: !v.status}">
+              <a class="echat-photo" :class="{lineOf: !v.status}">
                 <img :src="IMG_URL + v.userId.avatar" alt="">
               </a>
-              <span class="vchat-line1">{{v.userId.nickname}}</span>
+              <span class="echat-line1">{{v.userId.nickname}}</span>
             </li>
             <li>
               <p class="loadmore" v-if="groupUsers.length > groupUserList.length" @click="loadmore">
@@ -78,10 +78,10 @@
         </div>
       </div>
     </div>
-    <div class="vchat-item-container" v-show="currNav === 1">
+    <div class="echat-item-container" v-show="currNav === 1">
       努力开发中...
     </div>
-    <div class="vchat-item-container" v-show="currNav === 2">
+    <div class="echat-item-container" v-show="currNav === 2">
       <message-log :currSation="currSation" :currNav="currNav" @lookPhoto="lookPhoto"></message-log>
     </div>
     <v-photo-swipe :visible="photoSwipeFlag" @close="photoSwipeFlag = false" :url="photoSwipeUrl"></v-photo-swipe>
@@ -340,11 +340,11 @@
 </script>
 
 <style lang="scss" scoped>
-  .vchat-item {
+  .echat-item {
     width: 100%;
     height: 100%;
 
-    .vchat-item-header {
+    .echat-item-header {
       width: 100%;
       height: 32px;
       text-align: left;
@@ -388,7 +388,7 @@
       }
     }
 
-    .vchat-item-container {
+    .echat-item-container {
       width: 100%;
       height: calc(100% - 32px);
       display: flex;

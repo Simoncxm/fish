@@ -1,14 +1,14 @@
 <template>
-  <div class="vchat-theme-set">
+  <div class="echat-theme-set">
     <ul class="theme-list">
       <li>
         <div class="theme-style">
-          Vchat
+          Echat
         </div>
-        <el-button :type="projectTheme === 'vchat' ? 'success' : 'info'" :loading="setThemeIng === 'vchat'"
-                   @click="setTheme('vchat')">
-          <i class="el-icon-success el-icon--right" v-if="projectTheme === 'vchat'"></i>
-          {{getText('vchat')}}
+        <el-button :type="projectTheme === 'echat' ? 'success' : 'info'" :loading="setThemeIng === 'echat'"
+                   @click="setTheme('echat')">
+          <i class="el-icon-success el-icon--right" v-if="projectTheme === 'echat'"></i>
+          {{getText('echat')}}
         </el-button>
       </li>
     </ul>
@@ -66,7 +66,7 @@
   }
 </script>
 <style lang="scss">
-  .vchat-theme-set {
+  .echat-theme-set {
     width: 100%;
 
     .theme-list {

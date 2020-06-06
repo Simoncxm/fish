@@ -1,5 +1,5 @@
 <template>
-  <div class="vchat-todo">
+  <div class="echat-todo">
     <vHeader :isMainHeader="false"></vHeader>
     <full-calendar :events="fcEvents" locale="zh-cn" lang="zh" @dayClick="dayClick">
       <template slot="fc-event-card" slot-scope="p">
@@ -18,7 +18,7 @@
             内容：{{p.event.content}}
           </p>
           <p class="todoTitle-box" slot="reference">
-            <span class="vchat-line1 todoTitle">{{p.event.title}}</span>
+            <span class="echat-line1 todoTitle">{{p.event.title}}</span>
             <span>
                                 <v-icon class="el-icon-delete" cursor="pointer" :size="14"
                                         @clickIcon="delTodo(p.event['id'])"></v-icon>

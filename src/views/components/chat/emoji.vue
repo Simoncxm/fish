@@ -1,5 +1,5 @@
 <template>
-  <div class="vchat-emoji">
+  <div class="echat-emoji">
     <el-tabs type="border-card" tab-position="bottom" v-model="activeName">
       <el-tab-pane name="default">
                 <span slot="label" class="emoji-tap" :lazy="true">
@@ -32,7 +32,7 @@
               <a>
                 <img v-lazy="IMG_URL + m.list[0]" alt="">
               </a>
-              <p class="vchat-line1">{{m.name}}</p>
+              <p class="echat-line1">{{m.name}}</p>
             </li>
           </ul>
           <div class="emojiDetail" :class="{active: currEmojiDetail.name}">
@@ -44,9 +44,9 @@
                 <img v-lazy="IMG_URL + m" alt="">
               </li>
             </ul>
-            <p class="vchat-button addEmoji" v-if="user.emoji.indexOf(currEmojiDetail.code) === -1"
+            <p class="echat-button addEmoji" v-if="user.emoji.indexOf(currEmojiDetail.code) === -1"
                @click.stop="addEmoji(currEmojiDetail.code)">添加</p>
-            <p class="vchat-button info addEmoji" v-else>已添加</p>
+            <p class="echat-button info addEmoji" v-else>已添加</p>
           </div>
         </div>
       </el-tab-pane>
@@ -140,7 +140,7 @@
 </script>
 
 <style lang="scss" scoped>
-  .vchat-emoji {
+  .echat-emoji {
     width: 100%;
     height: 100%;
 

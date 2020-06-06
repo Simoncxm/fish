@@ -1,9 +1,9 @@
 <template>
-  <div class="vchat-system-Message" v-fontColor="user.chatColor">
+  <div class="echat-system-Message" v-fontColor="user.chatColor">
     <ul v-if="InfoList.length">
       <template v-for="v in InfoList">
         <li v-if="v.type === 'validate'" :key="v['id']">
-          <span class="vchat-line1 info">{{v.state === 'friend' ? '验证消息：' + v.nickname + '申请加您为好友' : '验证消息：' + v.nickname + '申请加入' + v.groupName}}</span>
+          <span class="echat-line1 info">{{v.state === 'friend' ? '验证消息：' + v.nickname + '申请加您为好友' : '验证消息：' + v.nickname + '申请加入' + v.groupName}}</span>
           <span class="time">{{v.time}}</span>
           <el-popover
             placement="left"
@@ -11,7 +11,7 @@
             v-model="v.visible">
             <div class="Validate-mes">
               <div class="header">
-                <a class="vchat-photo">
+                <a class="echat-photo">
                   <img :src="IMGURL + v.avatar" alt="">
                 </a>
                 <p>
@@ -23,8 +23,8 @@
                 附加消息：<span>{{v.mes}}</span>
               </div>
               <div class="footer" v-if="v.status === '0' ">
-                <button class="vchat-button-mini info" @click="refuse(v)">拒绝</button>
-                <button class="vchat-button-mini" @click="agree(v)">同意</button>
+                <button class="echat-button-mini info" @click="refuse(v)">拒绝</button>
+                <button class="echat-button-mini" @click="agree(v)">同意</button>
               </div>
               <div class="footer" v-else>
                 <span class="status">{{v.status === '1' ? '已同意' : '已拒绝'}}</span>
@@ -47,7 +47,7 @@
         </li>
         <li v-if="v.type === 'info'" :key="v['id']">
           <p>
-            <span class="vchat-line1 info">{{v.mes}}</span>
+            <span class="echat-line1 info">{{v.mes}}</span>
             <span class="time">{{v.time}}</span>
           </p>
           <el-popover
@@ -74,7 +74,7 @@
 
   export default {
     props: ['currSation'],
-    name: 'vchatSystemMessage',
+    name: 'echatSystemMessage',
     data() {
       return {
         IMGURL: process.env.IMG_URL,
@@ -123,7 +123,7 @@
       }
     },
     computed: {
-      ...mapState(['user', 'Vchat'])
+      ...mapState(['user', 'Echat'])
     },
     methods: {
       del(v) {
@@ -165,7 +165,7 @@
 </script>
 
 <style lang="scss" scoped>
-  .vchat-system-Message {
+  .echat-system-Message {
     width: 100%;
     height: 100%;
     padding: 15px 30px 10px 15px;

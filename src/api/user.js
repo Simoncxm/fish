@@ -31,11 +31,8 @@ export default {
   updateBgOpa(params) { // 修改聊天透明度
     return fetch.get('user/updateBgOpa', params);
   },
-  getUserDetail() { // 获取个人设置用户信息
-    return fetch.post('user/getUserDetail');
-  },
   getSystemInfo() { // 获取系统信息
-    return fetch.get('user/getSystemInfo');
+    return fetch.get('user/getSystemUserInfo');
   },
   addConversation(params) { // 添加会话
     return fetch.post('user/addConversation', params);

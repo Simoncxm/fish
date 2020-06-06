@@ -1,8 +1,8 @@
 <template>
-  <div class="vchat-main">
+  <div class="echat-main">
     <v-header></v-header>
-    <div class="vchat-content">
-      <div class="vchat-content-nav">
+    <div class="echat-content">
+      <div class="echat-content-nav">
 
         <ul>
           <li v-for="v in nav" :key="v.id" :class="{active: $route.path.indexOf(v.link) > -1}">
@@ -13,7 +13,7 @@
           </li>
         </ul>
       </div>
-      <div class="vchat-content-sub">
+      <div class="echat-content-sub">
         <router-view/>
       </div>
     </div>
@@ -21,7 +21,7 @@
 </template>
 
 <!--关于多房间，socket可以同时加入多个房间但是也同时可以接收到多个房间的消息，需要自己处理数据-->
-<!--所有用户都需要加入vchat房间 以发送系统消息（申请验证等）-->
+<!--所有用户都需要加入echat房间 以发送系统消息（申请验证等）-->
 <script>
   import utils from '@/utils/utils';
   import {mapState} from 'vuex';
@@ -58,7 +58,7 @@
       }
     },
     computed: {
-      ...mapState(['user', 'conversationsList', 'Vchat'])
+      ...mapState(['user', 'conversationsList', 'Echat'])
     },
     components: {
       vHeader
@@ -118,11 +118,11 @@
 </script>
 
 <style lang="scss" scoped>
-  .vchat-main {
+  .echat-main {
     width: 100%;
     height: 100%;
 
-    .vchat-content {
+    .echat-content {
       width: 100%;
       height: calc(100% - 80px);
       min-height: 600px;
@@ -130,7 +130,7 @@
       justify-content: flex-start;
       background-color: #fff;
 
-      .vchat-content-nav {
+      .echat-content-nav {
         width: 120px;
         height: 100%;
 
@@ -158,7 +158,7 @@
         }
       }
 
-      .vchat-content-sub {
+      .echat-content-sub {
         width: calc(100% - 120px);
         height: 100%;
         min-width: 1170px;

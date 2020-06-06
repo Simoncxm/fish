@@ -1,19 +1,19 @@
 <template>
-  <div class="vchat-personalMain">
-    <div class="vchat-content-left-view">
-      <div class="vchat-content-left-box">
-        <div class="vchat-content-left-content">
+  <div class="echat-personalMain">
+    <div class="echat-content-left-view">
+      <div class="echat-content-left-box">
+        <div class="echat-content-left-content">
           <router-view></router-view>
         </div>
       </div>
     </div>
-    <div class="vchat-content-right-view">
-      <v-chat></v-chat>
+    <div class="echat-content-right-view">
+      <e-chat></e-chat>
     </div>
   </div>
 </template>
 <script>
-  import vChat from "./components/chat/vChat";
+  import eChat from "./components/chat/eChat";
 
   export default {
     name: '',
@@ -22,7 +22,7 @@
       }
     },
     components: {
-      vChat
+      eChat
     },
     methods: {},
     mounted() {
@@ -30,14 +30,14 @@
   }
 </script>
 <style scoped lang="scss">
-  .vchat-personalMain {
+  .echat-personalMain {
     width: calc(100% - 30px);
     height: 100%;
     display: flex;
     justify-content: flex-start;
   }
 
-  .vchat-content-left-view {
+  .echat-content-left-view {
     width: 320px;
     height: 100%;
     padding: 20px 0 30px;
@@ -45,7 +45,7 @@
     margin-left: 20px;
     min-width: 300px;
 
-    .vchat-content-left-box {
+    .echat-content-left-box {
       width: 100%;
       height: 100%;
       box-sizing: border-box;
@@ -53,13 +53,13 @@
       box-shadow: 0 0 1px 1px #d5d5d5;
     }
 
-    .vchat-content-left-content {
+    .echat-content-left-content {
       width: 100%;
       height: calc(100% - 50px);
       box-sizing: border-box;
     }
 
-    .vchat-content-left-footer {
+    .echat-content-left-footer {
       width: 100%;
       height: 50px;
       box-sizing: border-box;
@@ -83,7 +83,7 @@
     }
   }
 
-  .vchat-content-right-view {
+  .echat-content-right-view {
     width: calc(100% - 340px);
     padding: 20px 0 30px;
     min-width: 820px;

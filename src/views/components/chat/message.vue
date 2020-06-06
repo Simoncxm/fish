@@ -1,5 +1,5 @@
 <template>
-  <ul ref="msglist" class="vchat-message">
+  <ul ref="msglist" class="echat-message">
     <li style="fontSize: 12px" v-if="chatList.length > 50">更多消息请在聊天记录中查看</li>
     <li :class="[{org: v.type==='org'}]" v-for="(v, i) in chatList" :key="i">
       <template v-if="v.type==='other'">
@@ -48,7 +48,7 @@
 </script>
 
 <style lang="scss" scoped>
-  .vchat-message {
+  .echat-message {
     width: 100%;
     height: 100%;
     overflow-y: auto;

@@ -1,5 +1,5 @@
 <template>
-  <div class="vchat-login" v-bgInmage="bg">
+  <div class="echat-login" v-bgInmage="bg">
     <div class="logo" :class="{active: showSign}">
       <h3 class="title">Hi, E-CHAT !</h3>
       <span class="begain" v-if="!showSign" @click="experience">立即体验</span>
@@ -298,7 +298,7 @@
 </script>
 
 <style scoped lang="scss">
-  .vchat-login {
+  .echat-login {
     width: 100%;
     height: 100%;
     overflow: hidden;

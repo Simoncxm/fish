@@ -1,7 +1,7 @@
 <template>
-  <div class="vchat-chatRoom" v-bgInmage="IMGURL + user.wallpaper.split(',')[0]" v-fontColor="user.chatColor">
+  <div class="echat-chatRoom" v-bgInmage="IMGURL + user.wallpaper.split(',')[0]" v-fontColor="user.chatColor">
     <div class="chatRoom-before" v-opacity="bgOpa"></div>
-    <div class="vchat-chatRoom-bg">
+    <div class="echat-chatRoom-bg">
       <div class="chat-header">
         <a v-fontColor="user.chatColor">{{currSation.name}}</a>
         <div class="chat-handel">
@@ -15,33 +15,33 @@
           <li class="chat-conversation-li" v-for="(v, i) in contactsList" :key=v.id
               :class="{active: currSation.id === v.id}" @click="setCurrSation(v)">
             <el-badge :value="v.unRead" :max="99" class="mesBadge" :hidden="v.unRead === 0">
-              <a class="vchat-photo">
+              <a class="echat-photo">
                 <img :src="IMGURL + v.avatar" alt="">
               </a>
             </el-badge>
             <div class="chat-conversation-li-center">
-              <template v-if="v.type === 'vchat'">
-                <p class="vchat-line1">{{v.nickname}}</p>
-                <p class="vchat-line1">{{v.signature}}</p>
+              <template v-if="v.type === 'echat'">
+                <p class="echat-line1">{{v.nickname}}</p>
+                <p class="echat-line1">{{v.signature}}</p>
               </template>
               <template v-else>
-                <p class="vchat-line1">{{v.name}}</p>
-                <p class="vchat-line1">{{v.newMes}}</p>
+                <p class="echat-line1">{{v.name}}</p>
+                <p class="echat-line1">{{v.newMes}}</p>
               </template>
             </div>
             <div class="chat-conversation-li-right">
               <p>{{v.newMesTime}}</p>
             </div>
             <p class="delete" >
-              <el-tooltip class="item" effect="dark" :content="'移除'" placement="top-start" v-if="v.name !== 'Vchat'">
+              <el-tooltip class="item" effect="dark" :content="'移除'" placement="top-start" v-if="v.name !== 'Echat'">
                 <el-button icon="el-icon-close" circle size="mini" @click="remove(v,i)"></el-button>
               </el-tooltip>
             </p>
           </li>
         </ul>
         <div class="chat-content-box" v-if="update">
-          <chat-item :currSation="currSation" @NewMes="getNewMes" v-show="currSation.type !== 'vchat'"></chat-item>
-          <vchat-message v-show="currSation.type === 'vchat'" :currSation="currSation"></vchat-message>
+          <chat-item :currSation="currSation" @NewMes="getNewMes" v-show="currSation.type !== 'echat'"></chat-item>
+          <echat-message v-show="currSation.type === 'echat'" :currSation="currSation"></echat-message>
         </div>
       </div>
       <div class="chat-setting" :class="{active: settingFlag.f}" v-watchMouse="settingFlag">
@@ -52,18 +52,18 @@
 </template>
 <script type="text/javascript">
   import chatItem from './chat-item.vue';
-  import vchatMessage from './vchatSystemMessage.vue';
+  import echatMessage from './echatSystemMessage.vue';
   import chatSetting from './chatSetting.vue';
   import {mapState} from 'vuex';
   import api from '@/api';
   import Msg from '@/views/components/msg.js'
   export default {
-    name: 'vChat',
+    name: 'eChat',
     inject:['reload'],
     data() {
       return {
         update:true,//没能实现，bug还存在
-        initVchatFlag: true,
+        initEchatFlag: true,
         currSation: {}, //当前会话
         contactsList :[], // 会话列表
         IMGURL: process.env.IMG_URL,
@@ -77,7 +77,7 @@
     sockets: {},
     components: {
       chatItem,
-      vchatMessage,
+      echatMessage,
       chatSetting
     },
 
@@ -86,14 +86,15 @@
         handler(list) {
           var _this=this;
           var allList = JSON.parse(JSON.stringify(list));
+          // alert(JSON.stringify(list));
           //保证只初始化一次
-          if(this.initVchatFlag){
+          if(this.initEchatFlag){
             for(var i = 0; i < allList.length; i++){
-              if(allList[i].name === 'Vchat') {
+              if(allList[i].name === 'Echat') {
                 _this.contactsList.push(allList[i]);
               }
             }
-            this.initVchatFlag = false;
+            this.initEchatFlag = false;
           }
           // console.log(allList.length);
           // console.log(allList[allList.length - 1]);
@@ -203,7 +204,7 @@
         //   console.log(this.currSation.name);
         // setCurrSation(this.contactsList[this.contactsList.length - 1]);
 
-        // if (v.type === 'vchat') { // 只做显示列表移除
+        // if (v.type === 'echat') { // 只做显示列表移除
         //   this.contactsList = this.contactsList.filter(m => m.id !== v.id);
         //   if (this.currSation.id === v.id && this.contactsList.length !== 0) {
         //     this.currSation = this.contactsList[i] || this.contactsList[i - 1] || this.contactsList[i + 1];
@@ -239,7 +240,7 @@
 </script>
 
 <style lang="scss" scoped>
-  .vchat-chatRoom {
+  .echat-chatRoom {
     width: 100%;
     height: 100%;
     border-radius: 3px;
@@ -257,7 +258,7 @@
       background-color: #000;
     }
 
-    .vchat-chatRoom-bg {
+    .echat-chatRoom-bg {
       position: absolute;
       left: 0;
       top: 0;

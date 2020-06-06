@@ -7,6 +7,6 @@ export default {
   conversationsList: [], // 会话列表
   OnlineUser: {}, // 在线人数
   unRead: [], // 未读消息
-  Vchat: {}, // 官方账号信息
-  Authorization: sessionStorage.getItem('Authorization') ? sessionStorage.getItem('Authorization') : ''
+  Echat: {}, // 官方账号信息
+  token: sessionStorage.getItem('token') ? sessionStorage.getItem('token') : ''
 }

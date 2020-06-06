@@ -1,14 +1,14 @@
 <template>
-  <div class="vchat-crop-box">
-    <div class="vchat-crop-container">
-      <div class="vchat-crop-left">
+  <div class="echat-crop-box">
+    <div class="echat-crop-container">
+      <div class="echat-crop-left">
         <img :src="url" ref="avatar-image">
       </div>
-      <div class="vchat-crop-right">
+      <div class="echat-crop-right">
         <img :src="cropedUrl" alt="">
       </div>
     </div>
-    <div class="vchat-crop-btn">
+    <div class="echat-crop-btn">
       <div class="choose-pic">
         <el-button size="small" type="primary">选择图片</el-button>
         <input type="file" @change="fileChange" ref="cropFile" accept="image/gif,image/jpeg,image/jpg,image/png">
@@ -99,10 +99,10 @@
   }
 </script>
 <style lang="scss">
-  .vchat-crop-box {
+  .echat-crop-box {
     width: 100%;
 
-    .vchat-crop-container {
+    .echat-crop-container {
       width: 100%;
       height: 400px;
       display: flex;
@@ -110,14 +110,14 @@
       align-items: flex-start;
       margin-bottom: 20px;
 
-      .vchat-crop-left {
+      .echat-crop-left {
         width: 400px;
         height: 400px;
         border: 1px solid #d5d5d5;
         overflow: hidden;
       }
 
-      .vchat-crop-right {
+      .echat-crop-right {
         width: 200px;
         height: 200px;
         border-radius: 50%;
@@ -131,7 +131,7 @@
       }
     }
 
-    .vchat-crop-btn {
+    .echat-crop-btn {
       width: 100%;
       display: flex;
       justify-content: space-between;

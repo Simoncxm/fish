@@ -49,7 +49,7 @@
         } else {
           document.title = '哇，又好了';
           this.t = setTimeout(_ => {
-            document.title = 'Vchat';
+            document.title = 'Echat';
           }, 2000)
         }
       });

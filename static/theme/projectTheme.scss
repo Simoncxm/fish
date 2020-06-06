@@ -1,96 +1,96 @@
 #theme-#{$theme} {
-  // vchat-main-header
-  .vchat-main-header { // 头部
-    background-color: $vchat-header-backgroudColor;
+  // echat-main-header
+  .echat-main-header { // 头部
+    background-color: $echat-header-backgroudColor;
 
-    .vchat-logo {
-      color: $vchat-logo-color;
+    .echat-logo {
+      color: $echat-logo-color;
     }
 
     .handleList li {
       i {
-        color: $vchat-header-handleList-i-color;
+        color: $echat-header-handleList-i-color;
       }
     }
 
     .handleList li a {
-      color: $vchat-header-handleList-a-color;
+      color: $echat-header-handleList-a-color;
     }
 
     .handleList li:hover {
-      background-color: $vchat-header-handleList-hover-bgcolor;
+      background-color: $echat-header-handleList-hover-bgcolor;
     }
 
     .handleList li:hover i, .handleList li:hover a {
-      color: $vchat-header-handleList-hover-color;
+      color: $echat-header-handleList-hover-color;
     }
 
     .logout {
-      color: $vchat-header-logout;
+      color: $echat-header-logout;
     }
 
     .logout:hover {
-      color: $vchat-header-logout-hover;
+      color: $echat-header-logout-hover;
     }
 
     .online {
-      color: $vchat-header-online;
+      color: $echat-header-online;
     }
   }
 
-  // vchat-little-header.vue
-  .vchat-little-header {
-    background-color: $vchat-little-header-bgcolor;
+  // echat-little-header.vue
+  .echat-little-header {
+    background-color: $echat-little-header-bgcolor;
 
     .logout {
-      color: $vchat-header-logout;
+      color: $echat-header-logout;
     }
 
     .logout:hover {
-      color: $vchat-header-logout-hover;
+      color: $echat-header-logout-hover;
     }
   }
 
   // personalMain.vue
-  .vchat-main {
-    .vchat-content {
-      //background-color: $vchat-content-bgcolor;
-      .vchat-content-nav {
-        background-color: $vchat-content-nav-bgcolor;
-        box-shadow: $vchat-content-nav-box-shadow;
+  .echat-main {
+    .echat-content {
+      //background-color: $echat-content-bgcolor;
+      .echat-content-nav {
+        background-color: $echat-content-nav-bgcolor;
+        box-shadow: $echat-content-nav-box-shadow;
 
         ul {
           li {
             a {
-              color: $vchat-content-nav-color;
+              color: $echat-content-nav-color;
             }
           }
 
           li.active {
             a {
-              color: $vchat-content-nav-active-color;
+              color: $echat-content-nav-active-color;
             }
           }
         }
       }
 
-      .vchat-content-left-footer {
+      .echat-content-left-footer {
         ul {
           a {
-            color: $vchat-content-nav-color;
+            color: $echat-content-nav-color;
           }
 
           li.active {
             a {
-              color: $vchat-content-nav-active-color;
+              color: $echat-content-nav-active-color;
             }
           }
         }
       }
     }
 
-    .vchat-content-view {
-      background-color: $vchat-content-view-bgcolor;
+    .echat-content-view {
+      background-color: $echat-content-view-bgcolor;
     }
   }
 }

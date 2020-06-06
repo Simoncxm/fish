@@ -1,5 +1,5 @@
 <template>
-  <ul class="vchat-dropdown" :style="style" v-show="showFlag">
+  <ul class="echat-dropdown" :style="style" v-show="showFlag">
     <slot name="dropdown" :command="command"></slot>
   </ul>
 </template>
@@ -41,7 +41,7 @@
 </script>
 
 <style lang="scss" scoped>
-  .vchat-dropdown {
+  .echat-dropdown {
     position: absolute;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .12), 0 0 6px 0 rgba(0, 0, 0, .04);
     z-index: 100;

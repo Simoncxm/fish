@@ -1,6 +1,6 @@
 <template>
-  <div class="vchat-friendly">
-    <div class="vchat-friendly-container">
+  <div class="echat-friendly">
+    <div class="echat-friendly-container">
       <transition :name="transitonName">
         <router-view v-if="isShow"></router-view>
       </transition>
@@ -32,13 +32,13 @@
 </script>
 
 <style lang="scss" scoped>
-  .vchat-friendly {
+  .echat-friendly {
     width: 100%;
     height: 100%;
     display: flex;
     justify-content: space-around;
 
-    .vchat-friendly-container {
+    .echat-friendly-container {
       width: 100%;
       min-width: 300px;
       height: 100%;

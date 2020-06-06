@@ -9,6 +9,8 @@ export default {
   setUser(state, data) {
     if (data === 'out') {
       state.user = {};
+      state.token = '';
+      sessionStorage.removeItem('token');
       return;
     }
     state.user = Object.assign({}, state.user, data);

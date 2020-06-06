@@ -1,6 +1,6 @@
 <template>
-  <div class="vchat-Detail">
-    <v-apheader back="-1" bgColor="transparent" class="vchat-Detail-header">
+  <div class="echat-Detail">
+    <v-apheader back="-1" bgColor="transparent" class="echat-Detail-header">
       <v-icon name="erweima" color="#f5f5f5" cursor="pointer" @clickIcon="showFriendQr = true"></v-icon>
     </v-apheader>
     <el-carousel trigger="click" height="200px" arrow="never"
@@ -16,13 +16,13 @@
         <p>{{friendInfo.signature}}</p>
       </div>
     </el-carousel>
-    <div class="vchat-Detail-container friend-detail-container">
+    <div class="echat-Detail-container friend-detail-container">
       <a class="detail-avatar">
         <img :src="IMG_URL + friendInfo.avatar" alt="">
       </a>
       <div class="firend-info">
 <!--        <p>-->
-<!--          Vchat：{{friendInfo.id}}-->
+<!--          Echat：{{friendInfo.id}}-->
 <!--        </p>-->
         <p>
           性别：{{friendInfo.gender === '1' ? '男' : friendInfo.gender === '2' ? '女' : '保密'}}
@@ -39,10 +39,10 @@
         </p>
       </div>
       <div class="detail-button" v-if="friendInfo.id !== user.id">
-        <button @click="apply" class="vchat-full-button minor" v-if="!myFriendFlag">加为好友</button>
+        <button @click="apply" class="echat-full-button minor" v-if="!myFriendFlag">加为好友</button>
         <div v-else>
-          <button @click="send" class="vchat-full-button minor">发消息</button>
-          <button @click="remove" class="vchat-full-button error">删除好友</button>
+          <button @click="send" class="echat-full-button minor">发消息</button>
+          <button @click="remove" class="echat-full-button error">删除好友</button>
 
         </div>
 
@@ -134,5 +134,5 @@
 </script>
 
 <style lang="scss" scoped>
-  @import "../vchatDetail";
+  @import "../echatDetail";
 </style>

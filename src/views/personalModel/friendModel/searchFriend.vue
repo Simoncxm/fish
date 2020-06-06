@@ -1,7 +1,7 @@
 <template>
-  <div class="vchat-searchFriend">
+  <div class="echat-searchFriend">
     <v-apheader title="添加好友" back="/main/personalMain/friendly/own"></v-apheader>
-    <div class="vchat-search friend-search">
+    <div class="echat-search friend-search">
       <el-select v-model="type" placeholder="请选择搜索方式" @change="huntFriends">
         <el-option
           v-for="item in searchOptions"
@@ -19,24 +19,24 @@
         <i slot="append" class="el-input__icon el-icon-search" @click="huntFriends('click')"></i>
       </el-input>
     </div>
-    <div class="vchat-linkman-container friend-container" v-loading="loadingSearch">
-      <ul class="vchat-linkman-list" v-show="friendList.length">
+    <div class="echat-linkman-container friend-container" v-loading="loadingSearch">
+      <ul class="echat-linkman-list" v-show="friendList.length">
         <li v-for="v in friendList" :key="v['id']" @click="goFriendDetail(v['id'])">
           <a href="javascript:;">
             <img :src="IMG_URL + v.avatar" alt="">
           </a>
           <div>
             <p>
-              <span class="vchat-line1" :title="v.nickname">{{v.nickname}}</span>
+              <span class="echat-line1" :title="v.nickname">{{v.nickname}}</span>
             </p>
             <p>
-              <span :title="v.signature" class="vchat-line1">{{v.signature}}</span>
+              <span :title="v.signature" class="echat-line1">{{v.signature}}</span>
             </p>
           </div>
         </li>
       </ul>
       <v-nodata v-show="!friendList.length && !loadingSearch">
-        <p class="vchat-no-have">
+        <p class="echat-no-have">
           没有搜索到想要的!
         </p>
       </v-nodata>
@@ -62,7 +62,7 @@
           },
           {
             value: '1',
-            label: 'Vchat号'
+            label: 'Echat号'
           }
         ],
         type: '2'
@@ -125,7 +125,7 @@
 </script>
 
 <style lang="scss" scoped>
-  .vchat-searchFriend {
+  .echat-searchFriend {
     width: 100%;
     height: 100%;
 

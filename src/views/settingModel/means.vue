@@ -15,40 +15,6 @@
         <el-input v-model="personForm.nickname" placeholder="名称">
         </el-input>
       </el-form-item>
-      <el-form-item label="地址" prop="nickname">
-        <el-select v-model="personForm.province" filterable placeholder="请选择" style="width: 120px;margin-right: 10px;">
-          <el-option
-            v-for="item in provinces"
-            :key="item.value"
-            :label="item.name"
-            :value="item">
-          </el-option>
-        </el-select>
-        <el-select v-model="personForm.city" filterable placeholder="请选择" style="width: 120px;margin-right: 10px;">
-          <el-option
-            v-for="item in cities"
-            :key="item.value"
-            :label="item.name"
-            :value="item">
-          </el-option>
-        </el-select>
-        <el-select v-model="personForm.town" filterable placeholder="请选择" style="width: 120px;">
-          <el-option
-            v-for="item in towns"
-            :key="item.value"
-            :label="item.name"
-            :value="item">
-          </el-option>
-        </el-select>
-      </el-form-item>
-      <el-form-item label="手机" prop="phone">
-        <el-input v-model="personForm.phone" placeholder="手机">
-        </el-input>
-      </el-form-item>
-      <el-form-item label="电子邮箱" prop="email">
-        <el-input v-model="personForm.email" placeholder="电子邮箱">
-        </el-input>
-      </el-form-item>
       <el-form-item label="个性签名" prop="signature">
         <el-input v-model="personForm.signature" placeholder="签名（不超过100位字符）" type="textarea" aotusize resize="none">
         </el-input>
@@ -66,7 +32,7 @@
 <script>
   import api from '@/api';
   import cropper from '@/views/components/cropper/cropper';
-  import {pca, pcaa} from 'area-data'; // 省市区数据
+  // import {pca, pcaa} from 'area-data'; // 省市区数据
   export default {
     name: 'means',
     data() {
@@ -76,30 +42,6 @@
         } else {
           if (value.length > 12) {
             callback(new Error('请输入不超过12位字符'));
-            return;
-          }
-          callback();
-        }
-      };
-      let validatePhone = (rule, value, callback) => {
-        if (value === '') {
-          callback();
-        } else {
-          let reg = /^1[3|4|5|7|8]\d{9}$/;
-          if (!reg.test(value)) {
-            callback(new Error('请输入正确的手机格式！'));
-            return;
-          }
-          callback();
-        }
-      };
-      let validateEmail = (rule, value, callback) => {
-        if (value === '') {
-          callback();
-        } else {
-          let reg = /^[A-Za-z0-9._%-]+@([A-Za-z0-9-]+\.)+[A-Za-z]{2,4}$/;
-          if (!reg.test(value)) {
-            callback(new Error('请输入正确的邮箱格式！'));
             return;
           }
           callback();
@@ -122,11 +64,6 @@
           nickname: '',
           signature: '',
           gender: '',
-          email: '',
-          phone: '',
-          province: '',
-          city: '',
-          town: ''
         },
         showCrop: false, // 裁剪框开关
         cropUrl: '', // 裁剪图片地址
@@ -134,18 +71,10 @@
           nickname: [
             {validator: validateNick, trigger: 'blur'}
           ],
-          phone: [
-            {validator: validatePhone, trigger: 'blur'}
-          ],
-          email: [
-            {validator: validateEmail, trigger: 'blur'}
-          ],
           signature: [
             {validator: validateSignature, trigger: 'blur'}
           ]
         },
-        cities: [],
-        towns: []
       }
     },
     computed: {
@@ -158,20 +87,6 @@
     components: {
       cropper
     },
-    watch: {
-      'personForm.province': {
-        handler(v) {
-          this.provinceChange(v);
-        },
-        deep: true
-      },
-      'personForm.city': {
-        handler(v) {
-          this.cityChange(v);
-        },
-        deep: true
-      }
-    },
     methods: {
       MapData(data) {
         return Object.keys(data).map(k => {
@@ -180,14 +95,6 @@
             value: k
           }
         });
-      },
-      provinceChange(v) {
-        this.cities = this.MapData(pcaa[v.value]);
-        this.personForm.city = this.cities[0];
-      },
-      cityChange(v) {
-        this.towns = this.MapData(pcaa[v.value]);
-        this.personForm.town = this.towns[0];
       },
       getAvatar(url) { // 裁剪后的图像路径
         this.imageUrl = process.env.IMG_URL + url;
@@ -252,9 +159,6 @@
               this.$store.commit('setUser', {
                 nickname: this.personForm.nickname,
                 signature: this.personForm.signature,
-                province: this.personForm.province,
-                city: this.personForm.city,
-                town: this.personForm.town
               });
             } else {
               this.$message({
@@ -267,8 +171,8 @@
           }
         });
       },
-      getUserDetail() {  // 获取个人设置用户信息
-        api.getUserDetail().then(r => {
+      getUserInfo() {  // 获取个人设置用户信息
+        api.getUserInfo().then(r => {
           if (r.code === 0) {
             this.personForm = Object.assign(this.personForm, r.data);
           }
@@ -276,7 +180,7 @@
       }
     },
     mounted() {
-      this.getUserDetail();
+      this.getUserInfo();
     }
   }
 </script>
