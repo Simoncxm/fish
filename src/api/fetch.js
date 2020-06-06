@@ -53,8 +53,14 @@ export default {
     })
   },
   post(url, params) {
+    let headers={};
+    if (store.state.token) {
+      headers={
+        token:store.state.token
+      };
+    }
     return new Promise((resolve, reject) => {
-      instance.post(url,params).then(r => {
+      instance.post(url,params,{headers:headers}).then(r => {
         resolve(r.data);
       })
     })

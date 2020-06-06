@@ -79,11 +79,11 @@
     computed: {
       ...mapState(['user']),
       bgList() {
-        return [{name: '远方', url: '/img/wallpaper.jpg', id: 1}, {
+        return [{name: '远方', url: '/display/20200603000000_wallpaper.jpg', id: 1}, {
           name: '昨日青空',
-          url: '/img/0055.jpg',
+          url: '/display/20200603000000_0055.jpg',
           id: 2
-        }, {name: '希望', url: '/img/xiang.jpg', id: 3}, {
+        }, {name: '希望', url: '/display/20200603000000_xiang.jpg', id: 3}, {
           name: '自定义',
           url: this.user.wallpaper && this.user.wallpaper.split(',')[1] || false,
           id: 4

@@ -40,9 +40,13 @@ module.exports = {
         // changeOrigin: true // 是否在本机创建target地址的虚拟服务，避免跨域问题
       },
       '/expre': {
-        target: 'http://localhost:8081',
+        target: 'http://123.57.203.185:8088',
         // changeOrigin: true // 是否在本机创建target地址的虚拟服务，避免跨域问题
       },
+      // '/display': {
+      //   target: 'http://123.57.203.185:8088',
+      //   // changeOrigin: true // 是否在本机创建target地址的虚拟服务，避免跨域问题
+      // },
       '/api': {
         target: 'http://api.budejie.com',
         changeOrigin: true // 是否在本机创建target地址的虚拟服务，避免跨域问题

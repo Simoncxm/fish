@@ -108,7 +108,7 @@
 
         this.loadingSearch = true;
         let params = {
-          key: this.huntKey,
+          keyword: this.huntKey,
           offset: 1,
           limit: 8,
           type: this.type
