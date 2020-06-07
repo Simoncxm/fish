@@ -143,7 +143,7 @@
         }
       },
       mes(r) {
-        if (r.conversationId === this.currSation.id) {
+        if (r.conversationId === this.currSation.id && r.userM!==this.user.id) {
           this.chatList.push(Object.assign({}, r, {type: 'other'}));
           this.$socket.emit('setReadStatus', {conversationId: r.conversationId, name: this.user.name});
           this.$store.commit('setUnRead', {conversationId: r.conversationId, clear: true});

@@ -94,11 +94,12 @@
       },
       remove() {
         let params={
-          userid: this.user.id
+          userid: this.$route.params.id
         };
         api.deleteMyFriend(params).then(r =>{
           if(r.code===0){
             this.$message.success('删除成功');
+            this.$router.go(-1);
           }
           else{
             this.$message.error(r.mes);
