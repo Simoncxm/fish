@@ -124,11 +124,11 @@
       },
       checkMyfriend() {
         let params = {
-          userid: this.user.id
+          userid: this.$route.params.id
         };
         api.checkMyfriend(params).then(r => {
           if (r.isMyfriend===true) {
-            this.myFriendFlag = r.data;
+            this.myFriendFlag = true;
           }
         })
       }

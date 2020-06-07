@@ -160,7 +160,6 @@
       },
       findMyfriends() {
         api.getMyfriend().then(r => {
-          alert(JSON.stringify(r));
           if (r.code === 0) {
             this.friendList = r.data;
           }
