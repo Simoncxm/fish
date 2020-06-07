@@ -9,7 +9,7 @@
       <el-form-item label="性别">
         <el-radio v-model="personForm.gender" label="1">男</el-radio>
         <el-radio v-model="personForm.gender" label="2">女</el-radio>
-        <el-radio v-model="personForm.gender" label="3">保密</el-radio>
+        <el-radio v-model="personForm.gender" label="0">保密</el-radio>
       </el-form-item>
       <el-form-item label="昵称" prop="nickname">
         <el-input v-model="personForm.nickname" placeholder="名称">
@@ -99,7 +99,7 @@
       getAvatar(url) { // 裁剪后的图像路径
         this.imageUrl = process.env.IMG_URL + url;
         this.showCrop = false;
-        api.updateUserInfo({type:'头像',content: url}).then(r => {
+        api.updateUserInfo({type:'avatar',content: url}).then(r => {
           if (r.code === 0) {
             this.$message({
               message: '保存头像成功',
@@ -131,16 +131,16 @@
                 sygnal=0;
               }
             });
-            api.updateUserInfo({type:'签名',content:this.personForm.signature}).then(r => {
+            api.updateUserInfo({type:'signature',content:this.personForm.signature}).then(r => {
               if (r.code !== 0) {
                 sygnal=0;
               }
             });
             let gendernum=0;
-            if(this.personForm.gender==='男'){
+            if(this.personForm.gender==='1'){
               gendernum=1;
             }
-            else if(this.personForm.gender==='女'){
+            else if(this.personForm.gender==='2'){
               gendernum=2;
             }
             else{
@@ -159,6 +159,7 @@
               this.$store.commit('setUser', {
                 nickname: this.personForm.nickname,
                 signature: this.personForm.signature,
+                gender: parseInt(this.personForm.gender),
               });
             } else {
               this.$message({
@@ -175,6 +176,7 @@
         api.getUserInfo().then(r => {
           if (r.code === 0) {
             this.personForm = Object.assign(this.personForm, r.data);
+            this.personForm.gender=this.personForm.gender+'';
           }
         });
       }
