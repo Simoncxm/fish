@@ -11,7 +11,7 @@ export default {
     return fetch.get('friend/checkMyfriend', params);
   },
   deleteMyFriend(params){//删除好友
-    return fetch.delete('friend/deleteMyFriend',params);
+    return fetch.post('friend/deleteMyfriend',params);
   }
 }
 
