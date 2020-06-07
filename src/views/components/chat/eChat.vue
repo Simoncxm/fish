@@ -83,42 +83,61 @@
 
     watch: {
       conversationsList: {
+        // handler(list) {
+        //
+        //   var _this=this;
+        //   var allList = JSON.parse(JSON.stringify(list));
+        //   // alert(JSON.stringify(this.user.wallpaper));
+        //   //保证只初始化一次
+        //   if(this.initEchatFlag){
+        //     // alert(JSON.stringify(allList));
+        //     for(var i = 0; i < allList.length; i++){
+        //       if(allList[i].name === 'Echat') {
+        //         _this.contactsList.push(allList[i]);
+        //         this.initEchatFlag = false;
+        //       }
+        //     }
+        //     // this.initEchatFlag = false;
+        //   }
+        //   alert()
+        //   // console.log(allList.length);
+        //   // console.log(allList[allList.length - 1]);
+        //   Msg.$on('val', function(m){
+        //     // alert("ok")
+        //     var flag = 0;
+        //     for(var j = 0; j < _this.contactsList.length; j++){
+        //       if(_this.contactsList[j].name === m) flag = 1;
+        //     }
+        //     if(flag === 0){
+        //       for(var i = 0; i < allList.length; i++){
+        //         if(allList[i].name === m) {
+        //           _this.contactsList.push(allList[i]);
+        //         }
+        //       }
+        //     }
+        //     for(var x = 0; x < _this.contactsList.length; x++){
+        //       if(_this.contactsList[x].name === m){
+        //         _this.currSation = _this.contactsList[x];
+        //       }
+        //     }
+        //
+        //   })
+        //   if (!this.currSation.id && list.length) {
+        //     this.currSation = this.contactsList[0];
+        //   }
+        //   if (!list.length) {
+        //     this.currSation = {};
+        //   }
+        //   if (!isNaN(this.removeSation.index)) {
+        //     if (this.currSation.id === this.removeSation.item.id && this.contactsList.length !== 0) {
+        //       this.currSation = this.contactsList[this.removeSation.index] || this.contactsList[this.removeSation.index - 1] || this.contactsList[this.removeSation.index + 1];
+        //     }
+        //   }
+        // },
+        // deep: true,
+        // immediate: true
         handler(list) {
-          var _this=this;
-          var allList = JSON.parse(JSON.stringify(list));
-          // alert(JSON.stringify(this.user.wallpaper));
-          //保证只初始化一次
-          if(this.initEchatFlag){
-            // alert(JSON.stringify(allList));
-            for(var i = 0; i < allList.length; i++){
-              if(allList[i].name === 'Echat') {
-                _this.contactsList.push(allList[i]);
-                this.initEchatFlag = false;
-              }
-            }
-            // this.initEchatFlag = false;
-          }
-          // console.log(allList.length);
-          // console.log(allList[allList.length - 1]);
-          Msg.$on('val', function(m){
-            var flag = 0;
-            for(var j = 0; j < _this.contactsList.length; j++){
-              if(_this.contactsList[j].name === m) flag = 1;
-            }
-            if(flag === 0){
-              for(var i = 0; i < allList.length; i++){
-                if(allList[i].name === m) {
-                  _this.contactsList.push(allList[i]);
-                }
-              }
-            }
-            for(var x = 0; x < _this.contactsList.length; x++){
-              if(_this.contactsList[x].name === m){
-                _this.currSation = _this.contactsList[x];
-              }
-            }
-
-          })
+          this.contactsList = JSON.parse(JSON.stringify(list));
           if (!this.currSation.id && list.length) {
             this.currSation = this.contactsList[0];
           }
@@ -167,6 +186,7 @@
         this.$emit('closeChat');
       },
        setCurrSation(v){
+        // alert(JSON.stringify(this.currSation));
          console.log(this.currSation.name);
         if (v.id === this.currSation.id) {
           return;
@@ -175,6 +195,7 @@
          console.log(this.currSation.name);
       },
       getNewMes(m) { // 获取最新一条消息
+        // alert(JSON.stringify(this.contactsList));
         this.contactsList.forEach((v, i) => {
           if (v.id === m.conversationId) {
             this.$set(this.contactsList, i, Object.assign({}, v, {newMes: m.mes, newMesTime: m.time.split(' ')[1]}));

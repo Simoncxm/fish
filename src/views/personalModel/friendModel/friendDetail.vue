@@ -31,7 +31,7 @@
 <!--          Echat：{{friendInfo.id}}-->
 <!--        </p>-->
         <p>
-          性别：{{friendInfo.gender === '1' ? '男' : friendInfo.gender === '2' ? '女' : '保密'}}
+          性别：{{friendInfo.gender === 1 ? '男' : friendInfo.gender === 2 ? '女' : '保密'}}
         </p>
 <!--        <p>-->
 <!--          所在地：{{friendInfo.province.name + (friendInfo.city.name === '市辖区' ? '' : ' - ' + friendInfo.city.name) + ' - '-->
@@ -44,8 +44,8 @@
 <!--          <v-icon name="enter" color="#d5d5d5"></v-icon>-->
 <!--        </p>-->
 <!--      </div>-->
-      <div class="detail-button" v-if="typeof(friendInfo.id) !== undefined && friendInfo.id !== user.id">
-        <button @click="apply" class="echat-full-button minor" v-if="typeof(myFriendFlag) !== undefined && !myFriendFlag">加为好友</button>
+      <div class="detail-button" v-if="friendInfo.id !== user.id">
+        <button @click="apply" class="echat-full-button minor" v-if="!myFriendFlag">加为好友</button>
         <div v-else>
           <button @click="send" class="echat-full-button minor">发消息</button>
           <button @click="remove" class="echat-full-button error">删除好友</button>
@@ -74,7 +74,7 @@
         friendInfo: {}, // user详情
         cover:['/display/20200603000000_cover.jpg','/display/20200603000000_cover1.jpg'],
         // showFriendQr: false, // 二维码开关
-        // myFriendFlag: true // 是否为我的好友
+        myFriendFlag: false // 是否为我的好友
       }
     },
     components: {
@@ -109,32 +109,37 @@
           // console.log('send');
           Msg.$emit("val", this.friendInfo.name);
       },
-      getOtherUserInfo() {
-        let params = {
-          id: this.$route.params.id
-        };
-        api.getOtherUserInfo(params).then(r => {
-          if (r.code === 0) {
-            this.friendInfo = r.data;
-          }
-        })
+      getUserInfo() {
+        if(this.$route.params.id === this.user.id){
+          this.friendInfo = this.user
+        }
+        else{
+          let params = {
+            id: this.$route.params.id
+          };
+          api.getOtherUserInfo(params).then(r => {
+            if (r.code === 0) {
+              this.friendInfo = r.data;
+            }
+          })
+        }
       },
       toPhoto() {
         this.$router.push({name: 'photoWall', params: this.$route.params});
       },
       checkMyfriend() {
         let params = {
-          userid: this.user.id
+          userid: this.$route.params.id
         };
         api.checkMyfriend(params).then(r => {
           if (r.isMyfriend===true) {
-            this.myFriendFlag = r.data;
+            this.myFriendFlag = true;
           }
         })
       }
     },
     created() {
-      this.getOtherUserInfo();
+      this.getUserInfo();
       this.checkMyfriend();
     }
   }
