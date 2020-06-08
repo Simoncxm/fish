@@ -9,6 +9,7 @@ export default {
         commit('setUser', r.data);
         commit('setConversationsList', r.data.conversationsList);
         dispatch('getSystemInfo');
+        // alert(JSON.stringify(state.conversationsList));
         if (that) {
           that.loading = false;
           that.$router.replace('/main/personalMain');
