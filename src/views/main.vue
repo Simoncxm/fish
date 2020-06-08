@@ -26,6 +26,7 @@
   import utils from '@/utils/utils';
   import {mapState} from 'vuex';
   import vHeader from '@/views/components/header/vHeader';
+  import api from '@/api';
 
   export default {
     data() {
@@ -78,12 +79,12 @@
       leaved(OnlineUser) {
         this.$store.commit('setOnlineUser', OnlineUser)
       },
-      getHistoryMessages(mesdata) { // 获取未读消息数量
-        let data = mesdata.filter(v => v.read.indexOf(this.user.name) === -1);
-        if (data.length) {
-          this.$store.commit('setUnRead', {conversationId: data[0].conversationId, count: data.length});
-        }
-      },
+      // getHistoryMessages(mesdata) { // 获取未读消息数量
+      //   let data = mesdata.data.filter(v => v.read.indexOf(this.user.name) === -1);
+      //   if (data.length) {
+      //     this.$store.commit('setUnRead', {conversationId: data[0].conversationId, count: data.length});
+      //   }
+      // },
       mes(r) { //更改未读消息数量
         this.$store.commit('setUnRead', {conversationId: r.conversationId, add: true, count: 1});
       },
@@ -106,9 +107,18 @@
             avatar: this.user.avatar,
             conversationId: v.id
           };
-          let room = {conversationId: v.id, offset: 1, limit: 200};
+          // let room = {conversationId: v.id, offset: 1, limit: 200};
           this.$socket.emit('join', val);
-          this.$socket.emit('getHistoryMessages', room);
+          // this.$socket.emit('getHistoryMessages', room);
+          let params = {conversationId: v.id, offset: 1, limit: 200};
+          api.getMoreMessage(params).then(r => {
+            if (r.code === 0) {
+              let data = r.data.filter(v => v.read.indexOf(this.user.name) === -1);
+              if (data.length) {
+                this.$store.commit('setUnRead', {conversationId: data[0].conversationId, count: data.length});
+              }
+            }
+          })
         });
       }
     },

@@ -4,7 +4,7 @@
       <template v-for="v in InfoList">
         <li v-if="v.type === 'validate'" :key="v['id']">
           <span class="echat-line1 info">{{v.state === 'friend' ? '验证消息：' + v.nickname + '申请加您为好友' : '验证消息：' + v.nickname + '申请加入' + v.groupName}}</span>
-          <span class="time">{{v.time}}</span>
+          <span class="time">{{$utils.formatTimeH(v.time)}}</span>
           <el-popover
             placement="left"
             width="400"
@@ -48,7 +48,7 @@
         <li v-if="v.type === 'info'" :key="v['id']">
           <p>
             <span class="echat-line1 info">{{v.mes}}</span>
-            <span class="time">{{v.time}}</span>
+            <span class="time">{{$utils.formatTimeH(v.time)}}</span>
           </p>
           <el-popover
             placement="top"
@@ -85,18 +85,17 @@
       }
     },
     sockets: {
-      getSystemMessages(r) { // 获取系统消息
-        if (r.length) {
-          this.$emit('NewMes', r[r.length - 1]);
-        }
-        r.forEach(v => {
-          v.visible = false;
-          v.delVisible = false;
-        });
-        this.InfoList = r;
-      },
+      // getSystemMessages(r) { // 获取系统消息
+      //   if (r.length) {
+      //     this.$emit('NewMes', r[r.length - 1]);
+      //   }
+      //   r.forEach(v => {
+      //     v.visible = false;
+      //     v.delVisible = false;
+      //   });
+      //   this.InfoList = r;
+      // },
       takeValidate(r) {
-        alert("in");
         this.$emit('NewMes', r);
         r.visible = false;
         this.InfoList.unshift(r);
@@ -115,7 +114,20 @@
             // alert("ok");
             this.$socket.emit('setReadStatus', {conversationId: v.id, name: this.user.name});
             this.$store.commit('setUnRead', {conversationId: v.id, clear: true});
-            this.$socket.emit('getSystemMessages', {conversationId: v.id, offset: this.offset, limit: this.limit});
+            // this.$socket.emit('getSystemMessages', {conversationId: v.id, offset: this.offset, limit: this.limit});
+            let params = {conversationId: v.id, offset: this.offset, limit: this.limit};
+            api.getMoreMessage(params).then(r => {
+              if (r.code === 0) {
+                if (r.data.length) {
+                  this.$emit('NewMes', r.data[r.data.length - 1]);
+                }
+                r.data.forEach(v => {
+                  v.visible = false;
+                  v.delVisible = false;
+                });
+                this.InfoList = r.data;
+              }
+            })
           } else {
             this.InfoList = [];
           }
