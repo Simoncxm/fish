@@ -112,7 +112,7 @@
         handler(v) {
           if (v.id) {
             // alert("ok");
-            this.$socket.emit('setReadStatus', {conversationId: v.id, name: this.user.name});
+            // this.$socket.emit('setReadStatus', {conversationId: v.id, name: this.user.name});
             this.$store.commit('setUnRead', {conversationId: v.id, clear: true});
             // this.$socket.emit('getSystemMessages', {conversationId: v.id, offset: this.offset, limit: this.limit});
             let params = {conversationId: v.id, offset: this.offset, limit: this.limit};
