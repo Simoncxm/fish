@@ -108,7 +108,6 @@
           };
           let room = {conversationId: v.id, offset: 1, limit: 200};
           this.$socket.emit('join', val);
-          alert("send");
           this.$socket.emit('getHistoryMessages', room);
         });
       }

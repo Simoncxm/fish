@@ -138,13 +138,11 @@
     },
     sockets: {
       org(r) {
-        alert("org");
         if (r.conversationId === this.currSation.id) {
           this.chatList.push(Object.assign({}, r, {type: 'org'}));
         }
       },
       mes(r) {
-        alert("mes");
         if (r.conversationId === this.currSation.id && r.userM!==this.user.id) {
           this.chatList.push(Object.assign({}, r, {type: 'other'}));
           this.$socket.emit('setReadStatus', {conversationId: r.conversationId, name: this.user.name});
@@ -152,7 +150,6 @@
         }
       },
       getHistoryMessages(r) { // 获取历史消息
-        alert("getHistoryMessages");
         // alert(JSON.stringify(r));
         // alert(r.conversationId);
         // alert(this.currSation.id);
@@ -194,7 +191,6 @@
             }
             this.$socket.emit('setReadStatus', {conversationId: v.id, name: this.user.name});
             this.$store.commit('setUnRead', {conversationId: v.id, clear: true});
-            alert("send");
             this.$socket.emit('getHistoryMessages', {conversationId: v.id, offset: 1, limit: 100});
           }
         },

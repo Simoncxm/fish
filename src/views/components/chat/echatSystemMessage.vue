@@ -96,7 +96,6 @@
         this.InfoList = r;
       },
       takeValidate(r) {
-        alert("in");
         this.$emit('NewMes', r);
         r.visible = false;
         this.InfoList.unshift(r);
