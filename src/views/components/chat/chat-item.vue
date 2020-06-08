@@ -145,7 +145,7 @@
       mes(r) {
         if (r.conversationId === this.currSation.id && r.userM!==this.user.id) {
           this.chatList.push(Object.assign({}, r, {type: 'other'}));
-          this.$socket.emit('setReadStatus', {conversationId: r.conversationId, name: this.user.name});
+          // this.$socket.emit('setReadStatus', {conversationId: r.conversationId, name: this.user.name});
           this.$store.commit('setUnRead', {conversationId: r.conversationId, clear: true});
         }
       },
@@ -189,7 +189,7 @@
             if (v.type === 'group') {
               this.getGroupUser(v.id);
             }
-            this.$socket.emit('setReadStatus', {conversationId: v.id, name: this.user.name});
+            // this.$socket.emit('setReadStatus', {conversationId: v.id, name: this.user.name});
             this.$store.commit('setUnRead', {conversationId: v.id, clear: true});
             // this.$socket.emit('getHistoryMessages', {conversationId: v.id, offset: 1, limit: 100});
             let params = {conversationId: v.id, offset: 1, limit: 100};
