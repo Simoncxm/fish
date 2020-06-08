@@ -30,7 +30,7 @@
               </template>
             </div>
             <div class="chat-conversation-li-right">
-              <p>{{v.newMesTime}}</p>
+              <p>{{$utils.formatTimeH(v.newMesTime)}}</p>
             </div>
             <p class="delete" >
               <el-tooltip class="item" effect="dark" :content="'移除'" placement="top-start" v-if="v.name !== 'Echat'">
