@@ -1,4 +1,5 @@
 const formatTime = timestamp => {
+  if(!timestamp)return '';
   const t = new Date(timestamp);
   const year = t.getFullYear();
   const month = t.getMonth() + 1;
@@ -11,6 +12,7 @@ const formatTime = timestamp => {
 };
 
 const formatDate = timestamp => {
+  if(!timestamp)return '';
   const t = new Date(timestamp);
   const year = t.getFullYear();
   const month = t.getMonth() + 1;
@@ -20,6 +22,7 @@ const formatDate = timestamp => {
 };
 
 const formatTimeH = timestamp => {
+  if(!timestamp)return '';
   const unix_stamp = timestamp;
   var _today_obj = new Date(),
     _today_date = {
@@ -117,6 +120,7 @@ const formatTimeH = timestamp => {
 };
 
 const formatDateH = timestamp => {
+  if(!timestamp)return '';
   const unix_stamp = timestamp;
   var _today_obj = new Date(),
     _today_date = {
