@@ -327,8 +327,7 @@
           read: [this.user.name],
           conversationId: this.currSation.id,
           style: 'mess',
-          userM: this.user.id,
-          userY: this.currSation.name
+          userM: this.user.id
         };
         if (type === 'emoji') { // 发送表情
           val.style = 'emoji';
