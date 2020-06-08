@@ -79,7 +79,7 @@
         this.$store.commit('setOnlineUser', OnlineUser)
       },
       getHistoryMessages(mesdata) { // 获取未读消息数量
-        let data = mesdata.filter(v => v.read.indexOf(this.user.name) === -1);
+        let data = mesdata.data.filter(v => v.read.indexOf(this.user.name) === -1);
         if (data.length) {
           this.$store.commit('setUnRead', {conversationId: data[0].conversationId, count: data.length});
         }
@@ -108,6 +108,7 @@
           };
           let room = {conversationId: v.id, offset: 1, limit: 200};
           this.$socket.emit('join', val);
+          alert("send");
           this.$socket.emit('getHistoryMessages', room);
         });
       }

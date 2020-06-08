@@ -138,11 +138,13 @@
     },
     sockets: {
       org(r) {
+        alert("org");
         if (r.conversationId === this.currSation.id) {
           this.chatList.push(Object.assign({}, r, {type: 'org'}));
         }
       },
       mes(r) {
+        alert("mes");
         if (r.conversationId === this.currSation.id && r.userM!==this.user.id) {
           this.chatList.push(Object.assign({}, r, {type: 'other'}));
           this.$socket.emit('setReadStatus', {conversationId: r.conversationId, name: this.user.name});
@@ -150,11 +152,14 @@
         }
       },
       getHistoryMessages(r) { // 获取历史消息
-        alert(JSON.stringify(r));
+        alert("getHistoryMessages");
+        // alert(JSON.stringify(r));
+        // alert(r.conversationId);
+        // alert(this.currSation.id);
         if (r.data.length) {
           this.$emit('NewMes', r.data[r.data.length - 1]);
         }
-        if(r.conversationId===this.currSation.conversationId){
+        if(r.conversationId===this.currSation.id){
           this.chatList = r.data.map(v => {
             if (v.type !== 'org') {
               if (v.name === this.user.name) {
