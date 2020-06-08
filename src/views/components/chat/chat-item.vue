@@ -149,26 +149,26 @@
           this.$store.commit('setUnRead', {conversationId: r.conversationId, clear: true});
         }
       },
-      getHistoryMessages(r) { // 获取历史消息
-        // alert(JSON.stringify(r));
-        // alert(r.conversationId);
-        // alert(this.currSation.id);
-        if (r.data.length) {
-          this.$emit('NewMes', r.data[r.data.length - 1]);
-        }
-        if(r.conversationId===this.currSation.id){
-          this.chatList = r.data.map(v => {
-            if (v.type !== 'org') {
-              if (v.name === this.user.name) {
-                v.type = 'mine';
-              } else {
-                v.type = 'other';
-              }
-            }
-            return v;
-          });
-        }
-      }
+      // getHistoryMessages(r) { // 获取历史消息
+      //   alert(JSON.stringify(r));
+      //   alert(r.conversationId);
+      //   alert(this.currSation.id);
+      //   if (r.data.length) {
+      //     this.$emit('NewMes', r.data[r.data.length - 1]);
+      //   }
+      //   if(r.conversationId===this.currSation.id){
+      //     this.chatList = r.data.map(v => {
+      //       if (v.type !== 'org') {
+      //         if (v.name === this.user.name) {
+      //           v.type = 'mine';
+      //         } else {
+      //           v.type = 'other';
+      //         }
+      //       }
+      //       return v;
+      //     });
+      //   }
+      // }
     },
     computed: {
       ...mapState(['user', 'OnlineUser'])
@@ -191,7 +191,25 @@
             }
             this.$socket.emit('setReadStatus', {conversationId: v.id, name: this.user.name});
             this.$store.commit('setUnRead', {conversationId: v.id, clear: true});
-            this.$socket.emit('getHistoryMessages', {conversationId: v.id, offset: 1, limit: 100});
+            // this.$socket.emit('getHistoryMessages', {conversationId: v.id, offset: 1, limit: 100});
+            let params = {conversationId: v.id, offset: 1, limit: 100};
+            api.getMoreMessage(params).then(r => {
+              if (r.code === 0) {
+                if (r.data.length) {
+                  this.$emit('NewMes', r.data[r.data.length - 1]);
+                }
+                this.chatList = r.data.map(v => {
+                  if (v.type !== 'org') {
+                    if (v.name === this.user.name) {
+                      v.type = 'mine';
+                    } else {
+                      v.type = 'other';
+                    }
+                  }
+                  return v;
+                });
+              }
+            })
           }
         },
         deep: true,

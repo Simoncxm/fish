@@ -6,7 +6,7 @@
     <div v-if="type === 'other' || type === 'mine'" class="messageInfo">
       <p class="info">
         <span>{{v.nickname}}</span>
-        <i>{{v.time}}</i>
+        <i>{{$utils.formatTimeH(v.time)}}</i>
       </p>
       <p v-if="v.style === 'emoji'" class="emoji">
         <img v-lazy="IMG_URL + v.emoji" alt="">

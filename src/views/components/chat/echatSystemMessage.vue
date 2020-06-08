@@ -4,7 +4,7 @@
       <template v-for="v in InfoList">
         <li v-if="v.type === 'validate'" :key="v['id']">
           <span class="echat-line1 info">{{v.state === 'friend' ? '验证消息：' + v.nickname + '申请加您为好友' : '验证消息：' + v.nickname + '申请加入' + v.groupName}}</span>
-          <span class="time">{{v.time}}</span>
+          <span class="time">{{$utils.formatTimeH(v.time)}}</span>
           <el-popover
             placement="left"
             width="400"
@@ -48,7 +48,7 @@
         <li v-if="v.type === 'info'" :key="v['id']">
           <p>
             <span class="echat-line1 info">{{v.mes}}</span>
-            <span class="time">{{v.time}}</span>
+            <span class="time">{{$utils.formatTimeH(v.time)}}</span>
           </p>
           <el-popover
             placement="top"
