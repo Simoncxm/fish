@@ -198,7 +198,7 @@
         // alert(JSON.stringify(this.contactsList));
         this.contactsList.forEach((v, i) => {
           if (v.id === m.conversationId) {
-            this.$set(this.contactsList, i, Object.assign({}, v, {newMes: m.mes, newMesTime: m.time.split(' ')[1]}));
+            this.$set(this.contactsList, i, Object.assign({}, v, {newMes: m.mes, newMesTime: m.time}));
           }
         })
       },
