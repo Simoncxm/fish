@@ -85,16 +85,16 @@
       }
     },
     sockets: {
-      getSystemMessages(r) { // 获取系统消息
-        if (r.length) {
-          this.$emit('NewMes', r[r.length - 1]);
-        }
-        r.forEach(v => {
-          v.visible = false;
-          v.delVisible = false;
-        });
-        this.InfoList = r;
-      },
+      // getSystemMessages(r) { // 获取系统消息
+      //   if (r.length) {
+      //     this.$emit('NewMes', r[r.length - 1]);
+      //   }
+      //   r.forEach(v => {
+      //     v.visible = false;
+      //     v.delVisible = false;
+      //   });
+      //   this.InfoList = r;
+      // },
       takeValidate(r) {
         this.$emit('NewMes', r);
         r.visible = false;
@@ -114,7 +114,20 @@
             // alert("ok");
             this.$socket.emit('setReadStatus', {conversationId: v.id, name: this.user.name});
             this.$store.commit('setUnRead', {conversationId: v.id, clear: true});
-            this.$socket.emit('getSystemMessages', {conversationId: v.id, offset: this.offset, limit: this.limit});
+            // this.$socket.emit('getSystemMessages', {conversationId: v.id, offset: this.offset, limit: this.limit});
+            let params = {conversationId: v.id, offset: this.offset, limit: this.limit};
+            api.getMoreMessage(params).then(r => {
+              if (r.code === 0) {
+                if (r.data.length) {
+                  this.$emit('NewMes', r.data[r.data.length - 1]);
+                }
+                r.data.forEach(v => {
+                  v.visible = false;
+                  v.delVisible = false;
+                });
+                this.InfoList = r.data;
+              }
+            })
           } else {
             this.InfoList = [];
           }

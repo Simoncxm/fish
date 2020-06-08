@@ -13,7 +13,6 @@ import VueSocketio from 'vue-socket.io';
 import socketio from 'socket.io-client';
 import libs from '@/libs'; // 引入全局插件
 import directives from './directives';
-import moment from 'moment'
 import utils from './utils/utils'
 
 Object.keys(directives).forEach(k => Vue.directive(k, directives[k]));
