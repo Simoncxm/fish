@@ -150,19 +150,22 @@
         }
       },
       getHistoryMessages(r) { // 获取历史消息
-        if (r.length) {
-          this.$emit('NewMes', r[r.length - 1]);
+        alert(JSON.stringify(r));
+        if (r.data.length) {
+          this.$emit('NewMes', r.data[r.data.length - 1]);
         }
-        this.chatList = r.map(v => {
-          if (v.type !== 'org') {
-            if (v.name === this.user.name) {
-              v.type = 'mine';
-            } else {
-              v.type = 'other';
+        if(r.conversationId===this.currSation.conversationId){
+          this.chatList = r.data.map(v => {
+            if (v.type !== 'org') {
+              if (v.name === this.user.name) {
+                v.type = 'mine';
+              } else {
+                v.type = 'other';
+              }
             }
-          }
-          return v;
-        });
+            return v;
+          });
+        }
       }
     },
     computed: {
@@ -170,7 +173,9 @@
     },
     watch: {
       currSation: { // 当前会话
-        handler(v) {
+        handler(v,old) {
+          if(old.id === v.id)return;
+          // alert(v.id);
           if (!v.id) {
             this.chatList = [];
           }
@@ -184,6 +189,7 @@
             }
             this.$socket.emit('setReadStatus', {conversationId: v.id, name: this.user.name});
             this.$store.commit('setUnRead', {conversationId: v.id, clear: true});
+            alert("send");
             this.$socket.emit('getHistoryMessages', {conversationId: v.id, offset: 1, limit: 100});
           }
         },
@@ -296,7 +302,7 @@
         let val = {
           name: this.user.name,
           mes: this.message,
-          time: utils.formatTime(new Date()),
+          time: (new Date()).getTime(),
           avatar: this.user.avatar,
           nickname: this.user.nickname,
           read: [this.user.name],
