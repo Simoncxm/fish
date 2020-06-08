@@ -33,7 +33,7 @@
       return {
         messageLog: [],
         offset: 1,
-        limit: 5,
+        limit: 100,
         total: 0,
         chatLoading: false
       }
