@@ -321,7 +321,6 @@
         let val = {
           name: this.user.name,
           mes: this.message,
-          time: (new Date()).getTime(),
           avatar: this.user.avatar,
           nickname: this.user.nickname,
           read: [this.user.name],
