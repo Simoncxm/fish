@@ -1,5 +1,10 @@
 <template>
-  <div class="echat-system-Message" v-fontColor="user.chatColor">
+  <div class="echat-system-Message"
+       v-loading="chatLoading"
+       element-loading-text="拼命加载中"
+       element-loading-spinner="el-icon-loading"
+       element-loading-background="rgba(0, 0, 0, 0.8)"
+       v-fontColor="user.chatColor">
     <ul v-if="InfoList.length">
       <template v-for="v in InfoList">
         <li v-if="v.type === 'validate'" :key="v['id']">
@@ -81,7 +86,8 @@
         visible: false,
         InfoList: [],
         offset: 1,
-        limit: 10
+        limit: 10,
+        chatLoading: false,
       }
     },
     sockets: {
@@ -110,6 +116,7 @@
     watch: {
       currSation: { // 当前会话
         handler(v) {
+          this.chatLoading = true;
           if (v.id) {
             // alert("ok");
             // this.$socket.emit('setReadStatus', {conversationId: v.id, name: this.user.name});
@@ -127,6 +134,7 @@
                 });
                 this.InfoList = r.data;
               }
+              this.chatLoading = false;
             })
           } else {
             this.InfoList = [];

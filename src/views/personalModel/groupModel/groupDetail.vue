@@ -1,7 +1,7 @@
 <template>
   <div class="echat-Detail">
     <v-apheader back="-1" bgColor="transparent" class="echat-Detail-header">
-      <v-icon name="erweima" color="#f5f5f5" cursor="pointer" @clickIcon="showGroupQr = true"></v-icon>
+<!--      <v-icon name="erweima" color="#f5f5f5" cursor="pointer" @clickIcon="showGroupQr = true"></v-icon>-->
     </v-apheader>
     <el-carousel trigger="click" height="200px" arrow="never" indicator-position="none">
       <el-carousel-item v-for="item in 1" :key="item">
@@ -13,23 +13,19 @@
           {{groupInfo.groupName}}
         </p>
         <p>
-          {{groupInfo.id}}
-        </p>
-        <p>本群创建于{{createDate}}</p>
-        <p>
           {{groupInfo.groupDesc}}
         </p>
       </div>
     </el-carousel>
     <div class="echat-Detail-container">
       <div class="group-users" v-if="applyFlag">
-        <h3 class="group-users-title detail-item">
-          <span>群聊成员</span>
-          <p class="many">
-            <span>共{{groupUsers.length}}人</span>
-            <v-icon name="enter" color="#d5d5d5"></v-icon>
-          </p>
-        </h3>
+<!--        <h3 class="group-users-title detail-item">-->
+<!--          <span>群聊成员</span>-->
+<!--          <p class="many">-->
+<!--            <span>共{{groupUsers.length}}人</span>-->
+<!--            <v-icon name="enter" color="#d5d5d5"></v-icon>-->
+<!--          </p>-->
+<!--        </h3>-->
         <ul class="group-users-liitte-list">
           <li v-for="(v, i) in groupUsers" :key="v.id" v-if="i < 9">
             <a class="echat-photo">
@@ -39,13 +35,13 @@
           </li>
         </ul>
       </div>
-      <div class="group-card detail-item" v-if="applyFlag">
-        <span>我的群名片</span>
-        <p class="many">
-          <span>别跟我比可爱</span>
-          <v-icon name="enter" color="#d5d5d5"></v-icon>
-        </p>
-      </div>
+<!--      <div class="group-card detail-item" v-if="applyFlag">-->
+<!--        <span>我的群名片</span>-->
+<!--        <p class="many">-->
+<!--          <span>别跟我比可爱</span>-->
+<!--          <v-icon name="enter" color="#d5d5d5"></v-icon>-->
+<!--        </p>-->
+<!--      </div>-->
       <div class="group-tag detail-item" v-if="groupInfo.holderName === user.name">
         <span>群标签</span>
         <p>
@@ -86,7 +82,6 @@
 <script>
   import vApheader from '@/views/components/header/vApheader';
   import api from '@/api';
-  import utils from '@/utils/utils';
   import {mapState} from 'vuex';
   import Msg from '@/views/components/msg.js'
   export default {
@@ -106,9 +101,6 @@
       vApheader
     },
     computed: {
-      createDate() {
-        return utils.formatDate(new Date(this.groupInfo.createDate));
-      },
       ...mapState(['user'])
     },
     methods: {
@@ -126,17 +118,17 @@
             // this.holder = this.groupUsers.filter(v => v.holder === this.groupInfo.holder)[0];
           }
         });
-        params = {
-          id: this.$route.params.id
-        };
-        api.getGroupUser(params).then(r => {
-          if (r.code === 0) {
-            this.groupUsers = r.data;
-            this.applyFlag = this.groupUsers.filter(v => v.id === this.user.id).length;
-            // this.managers = this.groupUsers.filter(v => v.holder === 1 );
-            this.holder = this.groupUsers.filter(v => v.holder === this.groupInfo.holder)[0];
-          }
-        });
+        // params = {
+        //   id: this.$route.params.id
+        // };
+        // api.getGroupUser(params).then(r => {
+        //   if (r.code === 0) {
+        //     this.groupUsers = r.data;
+        //     this.applyFlag = this.groupUsers.filter(v => v.id === this.user.id).length;
+        //     // this.managers = this.groupUsers.filter(v => v.holder === 1 );
+        //     this.holder = this.groupUsers.filter(v => v.holder === this.groupInfo.holder)[0];
+        //   }
+        // });
       },
       apply() {
         localStorage.group = JSON.stringify({
@@ -151,9 +143,20 @@
         Msg.$emit("val", this.groupInfo.title);
       },
       quit() {
+      },
+      checkMygroup() {
+        let params = {
+          groupId: this.$route.params.id
+        };
+        api.checkIfInGroup(params).then(r => {
+          if (r.isMygroup===true) {
+            this.applyFlag = true;
+          }
+        })
       }
     },
     mounted() {
+      this.checkMygroup();
       this.getGroupInfo();
     }
   }

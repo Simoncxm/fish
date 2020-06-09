@@ -128,7 +128,7 @@
         loadmoreLoading: false,
         groupUserList: [], // 长列表渲染
         offset: 1, // 群成员页码
-        limit: 50
+        limit: 50,
       };
     },
     components: {
@@ -176,7 +176,8 @@
     watch: {
       currSation: { // 当前会话
         handler(v,old) {
-          if(old.id === v.id)return;
+          if((old||!v)&&old.id === v.id)return;
+          this.initload = true;
           // alert(v.id);
           if (!v.id) {
             this.chatList = [];

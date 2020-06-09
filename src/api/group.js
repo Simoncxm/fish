@@ -15,6 +15,9 @@ export default {
   },
   getGroupInfo(params) {
     return fetch.get('group/getGroupInfo', params);
+  },
+  checkIfInGroup(params) {
+    return fetch.get('/group/checkIfInGroup', params);
   }
 }
 

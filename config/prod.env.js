@@ -2,6 +2,6 @@
 module.exports = {
   NODE_ENV: '"production"',
   IMG_URL: '""',
-  SOCKETIO: '"http://192.144.229.202:9090/"'
+  SOCKETIO: '"http://123.57.203.185:9090/"'
   // SOCKETIO: '"http://localhost:9090/"'
 };
