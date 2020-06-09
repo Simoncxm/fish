@@ -78,9 +78,9 @@
         </div>
       </div>
     </div>
-    <div class="echat-item-container" v-show="currNav === 1">
-      努力开发中...
-    </div>
+<!--    <div class="echat-item-container" v-show="currNav === 1">-->
+<!--      努力开发中...-->
+<!--    </div>-->
     <div class="echat-item-container" v-show="currNav === 2">
       <message-log :currSation="currSation" :currNav="currNav" @lookPhoto="lookPhoto"></message-log>
     </div>

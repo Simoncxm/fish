@@ -101,24 +101,27 @@
           return;
         }
         this.conversationsList.forEach(v => {
-          let val = {
-            name: this.user.name,
-            time: utils.formatTime(new Date()),
-            avatar: this.user.avatar,
-            conversationId: v.id
-          };
-          // let room = {conversationId: v.id, offset: 1, limit: 200};
-          this.$socket.emit('join', val);
-          // this.$socket.emit('getHistoryMessages', room);
-          let params = {conversationId: v.id, offset: 1, limit: 200};
-          api.getMoreMessage(params).then(r => {
-            if (r.code === 0) {
-              let data = r.data.filter(v => v.read.indexOf(this.user.name) === -1);
-              if (data.length) {
-                this.$store.commit('setUnRead', {conversationId: data[0].conversationId, count: data.length});
+          if(!v.joined){
+            v.joined=true;
+            let val = {
+              name: this.user.name,
+              time: utils.formatTime(new Date()),
+              avatar: this.user.avatar,
+              conversationId: v.id
+            };
+            // let room = {conversationId: v.id, offset: 1, limit: 200};
+            this.$socket.emit('join', val);
+            // this.$socket.emit('getHistoryMessages', room);
+            let params = {conversationId: v.id, offset: 1, limit: 200};
+            api.getMoreMessage(params).then(r => {
+              if (r.code === 0) {
+                let data = r.data.filter(v => v.read.indexOf(this.user.name) === -1);
+                if (data.length) {
+                  this.$store.commit('setUnRead', {conversationId: data[0].conversationId, count: data.length});
+                }
               }
-            }
-          })
+            })
+          }
         });
       }
     },
