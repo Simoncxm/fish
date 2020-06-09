@@ -67,7 +67,7 @@
           groupDesc: ''
         },
         InmageUrl: process.env.IMG_URL,
-        groupImage: '/img/zwsj5.png', // 显示图片路径
+        groupImage: '/display/20200603000000_zwsj5.png', // 显示图片路径
         groupRules: {
           groupName: [
             {validator: validateName, trigger: 'blur'}
