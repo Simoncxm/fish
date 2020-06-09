@@ -14,7 +14,7 @@ export default {
     return fetch.post('group/searchGroup', params);
   },
   getGroupInfo(params) {
-    return fetch.post('group/getGroupInfo', params);
+    return fetch.get('group/getGroupInfo', params);
   }
 }
 

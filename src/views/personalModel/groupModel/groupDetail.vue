@@ -5,19 +5,19 @@
     </v-apheader>
     <el-carousel trigger="click" height="200px" arrow="never" indicator-position="none">
       <el-carousel-item v-for="item in 1" :key="item">
-        <a class="DetailImage-a" :style="{backgroundImage: 'url('+ IMG_URL + groupInfo.img +')'}">
+        <a class="DetailImage-a" :style="{backgroundImage: 'url('+ IMG_URL + groupInfo.groupAvatar +')'}">
         </a>
       </el-carousel-item>
       <div class="DetailImage-bg">
         <p class="title">
-          {{groupInfo.title}}
+          {{groupInfo.groupName}}
         </p>
         <p>
           {{groupInfo.id}}
         </p>
         <p>本群创建于{{createDate}}</p>
         <p>
-          {{groupInfo.desc}}
+          {{groupInfo.groupDesc}}
         </p>
       </div>
     </el-carousel>
@@ -53,18 +53,18 @@
           <v-icon name="enter" color="#d5d5d5"></v-icon>
         </p>
       </div>
-      <div class="group-managers detail-item" v-if="!applyFlag">
-        <div>
-          <span>管理员</span>
-          <a v-for="(v, i) in managers" :key="v['id']" class="echat-photo" v-if="i < 3">
-            <img :src="IMG_URL + v.userId.avatar" alt="">
-          </a>
-        </div>
-        <p class="many">
-          <span>共{{managers.length}}人</span>
-          <v-icon name="enter" color="#d5d5d5"></v-icon>
-        </p>
-      </div>
+<!--      <div class="group-managers detail-item" v-if="!applyFlag">-->
+<!--        <div>-->
+<!--          <span>群主</span>-->
+<!--          <a v-for="(v, i) in managers" :key="v['id']" class="echat-photo" v-if="i < 3">-->
+<!--            <img :src="IMG_URL + v.userId.avatar" alt="">-->
+<!--          </a>-->
+<!--        </div>-->
+<!--        <p class="many">-->
+<!--          <span>共{{managers.length}}人</span>-->
+<!--          <v-icon name="enter" color="#d5d5d5"></v-icon>-->
+<!--        </p>-->
+<!--      </div>-->
 
       <div class="detail-button">
         <button @click="apply" class="echat-full-button minor" v-if="!applyFlag">申请加群</button>
@@ -96,10 +96,10 @@
         groupUsers: [],
         IMG_URL: process.env.IMG_URL,
         showGroupQr: false, // 二维码开关
-        managers: [],
+        // managers: [],
         groupTag: [], // 群标签
         applyFlag: false, // 是否已加群
-        holderId: '' // 群主id
+        holder:{},
       };
     },
     components: {
@@ -119,12 +119,24 @@
         api.getGroupInfo(params).then(r => {
           if (r.code === 0) {
             this.groupInfo = r.data;
-            this.groupUsers = r.users;
-            this.applyFlag = this.groupUsers.filter(v => v.userName === this.user.name).length;
-            this.managers = this.groupUsers.filter(v => v.holder === 1 || v.manager === 1);
-            this.holderId = this.groupUsers.filter(v => v.holder === 1)[0].userId['id'];
+            this.groupInfo.id = this.$route.params.id;
+            // this.groupUsers = r.users;
+            // this.applyFlag = this.groupUsers.filter(v => v.userName === this.user.name).length;
+            // // this.managers = this.groupUsers.filter(v => v.holder === 1 );
+            // this.holder = this.groupUsers.filter(v => v.holder === this.groupInfo.holder)[0];
           }
-        })
+        });
+        params = {
+          id: this.$route.params.id
+        };
+        api.getGroupUser(params).then(r => {
+          if (r.code === 0) {
+            this.groupUsers = r.data;
+            this.applyFlag = this.groupUsers.filter(v => v.id === this.user.id).length;
+            // this.managers = this.groupUsers.filter(v => v.holder === 1 );
+            this.holder = this.groupUsers.filter(v => v.holder === this.groupInfo.holder)[0];
+          }
+        });
       },
       apply() {
         localStorage.group = JSON.stringify({
@@ -132,7 +144,7 @@
           groupId: this.$route.params.id,
           groupPhoto: this.groupInfo.img
         });
-        this.$router.push({name: 'applyGroup', params: {id: this.holderId}});
+        this.$router.push({name: 'applyGroup', params: {id: this.holder.id}});
       },
       send(){
         // console.log('send');

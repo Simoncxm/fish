@@ -12,31 +12,38 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/user': {
-        target: 'http://192.144.229.202:8081',
+        // target: 'http://192.144.229.202:8081',
+        target: 'http://localhost:8081',
         // changeOrigin: true // 是否在本机创建target地址的虚拟服务，避免跨域问题
       },
       '/sendEmail': {
-        target: 'http://192.144.229.202:8081',
+        // target: 'http://192.144.229.202:8081',
+        target: 'http://localhost:8081',
         // changeOrigin: true // 是否在本机创建target地址的虚拟服务，避免跨域问题
       },
       '/login': {
-        target: 'http://192.144.229.202:8081',
+        // target: 'http://192.144.229.202:8081',
+        target: 'http://localhost:8081',
         // changeOrigin: true // 是否在本机创建target地址的虚拟服务，避免跨域问题
       },
       '/register': {
-        target: 'http://192.144.229.202:8081',
+        // target: 'http://192.144.229.202:8081',
+        target: 'http://localhost:8081',
         // changeOrigin: true // 是否在本机创建target地址的虚拟服务，避免跨域问题
       },
       '/group': {
-        target: 'http://192.144.229.202:8081',
+        // target: 'http://192.144.229.202:8081',
+        target: 'http://localhost:8081',
         // changeOrigin: true // 是否在本机创建target地址的虚拟服务，避免跨域问题
       },
       '/mes': {
-        target: 'http://192.144.229.202:8081',
+        // target: 'http://192.144.229.202:8081',
+        target: 'http://localhost:8081',
         // changeOrigin: true // 是否在本机创建target地址的虚拟服务，避免跨域问题
       },
       '/friend': {
-        target: 'http://192.144.229.202:8081',
+        // target: 'http://192.144.229.202:8081',
+        target: 'http://localhost:8081',
         // changeOrigin: true // 是否在本机创建target地址的虚拟服务，避免跨域问题
       },
       '/expre': {
@@ -58,7 +65,7 @@ module.exports = {
     },
 
     // Various Dev Server settings
-    host: '0.0.0.0', // can be overwritten by process.env.HOST
+    host: '127.0.0.1', // can be overwritten by process.env.HOST
     port: 8899, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: true,
     errorOverlay: true,

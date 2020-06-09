@@ -19,17 +19,17 @@
           <span>{{mySetGroups.length}}</span>
         </h3>
         <ul class="echat-linkman-list">
-          <li v-for="v in mySetGroups" :key="v.id" @click="goGroupDetail(v.groupId.id)"
-              @contextmenu="contextmenuClick($event, v.groupId)">
+          <li v-for="v in mySetGroups" :key="v.id" @click="goGroupDetail(v.id)"
+              @contextmenu="contextmenuClick($event, v.id)">
             <a href="javascript:;">
-              <img :src="IMG_URL + v.groupId.img" alt="">
+              <img :src="IMG_URL + v.groupAvatar" alt="">
             </a>
             <div>
               <p>
-                <span class="echat-line1" :title="v.groupId.title">{{v.groupId.title}}</span>
+                <span class="echat-line1" :title="v.groupName">{{v.groupName}}</span>
               </p>
               <p>
-                <span :title="v.groupId.desc" class="echat-line1">{{v.groupId.desc}}</span>
+                <span :title="v.groupDesc" class="echat-line1">{{v.groupDesc}}</span>
               </p>
             </div>
           </li>
@@ -44,17 +44,17 @@
           <span>{{myJoinGroups.length}}</span>
         </h3>
         <ul class="echat-linkman-list">
-          <li v-for="v in myJoinGroups" :key="v.id" @click="goGroupDetail(v.groupId.id)"
-              @contextmenu="contextmenuClick($event, v.groupId)">
+          <li v-for="v in myJoinGroups" :key="v.id" @click="goGroupDetail(v.id)"
+              @contextmenu="contextmenuClick($event, v.id)">
             <a href="javascript:;">
-              <img :src="IMG_URL + v.groupId.img" alt="">
+              <img :src="IMG_URL + v.groupAvatar" alt="">
             </a>
             <div>
               <p>
-                <span class="echat-line1" :title="v.groupId.title">{{v.groupId.title}}</span>
+                <span class="echat-line1" :title="v.groupName">{{v.groupName}}</span>
               </p>
               <p>
-                <span :title="v.groupId.desc" class="echat-line1">{{v.groupId.desc}}</span>
+                <span :title="v.groupDesc" class="echat-line1">{{v.groupDesc}}</span>
               </p>
             </div>
           </li>
@@ -104,7 +104,7 @@
       vApheader
     },
     computed: {
-      ...mapState(['conversationsList']),
+      ...mapState(['conversationsList','user']),
       addOrDel() {
         return this.conversationsList.filter(v => v.id === this.currGroup.id).length;
       }
@@ -127,8 +127,10 @@
         });
       },
       filterGroups() {
-        this.mySetGroups = this.Groups.filter(v => v.holder === 1);
-        this.myJoinGroups = this.Groups.filter(v => v.holder !== 1);
+        this.mySetGroups = this.Groups.filter(v => v.holder === this.user.id);
+        this.myJoinGroups = this.Groups.filter(v => v.holder !== this.user.id);
+        // alert(JSON.stringify(this.myJoinGroups));
+        // alert(JSON.stringify(this.mySetGroups));
       },
       setShowList(v) {
         if (this.showList.indexOf(v) > -1) {
