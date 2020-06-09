@@ -23,18 +23,18 @@
       <ul class="search-group-list" v-show="groupList.length">
         <li v-for="v in groupList" :key="v['id']" @click="goGroupDetail(v['id'])">
           <a href="javascript:;">
-            <img :src="IMG_URL + v.img" alt="">
+            <img :src="IMG_URL + v.groupAvatar" alt="">
           </a>
           <div>
             <p>
-              {{v.title}}
+              {{v.groupName}}
             </p>
-            <p>
-              <i class="icon-zhanghao iconfont"></i>
-              {{v.userNum}}
-            </p>
-            <p :title="v.desc" class="echat-line1">
-              {{v.desc}}
+<!--            <p>-->
+<!--              <i class="icon-zhanghao iconfont"></i>-->
+<!--              {{v.userNum}}-->
+<!--            </p>-->
+            <p :title="v.groupDesc" class="echat-line1">
+              {{v.groupDesc}}
             </p>
           </div>
         </li>
