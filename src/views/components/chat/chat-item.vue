@@ -62,18 +62,18 @@
           </h3>
           <input type="text" v-show="spread" ref="searchMember">
           <ul>
-            <li v-for="v in groupUserList" :key="v.userId['id']">
-              <a class="echat-photo" :class="{lineOf: !v.status}">
-                <img :src="IMG_URL + v.userId.avatar" alt="">
+            <li v-for="v in groupUsers" :key="v.id">
+              <a class="echat-photo" :class="{lineOf: !v.online}">
+                <img :src="IMG_URL + v.avatar" alt="">
               </a>
-              <span class="echat-line1">{{v.userId.nickname}}</span>
+              <span class="echat-line1">{{v.nickname}}</span>
             </li>
-            <li>
-              <p class="loadmore" v-if="groupUsers.length > groupUserList.length" @click="loadmore">
-                <v-icon class="el-icon-loading" color="#fff" :size="14" v-if="loadmoreLoading"></v-icon>
-                加载更多
-              </p>
-            </li>
+<!--            <li>-->
+<!--              <p class="loadmore" v-if="groupUsers.length > groupUserList.length" @click="loadmore">-->
+<!--                <v-icon class="el-icon-loading" color="#fff" :size="14" v-if="loadmoreLoading"></v-icon>-->
+<!--                加载更多-->
+<!--              </p>-->
+<!--            </li>-->
           </ul>
         </div>
       </div>
@@ -281,7 +281,7 @@
           });
           this.$set(this.groupUsers, i, Object.assign({}, v, {status: flag}));
         });
-        this.onlineNum = this.groupUsers.filter(v => v.status).length;
+        this.onlineNum = this.groupUsers.filter(v => v.online).length;
       },
       setCurrNav(i) {
         this.currNav = i;
@@ -319,6 +319,7 @@
         if (!this.message && !params) {
           return;
         }
+        alert(this.currSation.id);
         let val = {
           name: this.user.name,
           mes: this.message,
