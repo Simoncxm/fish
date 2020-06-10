@@ -319,7 +319,7 @@
         if (!this.message && !params) {
           return;
         }
-        alert(this.currSation.id);
+        // alert(this.currSation.id);
         let val = {
           name: this.user.name,
           mes: this.message,
