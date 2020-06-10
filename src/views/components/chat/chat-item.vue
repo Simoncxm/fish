@@ -140,7 +140,8 @@
     sockets: {
       org(r) {
         this.conversationsChat[r.conversationId].push(Object.assign({}, r, {type: 'other'}));
-        if (r.conversationId === this.currSation.id) {
+        if (r.conversationId !== this.currSation.id) {
+          this.$emit('NewMes', r);
           // this.chatList.push(Object.assign({}, r, {type: 'org'}));
         }
       },
@@ -315,7 +316,7 @@
         this.currSation.chatoffset += 1;
         let params = {conversationId: this.currSation.id, offset: this.currSation.chatoffset, limit: this.currSation.chatlimit};
 
-        api.getMoreMessage(params).then(r => {
+        api.loadMoreMessage(params).then(r => {
           if (r.code === 0) {
             this.chatList = r.data.map(v => {
               if (v.type !== 'org') {
