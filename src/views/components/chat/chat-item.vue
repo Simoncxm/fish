@@ -229,6 +229,7 @@
                 }
               });
             }
+            api.setConversation({conversationId: v.id});
           }
         },
         deep: true,

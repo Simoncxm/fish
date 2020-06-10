@@ -8,7 +8,7 @@ export default {
     return fetch.delete('mes/removeMessage', params);
   },
   getMoreMessage(params) { //加载更多消息
-    return fetch.get('mes/getMoreMessage', params);
+    return fetch.get('mes/loadMoreMessage', params);
   },
   loadMoreMessage(params) { //加载更多消息
     return fetch.get('mes/loadMoreMessage', params);

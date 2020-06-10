@@ -42,6 +42,9 @@ export default {
   },
   searchFriend(params) { // 添加好友
     return fetch.post('user/searchFriend', params);
+  },
+  setConversation(params) { // 添加好友
+    return fetch.get('user/setConversation', params);
   }
 }
 
