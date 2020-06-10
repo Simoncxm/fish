@@ -5,6 +5,7 @@
        element-loading-spinner="el-icon-loading"
        element-loading-background="rgba(0, 0, 0, 0.8)"
        v-fontColor="user.chatColor">
+<!--    <v-icon class="el-icon-loading" color="#fff" :size="14" v-if="loadmoreLoading"/>-->
     <ul v-if="InfoList.length">
       <template v-for="v in InfoList">
         <li v-if="v.type === 'validate'" :key="v['id']">
@@ -88,6 +89,7 @@
         offset: 1,
         limit: 10,
         chatLoading: false,
+        // loadmoreLoading: false,
       }
     },
     sockets: {

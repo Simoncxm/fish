@@ -13,7 +13,8 @@
              element-loading-spinner="el-icon-loading"
              element-loading-background="rgba(0, 0, 0, 0.8)"
         >
-          <v-message :chatList="chatList" :loadmoreLoading="loadmoreLoading" @lookPhoto="lookPhoto" @loadmore="chatloadmore" @chatLoading="chatLoading = false"></v-message>
+          <v-message ref="vmes" :chatList="chatList" :loadmoreLoading="loadmoreLoading" @lookPhoto="lookPhoto"
+                     @loadmore="chatloadmore" @chatLoading="chatLoading = false"/>
         </div>
         <div class="chat-send">
           <div class="tool">
@@ -138,15 +139,24 @@
     },
     sockets: {
       org(r) {
+        this.conversationsChat[r.conversationId].push(Object.assign({}, r, {type: 'other'}));
         if (r.conversationId === this.currSation.id) {
-          this.chatList.push(Object.assign({}, r, {type: 'org'}));
+          // this.chatList.push(Object.assign({}, r, {type: 'org'}));
         }
       },
       mes(r) {
-        if (r.conversationId === this.currSation.id && r.userM!==this.user.id) {
-          this.chatList.push(Object.assign({}, r, {type: 'other'}));
-          // this.$socket.emit('setReadStatus', {conversationId: r.conversationId, name: this.user.name});
-          this.$store.commit('setUnRead', {conversationId: r.conversationId, clear: true});
+        if (r.conversationId === this.currSation.id) {
+          if(r.userM!==this.user.id){
+            this.conversationsChat[r.conversationId].push(Object.assign({}, r, {type: 'other'}));
+            // this.chatList.push(Object.assign({}, r, {type: 'other'}));
+            // this.$socket.emit('setReadStatus', {conversationId: r.conversationId, name: this.user.name});
+            this.$store.commit('setUnRead', {conversationId: r.conversationId, clear: true});
+          }
+        }
+        else{
+          this.conversationsChat[r.conversationId].push(Object.assign({}, r, {type: 'other'}));
+          this.$emit('NewMes', r);
+          this.$store.commit('setUnRead', {conversationId: r.conversationId, add: true, count: 1});
         }
       },
       // getHistoryMessages(r) { // 获取历史消息
@@ -318,6 +328,7 @@
               return v;
             }).concat(this.chatList);
             this.loadmoreLoading = false;
+            this.conversationsChat[this.currSation.id] = this.chatList;
           }
           else{
             this.$message.error('加载历史消息失败!');
@@ -373,7 +384,8 @@
           val.mes = params.name;
           val.emoji = params.response.data;
         }
-        this.chatList.push(Object.assign({}, val, {type: 'mine'}));
+        // this.chatList.push(Object.assign({}, val, {type: 'mine'}));
+        this.conversationsChat[this.currSation.id].push(Object.assign({}, val, {type: 'mine'}));
         this.$socket.emit('mes', val);
         this.$emit('NewMes', val);
         if (type === 'mess') { // 发送文字

@@ -139,9 +139,9 @@
       //     this.$store.commit('setUnRead', {conversationId: data[0].conversationId, count: data.length});
       //   }
       // },
-      mes(r) { //更改未读消息数量
-        this.$store.commit('setUnRead', {conversationId: r.conversationId, add: true, count: 1});
-      },
+      // mes(r) { //更改未读消息数量
+      //   this.$store.commit('setUnRead', {conversationId: r.conversationId, add: true, count: 1});
+      // },
       takeValidate(r) {
         this.$store.commit('setUnRead', {conversationId: r.conversationId, add: true, count: 1});
         if (r.type === 'info') {

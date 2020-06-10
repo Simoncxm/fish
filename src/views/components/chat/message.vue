@@ -30,7 +30,7 @@
       chatList() {
         this.$nextTick(_ => {
           this.$emit('chatLoading');
-          // this.$refs['msglist'].scrollTop = this.$refs['msglist'].scrollHeight + 200;
+          this.$refs['msglist'].scrollTop = this.$refs['msglist'].scrollTop + 610;
         });
       }
     },
@@ -42,6 +42,9 @@
         if(this.$refs['msglist'].scrollTop===0){
           this.$emit('loadmore');
         }
+      },
+      lookPhoto(url){
+          this.$emit('lookPhoto',url);
       }
     }
   }
