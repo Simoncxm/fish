@@ -83,61 +83,13 @@
 
     watch: {
       conversationsList: {
-        // handler(list) {
-        //
-        //   var _this=this;
-        //   var allList = JSON.parse(JSON.stringify(list));
-        //   // alert(JSON.stringify(this.user.wallpaper));
-        //   //保证只初始化一次
-        //   if(this.initEchatFlag){
-        //     // alert(JSON.stringify(allList));
-        //     for(var i = 0; i < allList.length; i++){
-        //       if(allList[i].name === 'Echat') {
-        //         _this.contactsList.push(allList[i]);
-        //         this.initEchatFlag = false;
-        //       }
-        //     }
-        //     // this.initEchatFlag = false;
-        //   }
-        //   alert()
-        //   // console.log(allList.length);
-        //   // console.log(allList[allList.length - 1]);
-        //   Msg.$on('val', function(m){
-        //     // alert("ok")
-        //     var flag = 0;
-        //     for(var j = 0; j < _this.contactsList.length; j++){
-        //       if(_this.contactsList[j].name === m) flag = 1;
-        //     }
-        //     if(flag === 0){
-        //       for(var i = 0; i < allList.length; i++){
-        //         if(allList[i].name === m) {
-        //           _this.contactsList.push(allList[i]);
-        //         }
-        //       }
-        //     }
-        //     for(var x = 0; x < _this.contactsList.length; x++){
-        //       if(_this.contactsList[x].name === m){
-        //         _this.currSation = _this.contactsList[x];
-        //       }
-        //     }
-        //
-        //   })
-        //   if (!this.currSation.id && list.length) {
-        //     this.currSation = this.contactsList[0];
-        //   }
-        //   if (!list.length) {
-        //     this.currSation = {};
-        //   }
-        //   if (!isNaN(this.removeSation.index)) {
-        //     if (this.currSation.id === this.removeSation.item.id && this.contactsList.length !== 0) {
-        //       this.currSation = this.contactsList[this.removeSation.index] || this.contactsList[this.removeSation.index - 1] || this.contactsList[this.removeSation.index + 1];
-        //     }
-        //   }
-        // },
-        // deep: true,
-        // immediate: true
         handler(list) {
           this.contactsList = JSON.parse(JSON.stringify(list));
+          // this.contactsList.forEach(v => {
+          //   v.newMes=this.conversationsChat[v.id][this.conversationsChat[v.id].length - 1].mes;
+          //   v.newMesTime=this.conversationsChat[v.id][this.conversationsChat[v.id].length - 1].time;
+          //   // {newMes: m.mes, newMesTime: m.time}
+          // });
           if (!this.currSation.id && list.length) {
             this.currSation = this.contactsList[0];
           }
@@ -176,7 +128,7 @@
       }
     },
     computed: {
-      ...mapState(['user', 'conversationsList', 'unRead']),
+      ...mapState(['user', 'conversationsList', 'unRead','conversationsChat']),
       bgOpa() { // 兼容老用户
         return this.user.bgOpa || 0.2;
       }

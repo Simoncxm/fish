@@ -171,7 +171,7 @@
       // }
     },
     computed: {
-      ...mapState(['user', 'OnlineUser'])
+      ...mapState(['user', 'OnlineUser','conversationsChat','groupUserALL'])
     },
     watch: {
       currSation: { // 当前会话
@@ -179,38 +179,49 @@
           if((old||!v)&&old.id === v.id)return;
           this.initload = true;
           // alert(v.id);
-          if (!v.id) {
-            this.chatList = [];
-          }
-          this.offset = 1;
-          this.groupUserList = [];
-          this.chatLoading = true;
+          // if (!v.id) {
+          //   this.chatList = [];
+          // }
           this.currNav = 0; // 标签选中第一个
           if (v.type === 'group' || v.type === 'friend') {
             if (v.type === 'group') {
-              this.getGroupUser(v.id);
-            }
-            // this.$socket.emit('setReadStatus', {conversationId: v.id, name: this.user.name});
-            this.$store.commit('setUnRead', {conversationId: v.id, clear: true});
-            // this.$socket.emit('getHistoryMessages', {conversationId: v.id, offset: 1, limit: 100});
-            let params = {conversationId: v.id, offset: 1, limit: 100};
-            api.getMoreMessage(params).then(r => {
-              if (r.code === 0) {
-                if (r.data.length) {
-                  this.$emit('NewMes', r.data[r.data.length - 1]);
-                }
-                this.chatList = r.data.map(v => {
-                  if (v.type !== 'org') {
-                    if (v.name === this.user.name) {
-                      v.type = 'mine';
-                    } else {
-                      v.type = 'other';
-                    }
-                  }
-                  return v;
-                });
+              if(this.groupUserALL[v.id]){
+                this.groupUserList = this.groupUserALL[v.id];
+                this.getGroupUserStatus(this.OnlineUser);
               }
-            })
+              else{
+                this.groupUserList = [];
+                this.getGroupUser(v.id);
+              }
+            }
+            this.$store.commit('setUnRead', {conversationId: v.id, clear: true});
+            if(this.conversationsChat[v.id]){
+              this.chatList = this.conversationsChat[v.id];
+            }
+            else{
+              this.chatLoading = true;
+              v.chatoffset=1;
+              v.chatlimit=10;
+              let params = {conversationId: v.id, offset: v.chatoffset, limit: v.chatlimit};
+              api.getMoreMessage(params).then(r => {
+                if (r.code === 0) {
+                  if (r.data.length) {
+                    this.$emit('NewMes', r.data[r.data.length - 1]);
+                  }
+                  this.chatList = r.data.map(v => {
+                    if (v.type !== 'org') {
+                      if (v.name === this.user.name) {
+                        v.type = 'mine';
+                      } else {
+                        v.type = 'other';
+                      }
+                    }
+                    return v;
+                  });
+                  this.conversationsChat[v.id]= this.chatList;
+                }
+              });
+            }
           }
         },
         deep: true,
@@ -292,14 +303,29 @@
           this.$refs['searchMember'].focus();
         });
       },
-      loadmore() {
+      chatloadmore() {
         this.loadmoreLoading = true;
-        this.offset += 1;
+        this.currSation.chatoffset += 1;
+        let params = {conversationId: v.id, offset: v.chatoffset, limit: v.chatlimit};
+        api.getMoreMessage(params).then(r => {
+          if (r.code === 0) {
+            this.chatList = r.data.map(v => {
+              if (v.type !== 'org') {
+                if (v.name === this.user.name) {
+                  v.type = 'mine';
+                } else {
+                  v.type = 'other';
+                }
+              }
+              return v;
+            });
+          }
+        });
         setTimeout(v => {
           let page = (this.offset - 1) * this.limit;
           this.groupUserList = this.groupUserList.concat(this.groupUsers.slice(page, page + this.limit));
           this.loadmoreLoading = false;
-        }, 1000);
+        }, 200);
       },
       getGroupUser(id) { // 获取群成员
         let params = {
@@ -308,10 +334,11 @@
         api.getGroupUser(params).then(r => {
           if (r.code === 0) {
             this.groupUsers = r.data;
-            let page = (this.offset - 1) * this.limit;
-            this.groupUserList = this.groupUsers.slice(page, page + this.limit);
+            // let page = (this.offset - 1) * this.limit;
+            // this.groupUserList = this.groupUsers.slice(page, page + this.limit);
             /*console.log(this.groupUsers);*/
             this.getGroupUserStatus(this.OnlineUser);
+            this.groupUserALL[v.id] = this.groupUsers;
           }
         })
       },
@@ -328,7 +355,8 @@
           read: [this.user.name],
           conversationId: this.currSation.id,
           style: 'mess',
-          userM: this.user.id
+          userM: this.user.id,
+          time: (new Date()).getTime(),
         };
         if (type === 'emoji') { // 发送表情
           val.style = 'emoji';

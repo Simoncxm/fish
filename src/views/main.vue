@@ -59,7 +59,7 @@
       }
     },
     computed: {
-      ...mapState(['user', 'conversationsList', 'Echat'])
+      ...mapState(['user', 'conversationsList', 'Echat','conversationsChat'])
     },
     components: {
       vHeader
@@ -112,15 +112,37 @@
             // let room = {conversationId: v.id, offset: 1, limit: 200};
             this.$socket.emit('join', val);
             // this.$socket.emit('getHistoryMessages', room);
-            let params = {conversationId: v.id, offset: 1, limit: 200};
-            api.getMoreMessage(params).then(r => {
-              if (r.code === 0) {
-                let data = r.data.filter(v => v.read.indexOf(this.user.name) === -1);
-                if (data.length) {
-                  this.$store.commit('setUnRead', {conversationId: data[0].conversationId, count: data.length});
+            if(this.conversationsChat[v.id]){
+              this.chatList = this.conversationsChat[v.id];
+            }
+            else{
+              v.chatoffset=1;
+              v.chatlimit=10;
+              let params = {conversationId: v.id, offset: v.chatoffset, limit: v.chatlimit};
+              api.getMoreMessage(params).then(r => {
+                if (r.code === 0) {
+                  let data = r.data.filter(v => v.read.indexOf(this.user.name) === -1);
+                  if (data.length) {
+                    this.$store.commit('setUnRead', {conversationId: data[0].conversationId, count: data.length});
+                  }
+                  // if (r.data.length) {
+                  //   v.newMes=r.data[r.data.length - 1].mes;
+                  //   v.newMesTime=r.data[r.data.length - 1].time;
+                  // }
+                  let chatList = r.data.map(v => {
+                    if (v.type !== 'org') {
+                      if (v.name === this.user.name) {
+                        v.type = 'mine';
+                      } else {
+                        v.type = 'other';
+                      }
+                    }
+                    return v;
+                  });
+                  this.conversationsChat[v.id]= chatList;
                 }
-              }
-            })
+              });
+            }
           }
         });
       }
