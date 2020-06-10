@@ -27,10 +27,14 @@
       }
     },
     watch: {
-      chatList() {
+      chatList(v,old) {
         this.$nextTick(_ => {
           this.$emit('chatLoading');
           this.$refs['msglist'].scrollTop = this.$refs['msglist'].scrollTop + 610;
+          if(old[0].conversationId!==v[0].conversationId){
+            // alert("ok");
+            this.$refs['msglist'].scrollTop = this.$refs['msglist'].scrollHeight;
+          }
         });
       }
     },
@@ -45,7 +49,10 @@
       },
       lookPhoto(url){
           this.$emit('lookPhoto',url);
-      }
+      },
+      // godown(){
+      //   this.$refs['msglist'].scrollTop += clientHeight;
+      // }
     }
   }
 </script>
