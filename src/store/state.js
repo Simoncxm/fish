@@ -7,7 +7,6 @@ export default {
   conversationsList: [], // 会话列表
   conversationsChat: [],
   groupUserALL: [],
-  contactsList: [],
   OnlineUser: {}, // 在线人数
   unRead: [], // 未读消息
   Echat: {}, // 官方账号信息

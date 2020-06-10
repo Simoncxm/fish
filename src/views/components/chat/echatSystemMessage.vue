@@ -122,21 +122,54 @@
             // this.$socket.emit('setReadStatus', {conversationId: v.id, name: this.user.name});
             this.$store.commit('setUnRead', {conversationId: v.id, clear: true});
             // this.$socket.emit('getSystemMessages', {conversationId: v.id, offset: this.offset, limit: this.limit});
-            let params = {conversationId: v.id, offset: this.offset, limit: this.limit};
-            api.getMoreMessage(params).then(r => {
-              if (r.code === 0) {
-                if (r.data.length) {
-                  this.$emit('NewMes', r.data[r.data.length - 1]);
+            // alert(JSON.stringify(this.conversationsChat));
+            if(this.conversationsChat[v.id]){
+              this.InfoList = this.conversationsChat[v.id];
+              this.InfoList.forEach(t => {
+                t.visible = false;
+                t.delVisible = false;
+              });
+              // alert(JSON.stringify(this.InfoList))
+              // alert("ok");
+            }
+            else{
+              this.chatLoading = true;
+              v.chatoffset=1;
+              v.chatlimit=10;
+              let params = {conversationId: v.id, offset: v.chatoffset, limit: v.chatlimit};
+              api.getMoreMessage(params).then(r => {
+                if (r.code === 0) {
+                  if (r.data.length) {
+                    v.newMes=r.data[r.data.length - 1].mes;
+                    v.newMesTime=r.data[r.data.length - 1].time;
+                  }
+                  this.InfoList = r.data;
+                  // this.InfoList.forEach(t => {
+                  //   t.visible = false;
+                  //   t.delVisible = false;
+                  // });
+                  this.chatLoading = false;
+                  this.conversationsChat[v.id]= this.InfoList;
+                  // alert(JSON.stringify(this.InfoList))
                 }
-                r.data.forEach(v => {
-                  v.visible = false;
-                  v.delVisible = false;
-                });
-                this.InfoList = r.data;
-              }
-              this.chatLoading = false;
-            })
+              });
+            }
+            // let params = {conversationId: v.id, offset: this.offset, limit: this.limit};
+            // api.getMoreMessage(params).then(r => {
+            //   if (r.code === 0) {
+            //     if (r.data.length) {
+            //       this.$emit('NewMes', r.data[r.data.length - 1]);
+            //     }
+            //     r.data.forEach(v => {
+            //       v.visible = false;
+            //       v.delVisible = false;
+            //     });
+            //     this.InfoList = r.data;
+            //   }
+            //   this.chatLoading = false;
+            // })
           } else {
+            alert("no");
             this.InfoList = [];
           }
         },
@@ -145,7 +178,7 @@
       }
     },
     computed: {
-      ...mapState(['user', 'Echat'])
+      ...mapState(['user', 'Echat','conversationsChat'])
     },
     methods: {
       del(v) {

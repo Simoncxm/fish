@@ -1,6 +1,6 @@
 <template>
-  <ul ref="msglist" class="echat-message">
-    <li style="fontSize: 12px" v-if="chatList.length > 50">更多消息请在聊天记录中查看</li>
+  <ul ref="msglist" class="echat-message" v-on:scroll="scrollFunction">
+  <v-icon class="el-icon-loading" color="#fff" :size="14" v-if="loadmoreLoading"></v-icon>
     <li :class="[{org: v.type==='org'}]" v-for="(v, i) in chatList" :key="i">
       <template v-if="v.type==='other'">
         <message-item type="other" @lookPhoto="lookPhoto" :v="v" class="other"></message-item>
@@ -19,7 +19,7 @@
   import messageItem from './messageItem.vue';
 
   export default {
-    props: ['chatList'],
+    props: ['chatList','loadmoreLoading'],
     name: 'vMessage',
     data() {
       return {
@@ -30,7 +30,7 @@
       chatList() {
         this.$nextTick(_ => {
           this.$emit('chatLoading');
-          this.$refs['msglist'].scrollTop = this.$refs['msglist'].scrollHeight + 200;
+          // this.$refs['msglist'].scrollTop = this.$refs['msglist'].scrollHeight + 200;
         });
       }
     },
@@ -38,8 +38,10 @@
       messageItem
     },
     methods: {
-      lookPhoto(url) {
-        this.$emit('lookPhoto', url);
+      scrollFunction() {
+        if(this.$refs['msglist'].scrollTop===0){
+          this.$emit('loadmore');
+        }
       }
     }
   }

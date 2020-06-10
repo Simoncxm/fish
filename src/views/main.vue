@@ -51,8 +51,62 @@
     },
     watch: {
       conversationsList: {
-        handler() {
-          this.joinRoom();
+        handler(list) {
+          if (!this.user.name) {
+            return;
+          }
+          list.forEach(v => {
+            if(!v.joined){
+              // console.log(1);
+              v.joined=true;
+              let val = {
+                name: this.user.name,
+                time: utils.formatTime(new Date()),
+                avatar: this.user.avatar,
+                conversationId: v.id
+              };
+              // let room = {conversationId: v.id, offset: 1, limit: 200};
+              this.$socket.emit('join', val);
+              // this.$socket.emit('getHistoryMessages', room);
+              if(this.conversationsChat[v.id]){
+                this.chatList = this.conversationsChat[v.id];
+              }
+              else{
+                v.chatoffset=1;
+                v.chatlimit=10;
+                let params = {conversationId: v.id, offset: v.chatoffset, limit: v.chatlimit};
+                api.getMoreMessage(params).then(r => {
+                  if (r.code === 0) {
+                    let data = r.data.filter(v => v.read.indexOf(this.user.name) === -1);
+                    if (data.length) {
+                      this.$store.commit('setUnRead', {conversationId: data[0].conversationId, count: data.length});
+                    }
+                    if (r.data.length) {
+                      // console.log(v);
+                      v.newMes=r.data[r.data.length - 1].mes;
+                      v.newMesTime=r.data[r.data.length - 1].time;
+                    }
+                    if(v.name!=='Echat'){
+                      let chatList = r.data.map(v => {
+                        if (v.type !== 'org') {
+                          if (v.name === this.user.name) {
+                            v.type = 'mine';
+                          } else {
+                            v.type = 'other';
+                          }
+                        }
+                        return v;
+                      });
+                      this.conversationsChat[v.id]= chatList;
+                    }
+                    else{
+                      this.conversationsChat[v.id]=r.data;
+                    }
+                  }
+                });
+              }
+            }
+          });
         },
         deep: true,
         immediate: true
@@ -95,58 +149,8 @@
         }
       }
     },
-    methods: {
-      joinRoom() {
-        if (!this.user.name) {
-          return;
-        }
-        this.conversationsList.forEach(v => {
-          if(!v.joined){
-            v.joined=true;
-            let val = {
-              name: this.user.name,
-              time: utils.formatTime(new Date()),
-              avatar: this.user.avatar,
-              conversationId: v.id
-            };
-            // let room = {conversationId: v.id, offset: 1, limit: 200};
-            this.$socket.emit('join', val);
-            // this.$socket.emit('getHistoryMessages', room);
-            if(this.conversationsChat[v.id]){
-              this.chatList = this.conversationsChat[v.id];
-            }
-            else{
-              v.chatoffset=1;
-              v.chatlimit=10;
-              let params = {conversationId: v.id, offset: v.chatoffset, limit: v.chatlimit};
-              api.getMoreMessage(params).then(r => {
-                if (r.code === 0) {
-                  let data = r.data.filter(v => v.read.indexOf(this.user.name) === -1);
-                  if (data.length) {
-                    this.$store.commit('setUnRead', {conversationId: data[0].conversationId, count: data.length});
-                  }
-                  // if (r.data.length) {
-                  //   v.newMes=r.data[r.data.length - 1].mes;
-                  //   v.newMesTime=r.data[r.data.length - 1].time;
-                  // }
-                  let chatList = r.data.map(v => {
-                    if (v.type !== 'org') {
-                      if (v.name === this.user.name) {
-                        v.type = 'mine';
-                      } else {
-                        v.type = 'other';
-                      }
-                    }
-                    return v;
-                  });
-                  this.conversationsChat[v.id]= chatList;
-                }
-              });
-            }
-          }
-        });
-      }
-    },
+    // methods: {
+    // },
     mounted() {
     }
   }

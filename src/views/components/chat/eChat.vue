@@ -12,7 +12,7 @@
       </div>
       <div class="chat-container">
         <ul class="chat-conversation-ul">
-          <li class="chat-conversation-li" v-for="(v, i) in contactsList" :key=v.id
+          <li class="chat-conversation-li" v-for="(v, i) in conversationsList" :key=v.id
               :class="{active: currSation.id === v.id}" @click="setCurrSation(v)">
             <el-badge :value="v.unRead" :max="99" class="mesBadge" :hidden="v.unRead === 0">
               <a class="echat-photo">
@@ -65,7 +65,6 @@
         update:true,//没能实现，bug还存在
         initEchatFlag: true,
         currSation: {}, //当前会话
-        contactsList :[], // 会话列表
         IMGURL: process.env.IMG_URL,
         settingFlag: { // 设置面板
           f: false
@@ -83,42 +82,50 @@
 
     watch: {
       conversationsList: {
-        handler(list) {
-          this.contactsList = JSON.parse(JSON.stringify(list));
-          // this.contactsList.forEach(v => {
+        handler(list,old) {
+          // console.log(list[3]);
+          // this.conversationsList = JSON.parse(JSON.stringify(list));
+          // alert(JSON.stringify(list));
+          // list.forEach(v => {
+          //   // if(v.init)return;
+          //   // v.init=true;
           //   v.newMes=this.conversationsChat[v.id][this.conversationsChat[v.id].length - 1].mes;
           //   v.newMesTime=this.conversationsChat[v.id][this.conversationsChat[v.id].length - 1].time;
+          //   console.log(v)
           //   // {newMes: m.mes, newMesTime: m.time}
           // });
+          // console.log(list);
           if (!this.currSation.id && list.length) {
-            this.currSation = this.contactsList[0];
+            this.currSation = this.conversationsList[0];
           }
           if (!list.length) {
             this.currSation = {};
           }
-          if (!isNaN(this.removeSation.index)) {
-            if (this.currSation.id === this.removeSation.item.id && this.contactsList.length !== 0) {
-              this.currSation = this.contactsList[this.removeSation.index] || this.contactsList[this.removeSation.index - 1] || this.contactsList[this.removeSation.index + 1];
-            }
-          }
+          // if (!isNaN(this.removeSation.index)) {
+          //   if (this.currSation.id === this.removeSation.item.id && this.conversationsList.length !== 0) {
+          //     this.currSation = this.conversationsList[this.removeSation.index] || this.conversationsList[this.removeSation.index - 1] || this.conversationsList[this.removeSation.index + 1];
+          //   }
+          // }
+          // this.$forceUpdate();
+          // this.currSation = this.conversationsList[0];
         },
         deep: true,
         immediate: true
       },
-      contactsList: {
-        handler(list) {
-          // if (!list.length) {
-          //   this.currSation = {};
-          // }
-        },
-        deep: true
-      },
+      // conversationsList: {
+      //   handler(list) {
+      //     // if (!list.length) {
+      //     //   this.currSation = {};
+      //     // }
+      //   },
+      //   deep: true
+      // },
       unRead: {
         handler(list) {
-          this.contactsList.forEach((v, i) => {
+          this.conversationsList.forEach((v, i) => {
             list.forEach(m => {
               if (v.id === m.conversationId) {
-                this.$set(this.contactsList, i, Object.assign({}, v, {unRead: m.count}));
+                this.$set(this.conversationsList, i, Object.assign({}, v, {unRead: m.count}));
               }
             });
           })
@@ -139,50 +146,52 @@
       },
        setCurrSation(v){
         // alert(JSON.stringify(this.currSation));
-         console.log(this.currSation.name);
+        //  console.log(this.currSation.name);
         if (v.id === this.currSation.id) {
           return;
         }
         this.currSation = v;
-         console.log(this.currSation.name);
+         // console.log(this.currSation.name);
       },
       getNewMes(m) { // 获取最新一条消息
-        // alert(JSON.stringify(this.contactsList));
-        this.contactsList.forEach((v, i) => {
+        // alert(JSON.stringify(this.conversationsList));
+        this.conversationsList.forEach((v, i) => {
           if (v.id === m.conversationId) {
-            this.$set(this.contactsList, i, Object.assign({}, v, {newMes: m.mes, newMesTime: m.time}));
+            this.$set(this.conversationsList, i, Object.assign({}, v, {newMes: m.mes, newMesTime: m.time}));
           }
         })
       },
       remove(v,i) {
+        // alert(JSON.stringify(this.conversationsList))
         // console.log("remove");
         // console.log(v.id);
-        var _this = this;
-        if(this.contactsList[this.contactsList.length - 1].id === v.id){
-          //console.log(this.contactsList[this.contactsList.length - 1].id===v.id);
-            this.currSation = this.contactsList[this.contactsList.length - 1];
-        }
-        this.contactsList = this.contactsList.filter(m => m.id !== v.id);
+        // console.log(v.id);
+        // var _this = this;
+        // if(this.conversationsList[this.conversationsList.length - 1].id === v.id){
+        //   //console.log(this.conversationsList[this.conversationsList.length - 1].id===v.id);
+        //     this.currSation = this.conversationsList[this.conversationsList.length - 1];
+        // }
+        // this.conversationsList = this.conversationsList.filter(m => m.id !== v.id);
         //bug
        //  console.log(this.currSation.name);
-       // // this.currSation = this.contactsList[i] || this.contactsList[i - 1] || this.contactsList[i + 1];
+       // // this.currSation = this.conversationsList[i] || this.conversationsList[i - 1] || this.conversationsList[i + 1];
        //  console.log(this.currSation.name);
         // this.update = this.update ? false:true;
         // this.$nextTick(function(){
         //   this.update = this.update ? false:true;
-        //   setCurrSation(this.contactsList[this.contactsList.length - 1]);
+        //   setCurrSation(this.conversationsList[this.conversationsList.length - 1]);
         // })
         // this.$forceUpdate();
         //this.reload();
 
 
         //   console.log(this.currSation.name);
-        // setCurrSation(this.contactsList[this.contactsList.length - 1]);
+        // setCurrSation(this.conversationsList[this.conversationsList.length - 1]);
 
         // if (v.type === 'echat') { // 只做显示列表移除
-        //   this.contactsList = this.contactsList.filter(m => m.id !== v.id);
-        //   if (this.currSation.id === v.id && this.contactsList.length !== 0) {
-        //     this.currSation = this.contactsList[i] || this.contactsList[i - 1] || this.contactsList[i + 1];
+        //   this.conversationsList = this.conversationsList.filter(m => m.id !== v.id);
+        //   if (this.currSation.id === v.id && this.conversationsList.length !== 0) {
+        //     this.currSation = this.conversationsList[i] || this.conversationsList[i - 1] || this.conversationsList[i + 1];
         //   }
         // }
         //  else {
@@ -193,7 +202,7 @@
         //         message: '移除成功'
         //       });
         //       this.$store.commit('setConversationsList', Object.assign({d: true}, v));
-        //                    // this.contactsList = this.contactsList.filter(m => m.id !== v.id);
+        //                    // this.conversationsList = this.conversationsList.filter(m => m.id !== v.id);
         //       this.removeSation = {
         //         item: v,
         //         index: i

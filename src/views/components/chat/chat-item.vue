@@ -13,7 +13,7 @@
              element-loading-spinner="el-icon-loading"
              element-loading-background="rgba(0, 0, 0, 0.8)"
         >
-          <v-message :chatList="chatList" @lookPhoto="lookPhoto" @chatLoading="chatLoading = false"></v-message>
+          <v-message :chatList="chatList" :loadmoreLoading="loadmoreLoading" @lookPhoto="lookPhoto" @loadmore="chatloadmore" @chatLoading="chatLoading = false"></v-message>
         </div>
         <div class="chat-send">
           <div class="tool">
@@ -177,11 +177,6 @@
       currSation: { // 当前会话
         handler(v,old) {
           if((old||!v)&&old.id === v.id)return;
-          this.initload = true;
-          // alert(v.id);
-          // if (!v.id) {
-          //   this.chatList = [];
-          // }
           this.currNav = 0; // 标签选中第一个
           if (v.type === 'group' || v.type === 'friend') {
             if (v.type === 'group') {
@@ -206,7 +201,8 @@
               api.getMoreMessage(params).then(r => {
                 if (r.code === 0) {
                   if (r.data.length) {
-                    this.$emit('NewMes', r.data[r.data.length - 1]);
+                    v.newMes=r.data[r.data.length - 1].mes;
+                    v.newMesTime=r.data[r.data.length - 1].time;
                   }
                   this.chatList = r.data.map(v => {
                     if (v.type !== 'org') {
@@ -304,9 +300,11 @@
         });
       },
       chatloadmore() {
+        // if(this.currSation.nothing)return;
         this.loadmoreLoading = true;
         this.currSation.chatoffset += 1;
-        let params = {conversationId: v.id, offset: v.chatoffset, limit: v.chatlimit};
+        let params = {conversationId: this.currSation.id, offset: this.currSation.chatoffset, limit: this.currSation.chatlimit};
+
         api.getMoreMessage(params).then(r => {
           if (r.code === 0) {
             this.chatList = r.data.map(v => {
@@ -318,14 +316,18 @@
                 }
               }
               return v;
-            });
+            }).concat(this.chatList);
+            this.loadmoreLoading = false;
+          }
+          else{
+            this.$message.error('加载历史消息失败!');
           }
         });
-        setTimeout(v => {
-          let page = (this.offset - 1) * this.limit;
-          this.groupUserList = this.groupUserList.concat(this.groupUsers.slice(page, page + this.limit));
-          this.loadmoreLoading = false;
-        }, 200);
+        // setTimeout(v => {
+        //   let page = (this.offset - 1) * this.limit;
+        //   this.groupUserList = this.groupUserList.concat(this.groupUsers.slice(page, page + this.limit));
+        //   this.loadmoreLoading = false;
+        // }, 200);
       },
       getGroupUser(id) { // 获取群成员
         let params = {
