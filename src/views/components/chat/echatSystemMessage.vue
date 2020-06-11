@@ -156,6 +156,7 @@
                 }
               });
             }
+            api.setConversation({conversationId: v.id});
             // let params = {conversationId: v.id, offset: this.offset, limit: this.limit};
             // api.getMoreMessage(params).then(r => {
             //   if (r.code === 0) {
