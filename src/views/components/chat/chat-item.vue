@@ -83,7 +83,7 @@
 <!--      努力开发中...-->
 <!--    </div>-->
     <div class="echat-item-container" v-show="currNav === 2">
-      <message-log :currSation="currSation" :currNav="currNav" @lookPhoto="lookPhoto"></message-log>
+      <message-log :currNav="currNav" @lookPhoto="lookPhoto"></message-log>
     </div>
     <v-photo-swipe :visible="photoSwipeFlag" @close="photoSwipeFlag = false" :url="photoSwipeUrl"></v-photo-swipe>
   </div>
@@ -99,7 +99,6 @@
 
   export default {
     name: 'chatItem',
-    props: ['currSation'],
     data() {
       return {
         // type 0 共有 1 群聊 2 好友
@@ -182,7 +181,7 @@
       // }
     },
     computed: {
-      ...mapState(['user', 'OnlineUser','conversationsChat','groupUserALL'])
+      ...mapState(['user', 'OnlineUser','conversationsChat','groupUserALL','currSation'])
     },
     watch: {
       currSation: { // 当前会话
@@ -354,6 +353,7 @@
             /*console.log(this.groupUsers);*/
             this.getGroupUserStatus(this.OnlineUser);
             this.groupUserALL[v.id] = this.groupUsers;
+            // this.$store.commit('setGroupUserALL', v.id, this.groupUsers);
           }
         })
       },

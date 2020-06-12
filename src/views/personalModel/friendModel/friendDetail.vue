@@ -81,7 +81,7 @@
       vApheader
     },
     computed: {
-      ...mapState(['user'])
+      ...mapState(['user','conversationsList'])
     },
     methods: {
       apply() {
@@ -107,8 +107,26 @@
         })
       },
       send(){
-          // console.log('send');
-          Msg.$emit("val", this.friendInfo.name);
+        // console.log('send');
+        let flag=false;
+        this.conversationsList.forEach(v => {
+          if(v.itemId === this.$route.params.id){
+            this.$store.commit('setCurrSation', v);
+            flag=true;
+          }
+        });
+        if(!flag){
+          let params = {
+            type:'friend',
+            itemId: this.$route.params.id
+          };
+          api.addConversation(params).then(r => {
+            if (r.code === 0) {
+              this.$store.commit('addConversationsList', r.data);
+              this.$store.commit('setCurrSation', this.conversationsList[0]);
+            }
+          })
+        }
       },
       getUserInfo() {
         if(this.$route.params.id === this.user.id){

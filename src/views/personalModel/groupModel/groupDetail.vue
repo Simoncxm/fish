@@ -83,7 +83,6 @@
   import vApheader from '@/views/components/header/vApheader';
   import api from '@/api';
   import {mapState} from 'vuex';
-  import Msg from '@/views/components/msg.js'
   export default {
     data() {
       return {
@@ -101,7 +100,7 @@
       vApheader
     },
     computed: {
-      ...mapState(['user'])
+      ...mapState(['user','conversationsList'])
     },
     methods: {
       getGroupInfo() {
@@ -140,7 +139,25 @@
       },
       send(){
         // console.log('send');
-        Msg.$emit("val", this.groupInfo.title);
+        let flag=false;
+        this.conversationsList.forEach(v => {
+          if(v.itemId === this.$route.params.id){
+            this.$store.commit('setCurrSation', v);
+            flag=true;
+          }
+        });
+        if(!flag){
+          let params = {
+            type:'group',
+            itemId: this.$route.params.id
+          };
+          api.addConversation(params).then(r => {
+            if (r.code === 0) {
+              this.$store.commit('addConversationsList', r.data);
+              this.$store.commit('setCurrSation', this.conversationsList[0]);
+            }
+          })
+        }
       },
       quit() {
       },

@@ -25,10 +25,11 @@
 <script>
   import messageItem from './messageItem.vue';
   import api from '@/api';
+  import {mapState} from 'vuex';
 
   export default {
     name: 'messageLog',
-    props: ['currSation', 'currNav'],
+    props: ['currNav'],
     data() {
       return {
         messageLog: [],
@@ -37,6 +38,9 @@
         total: 0,
         chatLoading: false
       }
+    },
+    computed: {
+      ...mapState(['currSation'])
     },
     watch: {
       currSation: { // 当前会话

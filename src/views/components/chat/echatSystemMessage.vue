@@ -79,7 +79,6 @@
   import api from '@/api';
 
   export default {
-    props: ['currSation'],
     name: 'echatSystemMessage',
     data() {
       return {
@@ -172,7 +171,6 @@
             //   this.chatLoading = false;
             // })
           } else {
-            alert("no");
             this.InfoList = [];
           }
         },
@@ -181,7 +179,7 @@
       }
     },
     computed: {
-      ...mapState(['user', 'Echat','conversationsChat'])
+      ...mapState(['user', 'Echat','conversationsChat','currSation'])
     },
     methods: {
       del(v) {

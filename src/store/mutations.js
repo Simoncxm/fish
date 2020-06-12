@@ -15,6 +15,9 @@ export default {
     }
     state.user = Object.assign({}, state.user, data);
   },
+  setCurrSation(state, data) {
+    state.currSation=data;
+  },
   setIslogin(state, data) {
     state.isLogin = data;
   },
@@ -31,6 +34,12 @@ export default {
         }
       }
     }
+  },
+  addConversationsList(state, data) {
+    state.conversationsList = [data].concat(state.conversationsList);
+  },
+  removeConversationsList(state, index) { // 设置会话列表
+    state.conversationsList.splice(index,1);
   },
   setOnlineUser(state, data) {
     state.OnlineUser = data;

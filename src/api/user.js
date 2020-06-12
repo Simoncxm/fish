@@ -38,7 +38,7 @@ export default {
     return fetch.post('user/addConversation', params);
   },
   removeConversation(params) { // 移除会话
-    return fetch.delete('user/removeConversation', params);
+    return fetch.post('user/removeConversation', params);
   },
   searchFriend(params) { // 添加好友
     return fetch.post('user/searchFriend', params);

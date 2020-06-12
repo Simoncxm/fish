@@ -6,6 +6,7 @@ export default {
   transitionName: '', // 页面过渡动画
   conversationsList: [], // 会话列表
   conversationsChat: {},
+  currSation: {},
   groupUserALL: {},
   OnlineUser: {}, // 在线人数
   unRead: [], // 未读消息

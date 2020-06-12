@@ -34,14 +34,14 @@
             </div>
             <p class="delete" >
               <el-tooltip class="item" effect="dark" :content="'移除'" placement="top-start" v-if="v.name !== 'Echat'">
-                <el-button icon="el-icon-close" circle size="mini" @click="remove(v,i)"></el-button>
+                <el-button icon="el-icon-close" circle size="mini" @click.stop="remove(v,i)"></el-button>
               </el-tooltip>
             </p>
           </li>
         </ul>
         <div class="chat-content-box" v-if="update">
-          <chat-item :currSation="currSation" @NewMes="getNewMes" v-show="currSation.type !== 'echat'"></chat-item>
-          <echat-message v-show="currSation.type === 'echat'" :currSation="currSation"></echat-message>
+          <chat-item @NewMes="getNewMes" v-show="currSation.type !== 'echat'"></chat-item>
+          <echat-message v-show="currSation.type === 'echat'"></echat-message>
         </div>
       </div>
       <div class="chat-setting" :class="{active: settingFlag.f}" v-watchMouse="settingFlag">
@@ -57,6 +57,7 @@
   import {mapState} from 'vuex';
   import api from '@/api';
   import Msg from '@/views/components/msg.js'
+  import conversation from "../../personalModel/conversation";
   export default {
     name: 'eChat',
     inject:['reload'],
@@ -64,7 +65,6 @@
       return {
         update:true,//没能实现，bug还存在
         initEchatFlag: true,
-        currSation: {}, //当前会话
         IMGURL: process.env.IMG_URL,
         settingFlag: { // 设置面板
           f: false
@@ -96,10 +96,11 @@
           // });
           // console.log(list);
           if (!this.currSation.id && list.length) {
-            this.currSation = this.conversationsList[0];
+            this.$store.commit('setCurrSation', this.conversationsList[0]);
+            // alert("ok")
           }
           if (!list.length) {
-            this.currSation = {};
+            this.$store.commit('setCurrSation', {});
           }
           // if (!isNaN(this.removeSation.index)) {
           //   if (this.currSation.id === this.removeSation.item.id && this.conversationsList.length !== 0) {
@@ -135,7 +136,7 @@
       }
     },
     computed: {
-      ...mapState(['user', 'conversationsList', 'unRead','conversationsChat']),
+      ...mapState(['user', 'conversationsList', 'unRead','conversationsChat','currSation']),
       bgOpa() { // 兼容老用户
         return this.user.bgOpa || 0.2;
       }
@@ -150,7 +151,7 @@
         if (v.id === this.currSation.id) {
           return;
         }
-        this.currSation = v;
+         this.$store.commit('setCurrSation', v);
          // console.log(this.currSation.name);
       },
       getNewMes(m) { // 获取最新一条消息
@@ -162,6 +163,16 @@
         })
       },
       remove(v,i) {
+        let conversationId=this.conversationsList[i].id;
+        this.$store.commit('removeConversationsList', i);
+        let params={
+          id:conversationId
+        };
+        api.removeConversation(params).then(r => {
+          if (r.code === 0) {
+
+          }
+        })
         // alert(JSON.stringify(this.conversationsList))
         // console.log("remove");
         // console.log(v.id);
