@@ -9,7 +9,7 @@
         <message-item type="mine" @lookPhoto="lookPhoto" :v="v" class="mine"></message-item>
       </template>
       <template v-if="v.type==='org'">
-        系统消息：<span>{{v.nickname}}</span>加入群聊！
+        <span>{{v.mes}}</span>
       </template>
     </li>
   </ul>

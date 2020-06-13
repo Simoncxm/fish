@@ -102,6 +102,7 @@
         }
         this.$store.commit('removeConversationsList', index);
         let val={
+          myId:this.user.id,
           userId:this.$route.params.id
         };
         this.$socket.emit('deleteMyFriend', val);
