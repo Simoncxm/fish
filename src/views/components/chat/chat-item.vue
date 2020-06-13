@@ -139,6 +139,12 @@
     sockets: {
       org(r) {
         this.conversationsChat[r.conversationId].push(Object.assign({}, r, {type: 'org'}));
+        if(r.addOrDelete===1){
+          this.groupUserALL[r.conversationId].push(r.userInfo);
+        }
+        else if (r.addOrDelete===-1){
+          this.groupUserALL[r.conversationId] = this.groupUserALL[r.conversationId].filter(v => v.id !== r.userInfo.id);
+        }
         if (r.conversationId !== this.currSation.id) {
           this.$emit('NewMes', r);
           // this.chatList.push(Object.assign({}, r, {type: 'org'}));
@@ -352,7 +358,7 @@
             // this.groupUserList = this.groupUsers.slice(page, page + this.limit);
             /*console.log(this.groupUsers);*/
             this.getGroupUserStatus(this.OnlineUser);
-            this.groupUserALL[v.id] = this.groupUsers;
+            this.groupUserALL[this.currSation.id] = this.groupUsers;
             // this.$store.commit('setGroupUserALL', v.id, this.groupUsers);
           }
         })
