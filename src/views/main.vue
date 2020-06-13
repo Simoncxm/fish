@@ -131,8 +131,18 @@
         this.$store.commit('setOnlineUser', OnlineUser)
       },
       beDeleted(val){
-
-
+        if(val.type==='friend'){
+          let index = 1;
+          for (let i = 0; i < this.conversationsList.length; i++) {
+            if (this.conversationsList[i].itemId === val.itemId && this.conversationsList[i].type === 'friend'){
+              index = i;
+              break;
+            }
+          }
+          this.$store.commit('removeConversationsList', index);
+          this.$store.commit('removeFriend', val.itemId);
+          this.$router.go(-1);
+        }
       },
       leaved(OnlineUser) {
         this.$store.commit('setOnlineUser', OnlineUser)
