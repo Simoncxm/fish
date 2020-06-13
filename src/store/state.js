@@ -8,6 +8,10 @@ export default {
   conversationsChat: {},
   currSation: {},
   groupUserALL: {},
+  friendList: [],
+  Groups: [],
+  mySetGroups: [],
+  myJoinGroups: [],
   OnlineUser: {}, // 在线人数
   unRead: [], // 未读消息
   Echat: {}, // 官方账号信息

@@ -44,6 +44,30 @@ export default {
   setOnlineUser(state, data) {
     state.OnlineUser = data;
   },
+  removeFriend(state,userId){
+    state.friendList = state.friendList.filter(v => v.id !== userId);
+  },
+  setFriend(state,data){
+    state.friendList = data;
+  },
+  addfriend(state,data){
+    state.friendList.push(data);
+  },
+  leaveGroup(state,groupId){
+    state.Groups = state.Groups.filter(v => v.id !== groupId);
+    state.mySetGroups = state.Groups.filter(v => v.holder === state.user.id);
+    state.myJoinGroups = state.Groups.filter(v => v.holder !== state.user.id);
+  },
+  setGroup(state,data){
+    state.Groups = data;
+    state.mySetGroups = state.Groups.filter(v => v.holder === state.user.id);
+    state.myJoinGroups = state.Groups.filter(v => v.holder !== state.user.id);
+  },
+  addGroup(state,data){
+    state.Groups.push(data);
+    state.mySetGroups = state.Groups.filter(v => v.holder === state.user.id);
+    state.myJoinGroups = state.Groups.filter(v => v.holder !== state.user.id);
+  },
   setUnRead(state, data) {
     if (data.clear) {
       state.unRead.forEach(v => {

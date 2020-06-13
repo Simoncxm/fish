@@ -172,7 +172,8 @@
           if (r.code === 0) {
 
           }
-        })
+        });
+        if(i===0)this.$store.commit('setCurrSation', this.conversationsList[0]);
         // alert(JSON.stringify(this.conversationsList))
         // console.log("remove");
         // console.log(v.id);

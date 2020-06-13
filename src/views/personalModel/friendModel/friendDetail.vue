@@ -81,7 +81,7 @@
       vApheader
     },
     computed: {
-      ...mapState(['user','conversationsList'])
+      ...mapState(['user','conversationsList','friendList'])
     },
     methods: {
       apply() {
@@ -93,27 +93,30 @@
         this.$router.push({name: 'applyFriend', params: {id: this.$route.params.id}, query: {}});
       },
       remove() {
-        let params={
-          userid: this.$route.params.id
+        let index = 1;
+        for (let i = 0; i < this.conversationsList.length; i++) {
+          if (this.conversationsList[i].itemId === this.$route.params.id && this.conversationsList[i].type === 'friend'){
+            index = i;
+            break;
+          }
+        }
+        this.$store.commit('removeConversationsList', index);
+        let val={
+          userId:this.$route.params.id
         };
-        api.deleteMyFriend(params).then(r =>{
-          if(r.code===0){
-            this.$message.success('删除成功');
-            this.$router.go(-1);
-          }
-          else{
-            this.$message.error(r.mes);
-          }
-        })
+        this.$socket.emit('deleteMyFriend', val);
+        this.$store.commit('removeFriend', this.$route.params.id);
+        this.$router.go(-1);
       },
       send(){
         // console.log('send');
         let flag=false;
         this.conversationsList.forEach(v => {
-          if(v.itemId === this.$route.params.id){
+          if(v.itemId === this.$route.params.id && v.type === 'friend'){
             this.$store.commit('setCurrSation', v);
             flag=true;
           }
+
         });
         if(!flag){
           let params = {
@@ -147,14 +150,17 @@
         this.$router.push({name: 'photoWall', params: this.$route.params});
       },
       checkMyfriend() {
-        let params = {
-          userid: this.$route.params.id
-        };
-        api.checkMyfriend(params).then(r => {
-          if (r.isMyfriend===true) {
-            this.myFriendFlag = true;
-          }
-        })
+        if (this.friendList.filter(v => v.id === this.$route.params.id).length){
+          this.myFriendFlag = true;
+        }
+        // let params = {
+        //   userid: this.$route.params.id
+        // };
+        // api.checkMyfriend(params).then(r => {
+        //   if (r.isMyfriend===true) {
+        //     this.myFriendFlag = true;
+        //   }
+        // })
       }
     },
     created() {

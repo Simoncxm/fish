@@ -100,7 +100,7 @@
       vApheader
     },
     computed: {
-      ...mapState(['user','conversationsList'])
+      ...mapState(['user','conversationsList','Groups'])
     },
     methods: {
       getGroupInfo() {
@@ -141,7 +141,7 @@
         // console.log('send');
         let flag=false;
         this.conversationsList.forEach(v => {
-          if(v.itemId === this.$route.params.id){
+          if(v.itemId === this.$route.params.id && v.type === 'group'){
             this.$store.commit('setCurrSation', v);
             flag=true;
           }
@@ -160,16 +160,35 @@
         }
       },
       quit() {
+        let index = 1;
+        for (let i = 0; i < this.conversationsList.length; i++) {
+          if (this.conversationsList[i].itemId === this.$route.params.id && this.conversationsList[i].type === 'group'){
+            index = i;
+            break;
+          }
+        }
+        this.$store.commit('removeConversationsList', index);
+        let val={
+          userId:this.user.id,
+          groupId:this.$route.params.id
+
+        };
+        this.$socket.emit('quitGroup', val);
+        this.$store.commit('leaveGroup', this.$route.params.id);
+        this.$router.go(-1);
       },
       checkMygroup() {
-        let params = {
-          groupId: this.$route.params.id
-        };
-        api.checkIfInGroup(params).then(r => {
-          if (r.isMygroup===true) {
-            this.applyFlag = true;
-          }
-        })
+        if (this.Groups.filter(v => v.id === this.$route.params.id).length){
+          this.applyFlag = true;
+        }
+        // let params = {
+        //   groupId: this.$route.params.id
+        // };
+        // api.checkIfInGroup(params).then(r => {
+        //   if (r.isMygroup===true) {
+        //     this.applyFlag = true;
+        //   }
+        // })
       }
     },
     mounted() {

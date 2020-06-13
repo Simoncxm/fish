@@ -67,7 +67,6 @@
   export default {
     data() {
       return {
-        friendList: [],
         IMG_URL: process.env.IMG_URL,
         showList: ['mine'], // 分组 备用
         visible: false, // dropdown显示
@@ -80,7 +79,7 @@
       vApheader
     },
     computed: {
-      ...mapState(['conversationsList', 'user']),
+      ...mapState(['conversationsList', 'user','friendList']),
       addOrDel() {
         return this.conversationsList.filter(v => v.id === this.currFriend.conversationId).length;
       }
@@ -159,11 +158,13 @@
         });
       },
       findMyfriends() {
-        api.getMyfriend().then(r => {
-          if (r.code === 0) {
-            this.friendList = r.data;
-          }
-        })
+        if(!this.friendList.length){
+          api.getMyfriend().then(r => {
+            if (r.code === 0) {
+              this.$store.commit('setFriend', r.data);
+            }
+          })
+        }
       }
     },
     mounted() {

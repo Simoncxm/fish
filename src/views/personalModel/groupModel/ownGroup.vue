@@ -90,9 +90,6 @@
         is_focus: false,
         IMG_URL: process.env.IMG_URL,
         loadingWait: false,
-        Groups: [], // 群聊数据
-        mySetGroups: [], // 我创建的
-        myJoinGroups: [],// 我加入的
         showList: ['set'], // 创建or加入
         currGroup: {}, // 当前群
         visible: false, // dropdown显示
@@ -104,7 +101,7 @@
       vApheader
     },
     computed: {
-      ...mapState(['conversationsList','user']),
+      ...mapState(['conversationsList','user','Groups','mySetGroups','myJoinGroups']),
       addOrDel() {
         return this.conversationsList.filter(v => v.id === this.currGroup.id).length;
       }
@@ -117,21 +114,22 @@
         this.$router.push({name: 'groupDetail', params: {id: id}});
       },
       getMyGroup() {
-        this.loadingWait = true;
-        api.getMyGroup().then(r => {
-          if (r.code === 0) {
-            this.Groups = r.data;
-            this.filterGroups();
-            this.loadingWait = false;
-          }
-        });
+        if(!this.Groups.length){
+          this.loadingWait = true;
+          api.getMyGroup().then(r => {
+            if (r.code === 0) {
+              this.$store.commit('setGroup', r.data);
+              this.loadingWait = false;
+            }
+          });
+        }
       },
-      filterGroups() {
-        this.mySetGroups = this.Groups.filter(v => v.holder === this.user.id);
-        this.myJoinGroups = this.Groups.filter(v => v.holder !== this.user.id);
-        // alert(JSON.stringify(this.myJoinGroups));
-        // alert(JSON.stringify(this.mySetGroups));
-      },
+      // filterGroups() {
+      //   this.mySetGroups = this.Groups.filter(v => v.holder === this.user.id);
+      //   this.myJoinGroups = this.Groups.filter(v => v.holder !== this.user.id);
+      //   // alert(JSON.stringify(this.myJoinGroups));
+      //   // alert(JSON.stringify(this.mySetGroups));
+      // },
       setShowList(v) {
         if (this.showList.indexOf(v) > -1) {
           this.showList.splice(this.showList.indexOf(v), 1);

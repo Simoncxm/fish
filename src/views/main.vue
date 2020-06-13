@@ -130,6 +130,10 @@
         console.log('加入了', OnlineUser);
         this.$store.commit('setOnlineUser', OnlineUser)
       },
+      beDeleted(val){
+
+
+      },
       leaved(OnlineUser) {
         this.$store.commit('setOnlineUser', OnlineUser)
       },
