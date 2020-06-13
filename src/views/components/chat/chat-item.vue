@@ -138,7 +138,7 @@
     },
     sockets: {
       org(r) {
-        this.conversationsChat[r.conversationId].push(Object.assign({}, r, {type: 'other'}));
+        this.conversationsChat[r.conversationId].push(Object.assign({}, r, {type: 'org'}));
         if (r.conversationId !== this.currSation.id) {
           this.$emit('NewMes', r);
           // this.chatList.push(Object.assign({}, r, {type: 'org'}));
