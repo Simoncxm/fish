@@ -152,6 +152,7 @@
         else{
           if(r.addOrDelete){
             this.groupUsers = this.groupUserALL[r.conversationId];
+            this.getGroupUserStatus(this.OnlineUser)
           }
         }
       },
