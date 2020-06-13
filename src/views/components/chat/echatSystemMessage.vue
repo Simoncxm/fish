@@ -103,6 +103,8 @@
       //   this.conversationsChat[this.currSation.id] = r;
       // },
       takeValidate(r) {
+        // alert("ok");
+        // alert(JSON.stringify(r));
         this.$emit('NewMes', r);
         r.visible = false;
         this.currChat.unshift(r);
@@ -117,7 +119,8 @@
           }
         }
       },
-      ValidateSuccess() {
+      ValidateSuccess(r) {
+        // alert(JSON.stringify(r));
         // this.$store.dispatch('getUserInfo');
         if(r.state==='friend'){
           this.$store.commit('addfriend', r.friend);

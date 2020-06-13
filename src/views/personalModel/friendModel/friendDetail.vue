@@ -108,7 +108,7 @@
         };
         this.$socket.emit('deleteMyFriend', val);
         this.$store.commit('removeFriend', this.$route.params.id);
-        this.$router.go(-1);
+        // this.$router.go(-1);
       },
       send(){
         // console.log('send');
