@@ -163,7 +163,9 @@
       //   this.$store.commit('setUnRead', {conversationId: r.conversationId, add: true, count: 1});
       // },
       takeValidate(r) {
-        this.$store.commit('setUnRead', {conversationId: r.conversationId, add: true, count: 1});
+        if(this.currSation&&this.currSation.id!==this.Echat.id){
+          this.$store.commit('setUnRead', {conversationId: r.conversationId, add: true, count: 1});
+        }
         // if (r.type === 'info') {
         //   this.$store.dispatch('getUserInfo');
         // }

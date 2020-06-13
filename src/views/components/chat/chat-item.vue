@@ -166,7 +166,12 @@
           }
         }
         else{
-          this.conversationsChat[r.conversationId].push(Object.assign({}, r, {type: 'other'}));
+          if(r.conversationId===this.Echat.id){
+            this.conversationsChat[r.conversationId].push(Object.assign({}, r, {type: 'info'}));
+          }
+          else{
+            this.conversationsChat[r.conversationId].push(Object.assign({}, r, {type: 'other'}));
+          }
           this.$emit('NewMes', r);
           this.$store.commit('setUnRead', {conversationId: r.conversationId, add: true, count: 1});
         }
@@ -193,7 +198,7 @@
       // }
     },
     computed: {
-      ...mapState(['user', 'OnlineUser','conversationsChat','groupUserALL','currSation'])
+      ...mapState(['user', 'Echat','OnlineUser','conversationsChat','groupUserALL','currSation'])
     },
     watch: {
       currSation: { // 当前会话

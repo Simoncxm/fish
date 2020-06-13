@@ -92,23 +92,24 @@
       }
     },
     sockets: {
-      takeValidate(r) {
-        // alert("ok");
-        // alert(JSON.stringify(r));
-        this.$emit('NewMes', r);
-        r.visible = false;
-        this.currChat.unshift(r);
-        if (r.type === 'info' && r.status==='1') {
-          if(r.state==='friend'){
-            this.$store.commit('addfriend', r.friend);
-            this.$store.commit('addConversationsList', r.conversation);
-          }
-          else{
-            this.$store.commit('addGroup', r.group);
-            this.$store.commit('addConversationsList', r.conversation);
-          }
-        }
-      },
+      // takeValidate(r) {
+      //   alert("2");
+      //   // alert("ok");
+      //   // alert(JSON.stringify(r));
+      //   this.$emit('NewMes', r);
+      //   r.visible = false;
+      //   this.currChat.unshift(r);
+      //   if (r.type === 'info' && r.status==='1') {
+      //     if(r.state==='friend'){
+      //       this.$store.commit('addfriend', r.friend);
+      //       this.$store.commit('addConversationsList', r.conversation);
+      //     }
+      //     else{
+      //       this.$store.commit('addGroup', r.group);
+      //       this.$store.commit('addConversationsList', r.conversation);
+      //     }
+      //   }
+      // },
       // getSystemMessages(r) { // 获取系统消息
       //   if (r.length) {
       //     this.$emit('NewMes', r[r.length - 1]);
@@ -119,7 +120,21 @@
       //   });
       //   this.conversationsChat[this.currSation.id] = r;
       // },
-
+      mes(r) {
+        if (r.conversationId === this.currSation.id) {
+          if(r.userM!==this.user.id){
+            this.conversationsChat[r.conversationId].push(Object.assign({}, r, {type: 'info'}));
+            // this.chatList.push(Object.assign({}, r, {type: 'other'}));
+            // this.$socket.emit('setReadStatus', {conversationId: r.conversationId, name: this.user.name});
+            this.$store.commit('setUnRead', {conversationId: r.conversationId, clear: true});
+          }
+        }
+        else{
+          this.conversationsChat[r.conversationId].push(Object.assign({}, r, {type: 'other'}));
+          this.$emit('NewMes', r);
+          this.$store.commit('setUnRead', {conversationId: r.conversationId, add: true, count: 1});
+        }
+      },
       ValidateSuccess(r) {
         // alert(JSON.stringify(r));
         // this.$store.dispatch('getUserInfo');
