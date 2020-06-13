@@ -164,8 +164,20 @@
       // },
       takeValidate(r) {
         this.$store.commit('setUnRead', {conversationId: r.conversationId, add: true, count: 1});
-        if (r.type === 'info') {
-          this.$store.dispatch('getUserInfo');
+        // if (r.type === 'info') {
+        //   this.$store.dispatch('getUserInfo');
+        // }
+        r.visible = false;
+        this.conversationsChat[this.Echat.id].unshift(r);
+        if (r.type === 'info' && r.status==='1') {
+          if(r.state==='friend'){
+            this.$store.commit('addfriend', r.friend);
+            this.$store.commit('addConversationsList', r.conversation);
+          }
+          else{
+            this.$store.commit('addGroup', r.group);
+            this.$store.commit('addConversationsList', r.conversation);
+          }
         }
       }
     },

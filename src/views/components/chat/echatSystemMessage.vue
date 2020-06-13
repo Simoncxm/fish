@@ -102,23 +102,7 @@
       //   });
       //   this.conversationsChat[this.currSation.id] = r;
       // },
-      takeValidate(r) {
-        // alert("ok");
-        // alert(JSON.stringify(r));
-        this.$emit('NewMes', r);
-        r.visible = false;
-        this.currChat.unshift(r);
-        if (r.type === 'info' && r.status==='1') {
-          if(r.state==='friend'){
-            this.$store.commit('addfriend', r.friend);
-            this.$store.commit('addConversationsList', r.conversation);
-          }
-          else{
-            this.$store.commit('addGroup', r.group);
-            this.$store.commit('addConversationsList', r.conversation);
-          }
-        }
-      },
+
       ValidateSuccess(r) {
         // alert(JSON.stringify(r));
         // this.$store.dispatch('getUserInfo');
@@ -194,6 +178,23 @@
       ...mapState(['user', 'Echat','conversationsChat','currSation']),
     },
     methods: {
+      // takeValidate(r) {
+      //   // alert("ok");
+      //   // alert(JSON.stringify(r));
+      //   this.$emit('NewMes', r);
+      //   r.visible = false;
+      //   this.currChat.unshift(r);
+      //   if (r.type === 'info' && r.status==='1') {
+      //     if(r.state==='friend'){
+      //       this.$store.commit('addfriend', r.friend);
+      //       this.$store.commit('addConversationsList', r.conversation);
+      //     }
+      //     else{
+      //       this.$store.commit('addGroup', r.group);
+      //       this.$store.commit('addConversationsList', r.conversation);
+      //     }
+      //   }
+      // },
       del(v) {
         api.removeMessage({'id': v['id']}).then(r => {
           if (r.code === 0) {
