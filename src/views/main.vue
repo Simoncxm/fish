@@ -131,6 +131,7 @@
         this.$store.commit('setOnlineUser', OnlineUser)
       },
       beDeleted(val){
+        alert(JSON.stringify(val));
         if(val.type==='friend'){
           let index = 1;
           for (let i = 0; i < this.conversationsList.length; i++) {

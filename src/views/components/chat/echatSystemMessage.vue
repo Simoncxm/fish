@@ -117,7 +117,6 @@
     watch: {
       currSation: { // 当前会话
         handler(v) {
-          this.chatLoading = true;
           if (v.id) {
             // alert("ok");
             // this.$socket.emit('setReadStatus', {conversationId: v.id, name: this.user.name});
