@@ -34,6 +34,7 @@
   import api from '@/api';
   import cropper from '@/views/components/cropper/cropper';
   import vApheader from '@/views/components/header/vApheader';
+  import {mapState} from 'vuex';
 
   export default {
     name: 'setGroup',
@@ -84,6 +85,9 @@
       cropper,
       vApheader
     },
+    computed: {
+      ...mapState(['user'])
+    },
     methods: {
       setShowCrop() { // 打开裁剪框
         this.showCrop = true;
@@ -118,6 +122,8 @@
                 //     this.$store.commit('setConversationsList', params);
                 //   }
                 // });
+                this.$store.commit('addGroup', Object.assign({}, params, {id: r.id,holder:this.user.id}));
+                this.conversationsChat[r.conversationId].push(Object.assign({}, r, {type: 'other'}));
                 this.$message.success('创建成功');
                 this.$router.push('/main/personalMain/group/own');
               } else {

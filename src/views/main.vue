@@ -131,7 +131,10 @@
         this.$store.commit('setOnlineUser', OnlineUser)
       },
       beDeleted(raw){
+        // alert("ddddd");
         let val = raw.body;
+        // alert(JSON.stringify(val));
+        // alert(JSON.stringify(this.conversationsList));
         if(val.type==='friend'){
           let index = -1;
           for (let i = 0; i < this.conversationsList.length; i++) {
@@ -142,7 +145,9 @@
           }
           this.$store.commit('removeConversationsList', index);
           this.$store.commit('removeFriend', val.itemId);
-          this.$router.go(-1);
+          // alert(index);
+          // alert(JSON.stringify(this.conversationsList));
+          // this.$router.go(-1);
         }
       },
       leaved(OnlineUser) {
