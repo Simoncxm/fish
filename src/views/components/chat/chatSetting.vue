@@ -164,18 +164,18 @@
           return;
         }
         let formdata = new FormData();
-        formdata.append('f', f);
+        formdata.append('fileName', f);
         api.uploadFile(formdata).then(r => {
           if (r.code === 0) {
             let params = {
-              wallpaper: r.data + ',' + r.data
+              wallpaper: r.url + ',' + r.url
             };
             if (this.user.wallpaper.split(',')[1]) {
               params.unlink = this.user.wallpaper.split(',')[1];
             }
             api.updateUserInfo(params).then(res => {
               if (res.code === 0) {
-                this.$store.commit('setUser', {wallpaper: r.data + ',' + r.data});
+                this.$store.commit('setUser', {wallpaper: r.url + ',' + r.url});
                 this.$message({
                   message: '上传成功',
                   type: 'success'

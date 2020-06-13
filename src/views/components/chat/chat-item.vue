@@ -293,10 +293,10 @@
           return;
         }
         let formdata = new FormData();
-        formdata.append('f', f);
+        formdata.append('fileName', f);
         api.uploadFile(formdata).then(r => {
           if (r.code === 0) {
-            this.send(r.data, 'img');
+            this.send(r.url, 'img');
           } else {
             this.$message({
               message: '上传失败',
@@ -390,6 +390,7 @@
           userM: this.user.id,
           time: (new Date()).getTime(),
         };
+
         if (type === 'emoji') { // 发送表情
           val.style = 'emoji';
           val.mes = '表情';
