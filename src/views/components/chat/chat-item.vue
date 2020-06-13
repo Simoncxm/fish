@@ -149,6 +149,11 @@
           this.$emit('NewMes', r);
           // this.chatList.push(Object.assign({}, r, {type: 'org'}));
         }
+        else{
+          if(r.addOrDelete){
+            this.groupUsers = this.groupUserALL[r.conversationId];
+          }
+        }
       },
       mes(r) {
         if (r.conversationId === this.currSation.id) {
