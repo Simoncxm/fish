@@ -122,10 +122,11 @@
         if(r.state==='friend'){
           this.$store.commit('addfriend', r.friend);
           this.$store.commit('addConversationsList', r.conversation);
-        }
-        else{
-          this.$store.commit('addGroup', r.group);
-          this.$store.commit('addConversationsList', r.conversation);
+          this.$store.commit('setCurrSation', r.conversation);
+          this.$message({
+            message: '添加好友成功',
+            type: 'success'
+          });
         }
       }
     },
