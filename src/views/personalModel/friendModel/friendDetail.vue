@@ -19,7 +19,8 @@
         <p class="title">
           {{friendInfo.nickname}}
         </p>
-        <p>{{friendInfo.signature}}</p>
+        <p>{{friendInfo.signature ? '个性签名：' + friendInfo.signature :
+          '这个人很懒，暂时没有签名哦！'}}</p>
       </div>
     </el-carousel>
     <div class="echat-Detail-container friend-detail-container">
@@ -93,7 +94,7 @@
         this.$router.push({name: 'applyFriend', params: {id: this.$route.params.id}, query: {}});
       },
       remove() {
-        let index = 1;
+        let index = -1;
         for (let i = 0; i < this.conversationsList.length; i++) {
           if (this.conversationsList[i].itemId === this.$route.params.id && this.conversationsList[i].type === 'friend'){
             index = i;

@@ -6,8 +6,8 @@
        element-loading-background="rgba(0, 0, 0, 0.8)"
        v-fontColor="user.chatColor">
 <!--    <v-icon class="el-icon-loading" color="#fff" :size="14" v-if="loadmoreLoading"/>-->
-    <ul v-if="InfoList.length">
-      <template v-for="v in InfoList">
+    <ul v-if="currChat.length">
+      <template v-for="v in currChat">
         <li v-if="v.type === 'validate'" :key="v['id']">
           <span class="echat-line1 info">{{v.state === 'friend' ? '验证消息：' + v.nickname + '申请加您为好友' : '验证消息：' + v.nickname + '申请加入' + v.groupName}}</span>
           <span class="time">{{$utils.formatTimeH(v.time)}}</span>
@@ -84,9 +84,9 @@
       return {
         IMGURL: process.env.IMG_URL,
         visible: false,
-        InfoList: [],
         offset: 1,
         limit: 10,
+        currChat: [],
         chatLoading: false,
         // loadmoreLoading: false,
       }
@@ -100,18 +100,33 @@
       //     v.visible = false;
       //     v.delVisible = false;
       //   });
-      //   this.InfoList = r;
+      //   this.conversationsChat[this.currSation.id] = r;
       // },
       takeValidate(r) {
         this.$emit('NewMes', r);
         r.visible = false;
-        this.InfoList.unshift(r);
-        if (r.type === 'info') {
-          this.$store.dispatch('getUserInfo');
+        this.currChat.unshift(r);
+        if (r.type === 'info' && r.status==='1') {
+          if(r.state==='friend'){
+            this.$store.commit('addfriend', r.friend);
+            this.$store.commit('addConversationsList', r.conversation);
+          }
+          else{
+            this.$store.commit('addGroup', r.group);
+            this.$store.commit('addConversationsList', r.conversation);
+          }
         }
       },
       ValidateSuccess() {
-        this.$store.dispatch('getUserInfo');
+        // this.$store.dispatch('getUserInfo');
+        if(r.state==='friend'){
+          this.$store.commit('addfriend', r.friend);
+          this.$store.commit('addConversationsList', r.conversation);
+        }
+        else{
+          this.$store.commit('addGroup', r.group);
+          this.$store.commit('addConversationsList', r.conversation);
+        }
       }
     },
     watch: {
@@ -123,16 +138,7 @@
             this.$store.commit('setUnRead', {conversationId: v.id, clear: true});
             // this.$socket.emit('getSystemMessages', {conversationId: v.id, offset: this.offset, limit: this.limit});
             // alert(JSON.stringify(this.conversationsChat));
-            if(this.conversationsChat[v.id]){
-              this.InfoList = this.conversationsChat[v.id];
-              this.InfoList.forEach(t => {
-                t.visible = false;
-                t.delVisible = false;
-              });
-              // alert(JSON.stringify(this.InfoList))
-              // alert("ok");
-            }
-            else{
+            if(!this.conversationsChat[v.id]){
               this.chatLoading = true;
               v.chatoffset=1;
               v.chatlimit=10;
@@ -143,16 +149,19 @@
                     v.newMes=r.data[r.data.length - 1].mes;
                     v.newMesTime=r.data[r.data.length - 1].time;
                   }
-                  this.InfoList = r.data;
-                  // this.InfoList.forEach(t => {
+                  this.currChat = r.data;
+                  // this.conversationsChat[this.currSation.id].forEach(t => {
                   //   t.visible = false;
                   //   t.delVisible = false;
                   // });
                   this.chatLoading = false;
-                  this.conversationsChat[v.id]= this.InfoList;
-                  // alert(JSON.stringify(this.InfoList))
+                  this.conversationsChat[v.id]= this.currChat;
+                  // alert(JSON.stringify(this.conversationsChat[this.currSation.id]))
                 }
               });
+            }
+            else{
+              this.currChat = this.conversationsChat[this.currSation.id];
             }
             api.setConversation({conversationId: v.id});
             // let params = {conversationId: v.id, offset: this.offset, limit: this.limit};
@@ -165,12 +174,12 @@
             //       v.visible = false;
             //       v.delVisible = false;
             //     });
-            //     this.InfoList = r.data;
+            //     this.conversationsChat[this.currSation.id] = r.data;
             //   }
             //   this.chatLoading = false;
             // })
           } else {
-            this.InfoList = [];
+            this.currChat = [];
           }
         },
         deep: true,
@@ -178,7 +187,7 @@
       }
     },
     computed: {
-      ...mapState(['user', 'Echat','conversationsChat','currSation'])
+      ...mapState(['user', 'Echat','conversationsChat','currSation']),
     },
     methods: {
       del(v) {
@@ -188,7 +197,9 @@
               message: '删除成功',
               type: 'success'
             });
-            this.InfoList = this.InfoList.filter(m => m.id !== v.id);
+            this.currChat = this.currChat.filter(m => m.id !== v.id);
+            this.conversationsChat[this.currSation.id] = this.currChat
+            // this.conversationsChat[this.currSation.id] = this.conversationsChat[this.currSation.id].filter(m => m.id !== v.id);
           } else {
             this.$message({
               message: '删除失败',
@@ -202,7 +213,7 @@
         v.userYname = this.user.nickname;
         // alert(JSON.stringify(v))
         this.$socket.emit('agreeValidate', v);
-        this.InfoList.forEach(m => { // 更新同一申请人的所有相同请求
+        this.conversationsChat[this.currSation.id].forEach(m => { // 更新同一申请人的所有相同请求
           if (m.userM === v.userM && m.type === "validate" && (v.state === 'friend' || v.state === 'group')) {
             m.status = '1';
             m.visible = false

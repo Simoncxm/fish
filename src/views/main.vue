@@ -133,7 +133,7 @@
       beDeleted(raw){
         let val = raw.body;
         if(val.type==='friend'){
-          let index = 1;
+          let index = -1;
           for (let i = 0; i < this.conversationsList.length; i++) {
             if (this.conversationsList[i].itemId === val.itemId && this.conversationsList[i].type === 'friend'){
               index = i;

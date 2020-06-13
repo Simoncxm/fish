@@ -38,8 +38,20 @@ export default {
   addConversationsList(state, data) {
     state.conversationsList = [data].concat(state.conversationsList);
   },
-  removeConversationsList(state, index) { // 设置会话列表
+  removeConversationsList(state, index) {
+    if(index < 0)return;
     state.conversationsList.splice(index,1);
+    if(index === 0){
+      if(state.conversationsList.length){
+        state.currSation=state.conversationsList[0];
+      }
+      else{
+        state.currSation={};
+      }
+    }
+    else{
+      state.currSation=state.conversationsList[index-1];
+    }
   },
   setOnlineUser(state, data) {
     state.OnlineUser = data;

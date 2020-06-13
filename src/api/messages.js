@@ -5,7 +5,7 @@ import fetch from './fetch';
 
 export default {
   removeMessage(params) { //删除消息
-    return fetch.delete('mes/removeMessage', params);
+    return fetch.post('mes/removeMessage', params);
   },
   getMoreMessage(params) { //加载更多消息
     return fetch.get('mes/loadMoreMessage', params);

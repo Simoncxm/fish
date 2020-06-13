@@ -41,7 +41,7 @@
         </ul>
         <div class="chat-content-box" v-if="update">
           <chat-item @NewMes="getNewMes" v-show="currSation.type !== 'echat'"></chat-item>
-          <echat-message v-show="currSation.type === 'echat'"></echat-message>
+          <echat-message @NewMes="getNewMes" v-show="currSation.type === 'echat'"></echat-message>
         </div>
       </div>
       <div class="chat-setting" :class="{active: settingFlag.f}" v-watchMouse="settingFlag">
@@ -173,7 +173,7 @@
 
           }
         });
-        if(i===0)this.$store.commit('setCurrSation', this.conversationsList[0]);
+        // if(i===0)this.$store.commit('setCurrSation', this.conversationsList[0]);
         // alert(JSON.stringify(this.conversationsList))
         // console.log("remove");
         // console.log(v.id);

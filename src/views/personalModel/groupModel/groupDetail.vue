@@ -160,7 +160,7 @@
         }
       },
       quit() {
-        let index = 1;
+        let index = -1;
         for (let i = 0; i < this.conversationsList.length; i++) {
           if (this.conversationsList[i].itemId === this.$route.params.id && this.conversationsList[i].type === 'group'){
             index = i;
