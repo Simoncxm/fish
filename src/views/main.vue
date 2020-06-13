@@ -130,8 +130,8 @@
         console.log('加入了', OnlineUser);
         this.$store.commit('setOnlineUser', OnlineUser)
       },
-      beDeleted(val){
-        alert(JSON.stringify(val));
+      beDeleted(raw){
+        let val = raw.body;
         if(val.type==='friend'){
           let index = 1;
           for (let i = 0; i < this.conversationsList.length; i++) {
