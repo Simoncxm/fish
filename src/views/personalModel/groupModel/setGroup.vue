@@ -123,7 +123,6 @@
                 //   }
                 // });
                 this.$store.commit('addGroup', Object.assign({}, params, {id: r.id,holder:this.user.id}));
-                this.conversationsChat[r.conversationId].push(Object.assign({}, r, {type: 'other'}));
                 this.$message.success('创建成功');
                 this.$router.push('/main/personalMain/group/own');
               } else {
