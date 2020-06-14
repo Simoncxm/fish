@@ -175,7 +175,7 @@
         };
         this.$socket.emit('quitGroup', val);
         this.$store.commit('leaveGroup', this.$route.params.id);
-        this.$router.go(-1);
+        this.$router.push('/main/personalMain/group/own');
       },
       checkMygroup() {
         if (this.Groups.filter(v => v.id === this.$route.params.id).length){

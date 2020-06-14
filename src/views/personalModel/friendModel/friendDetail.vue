@@ -108,6 +108,7 @@
         };
         this.$socket.emit('deleteMyFriend', val);
         this.$store.commit('removeFriend', this.$route.params.id);
+        this.$router.push('/main/personalModel/friendly/own');
         // this.$router.go(-1);
       },
       send(){
