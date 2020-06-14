@@ -40,7 +40,7 @@ export default {
   },
   removeConversationsList(state, index) {
     if(index < 0)return;
-    let flag = state.conversationsList[index].id===this.currSation.id;
+    let flag = state.conversationsList[index].id===state.currSation.id;
     state.conversationsList.splice(index,1);
     if(flag){
       if(index === 0){
