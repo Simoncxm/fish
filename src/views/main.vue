@@ -163,6 +163,7 @@
       //   this.$store.commit('setUnRead', {conversationId: r.conversationId, add: true, count: 1});
       // },
       takeValidate(r) {
+        // alert("ok");
         if(this.currSation&&this.currSation.id!==this.Echat.id){
           this.$store.commit('setUnRead', {conversationId: r.conversationId, add: true, count: 1});
         }
@@ -170,7 +171,7 @@
         //   this.$store.dispatch('getUserInfo');
         // }
         r.visible = false;
-        this.conversationsChat[this.Echat.id].unshift(r);
+        this.conversationsChat[this.Echat.id].push(r);
         if (r.type === 'info' && r.status==='1') {
           if(r.state==='friend'){
             this.$store.commit('addfriend', r.friend);
