@@ -40,17 +40,20 @@ export default {
   },
   removeConversationsList(state, index) {
     if(index < 0)return;
+    let flag = state.conversationsList[index].id===this.currSation.id;
     state.conversationsList.splice(index,1);
-    if(index === 0){
-      if(state.conversationsList.length){
-        state.currSation=state.conversationsList[0];
+    if(flag){
+      if(index === 0){
+        if(state.conversationsList.length){
+          state.currSation=state.conversationsList[0];
+        }
+        else{
+          state.currSation={};
+        }
       }
       else{
-        state.currSation={};
+        state.currSation=state.conversationsList[index-1];
       }
-    }
-    else{
-      state.currSation=state.conversationsList[index-1];
     }
   },
   setOnlineUser(state, data) {
