@@ -152,6 +152,7 @@
     watch: {
       currSation: { // 当前会话
         handler(v) {
+          if(v.id!==this.Echat.id)return;
           if (v.id) {
             // alert("ok");
             // this.$socket.emit('setReadStatus', {conversationId: v.id, name: this.user.name});
