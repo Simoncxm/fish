@@ -113,7 +113,7 @@
       }
     },
     computed: {
-      ...mapState(['user', 'conversationsList', 'Echat','conversationsChat'])
+      ...mapState(['user', 'conversationsList', 'Echat','conversationsChat','currSation'])
     },
     components: {
       vHeader
@@ -165,7 +165,7 @@
       takeValidate(r) {
         // alert("ok");
         if(this.currSation&&this.currSation.id!==this.Echat.id){
-          this.$store.commit('setUnRead', {conversationId: r.conversationId, add: true, count: 1});
+          this.$store.commit('setUnRead', {conversationId: this.Echat.id, add: true, count: 1});
         }
         // if (r.type === 'info') {
         //   this.$store.dispatch('getUserInfo');
