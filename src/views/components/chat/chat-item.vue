@@ -140,9 +140,11 @@
       org(r) {
         this.conversationsChat[r.conversationId].push(Object.assign({}, r, {type: 'org'}));
         if(r.addOrDelete===1){
+          this.$store.commit('setOnlineUser', r.OnlineUser);
           this.groupUserALL[r.conversationId].push(r.userInfo);
         }
         else if (r.addOrDelete===-1){
+          this.$store.commit('setOnlineUser', r.OnlineUser);
           this.groupUserALL[r.conversationId] = this.groupUserALL[r.conversationId].filter(v => v.id !== r.userInfo.id);
         }
         if (r.conversationId !== this.currSation.id) {
@@ -171,26 +173,6 @@
           this.$store.commit('setUnRead', {conversationId: r.conversationId, add: true, count: 1});
         }
       },
-      // getHistoryMessages(r) { // 获取历史消息
-      //   alert(JSON.stringify(r));
-      //   alert(r.conversationId);
-      //   alert(this.currSation.id);
-      //   if (r.data.length) {
-      //     this.$emit('NewMes', r.data[r.data.length - 1]);
-      //   }
-      //   if(r.conversationId===this.currSation.id){
-      //     this.chatList = r.data.map(v => {
-      //       if (v.type !== 'org') {
-      //         if (v.name === this.user.name) {
-      //           v.type = 'mine';
-      //         } else {
-      //           v.type = 'other';
-      //         }
-      //       }
-      //       return v;
-      //     });
-      //   }
-      // }
     },
     computed: {
       ...mapState(['user', 'Echat','OnlineUser','conversationsChat','groupUserALL','currSation'])
