@@ -362,17 +362,19 @@
         let params = {
           id: id
         };
-        api.getGroupUser(params).then(r => {
-          if (r.code === 0) {
-            this.groupUsers = r.data;
-            // let page = (this.offset - 1) * this.limit;
-            // this.groupUserList = this.groupUsers.slice(page, page + this.limit);
-            /*console.log(this.groupUsers);*/
-            this.getGroupUserStatus(this.OnlineUser);
-            this.groupUserALL[this.currSation.id] = this.groupUsers;
-            // this.$store.commit('setGroupUserALL', v.id, this.groupUsers);
-          }
-        })
+        if(!this.groupUserALL[this.currSation.id]||this.groupUserALL[this.currSation.id]==={}){
+          api.getGroupUser(params).then(r => {
+            if (r.code === 0) {
+              this.groupUsers = r.data;
+              // let page = (this.offset - 1) * this.limit;
+              // this.groupUserList = this.groupUsers.slice(page, page + this.limit);
+              /*console.log(this.groupUsers);*/
+              this.getGroupUserStatus(this.OnlineUser);
+              this.groupUserALL[this.currSation.id] = this.groupUsers;
+              // this.$store.commit('setGroupUserALL', v.id, this.groupUsers);
+            }
+          })
+        }
       },
       send(params, type = 'mess') { // 发送消息
         if (!this.message && !params) {
@@ -402,7 +404,7 @@
         } else if (type === 'file') {
           val.style = 'file';
           val.mes = params.name;
-          val.emoji = params.response.data;
+          val.emoji = params.response.url.replace(/display/,"download");
         }
         // this.chatList.push(Object.assign({}, val, {type: 'mine'}));
         this.conversationsChat[this.currSation.id].push(Object.assign({}, val, {type: 'mine'}));

@@ -75,10 +75,10 @@
         this.loading = true;
         let blob = new Blob([ab], {type: 'image/png'}); // type为图片的格式
         let formdata = new FormData();
-        formdata.append('f', blob, 'f' + Date.now() + '.png');
+        formdata.append('fileName', blob);
         api.uploadFile(formdata).then(r => {
           if (r.code === 0) {
-            this.$emit('avatar', r.data);
+            this.$emit('avatar', r.url);
           } else {
             this.$message({
               message: '保存失败',

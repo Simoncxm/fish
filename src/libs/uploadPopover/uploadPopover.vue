@@ -8,12 +8,12 @@
       <el-upload
         class="upload-demo"
         ref="upload"
-        action="/v/api/uploadFile"
+        action="/uploadFile"
         :file-list="fileList"
         :on-success="handleSuccess"
         :on-error="handleError"
         :before-upload="beforeUpload"
-        name="f"
+        name="fileName"
         :auto-upload="false">
         <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
         <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">传输</el-button>
