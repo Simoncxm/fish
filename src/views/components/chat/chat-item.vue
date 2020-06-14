@@ -275,7 +275,7 @@
       },
       uploadFileSuccess(res, file) { // 上传成功
         if (file.raw.type.indexOf('image') > -1) {
-          this.send(res.data, 'img');
+          this.send(res.url, 'img');
         } else {
           this.send(file, 'file');
         }

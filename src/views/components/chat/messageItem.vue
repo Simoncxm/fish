@@ -19,7 +19,7 @@
         <div>
           <p :title="v.mes">{{v.mes.lastIndexOf('.') > 12 ? v.mes.slice(0, 12) + '...' +
             v.mes.slice(v.mes.lastIndexOf('.')) : v.mes}}</p>
-          <a :href="v.emoji" download v-if="type === 'other'">下载</a>
+          <a :href="IMG_URL + v.emoji" download v-if="type === 'other'">下载</a>
           <p v-if="type === 'mine'">
             发送成功
             <v-icon class="el-icon-circle-check-outline" color="#67C23A"></v-icon>
