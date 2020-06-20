@@ -13,50 +13,50 @@ module.exports = {
     proxyTable: {
       '/uploadFile': {
         // target: 'http://192.144.229.202:8081',
-        target: 'http://123.57.203.185:8088',
+        target: 'http://39.107.125.161:8080',
         // changeOrigin: true // 是否在本机创建target地址的虚拟服务，避免跨域问题
       },
       '/user': {
         // target: 'http://192.144.229.202:8081',
-        target: 'http://123.57.203.185:8081',
+        target: 'http://39.107.125.161:8080',
         // changeOrigin: true // 是否在本机创建target地址的虚拟服务，避免跨域问题
       },
       '/sendEmail': {
         // target: 'http://192.144.229.202:8081',
-        target: 'http://123.57.203.185:8081',
+        target: 'http://39.107.125.161:8080',
         // changeOrigin: true // 是否在本机创建target地址的虚拟服务，避免跨域问题
       },
       '/login': {
         // target: 'http://192.144.229.202:8081',
-        target: 'http://123.57.203.185:8081',
+        target: 'http://39.107.125.161:8080',
         // changeOrigin: true // 是否在本机创建target地址的虚拟服务，避免跨域问题
       },
       '/register': {
         // target: 'http://192.144.229.202:8081',
-        target: 'http://123.57.203.185:8081',
+        target: 'http://39.107.125.161:8080',
         // changeOrigin: true // 是否在本机创建target地址的虚拟服务，避免跨域问题
       },
       '/group': {
         // target: 'http://192.144.229.202:8081',
-        target: 'http://123.57.203.185:8081',
+        target: 'http://39.107.125.161:8080',
         // changeOrigin: true // 是否在本机创建target地址的虚拟服务，避免跨域问题
       },
       '/mes': {
         // target: 'http://192.144.229.202:8081',
-        target: 'http://123.57.203.185:8081',
+        target: 'http://39.107.125.161:8080',
         // changeOrigin: true // 是否在本机创建target地址的虚拟服务，避免跨域问题
       },
       '/friend': {
         // target: 'http://192.144.229.202:8081',
-        target: 'http://123.57.203.185:8081',
+        target: 'http://39.107.125.161:8080',
         // changeOrigin: true // 是否在本机创建target地址的虚拟服务，避免跨域问题
       },
       '/expre': {
-        target: 'http://123.57.203.185:8088',
+        target: 'http://39.107.125.161:8080',
         // changeOrigin: true // 是否在本机创建target地址的虚拟服务，避免跨域问题
       },
       // '/display': {
-      //   target: 'http://123.57.203.185:8088',
+      //   target: 'http://39.107.125.161:8088',
       //   // changeOrigin: true // 是否在本机创建target地址的虚拟服务，避免跨域问题
       // },
       '/api': {
