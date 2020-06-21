@@ -14,6 +14,9 @@
       <p v-if="v.style === 'img'" class="image">
         <img v-lazy="IMG_URL + v.emoji" alt="" @dblclick="$emit('lookPhoto', v.emoji)" title="双击查看原图">
       </p>
+      <p v-if="v.style === 'video'" class="mes">
+        <el-link :href="v.emoji" target="_blank">{{v.mes}}</el-link>
+      </p>
       <div v-if="v.style === 'file'" class="file">
         <img src="../../../assets/img/file.png" alt="">
         <div>

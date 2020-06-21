@@ -11,6 +11,11 @@ export default new Router({
       component: _import('login')
     },
     {
+      path: '/video',
+      name: 'video',
+      component: _import('video')
+    },
+    {
       path: '/main',
       name: 'main',
       component: _import('main'),

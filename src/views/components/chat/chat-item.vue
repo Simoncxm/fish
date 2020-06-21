@@ -18,27 +18,33 @@
         </div>
         <div class="chat-send">
           <div class="tool">
-                        <span class="tool-item" v-watchMouse="showEmoji">
-                            <v-icon name="biaoqing1" :color="user.chatColor" @clickIcon="showEmoji.f = !showEmoji.f"
-                                    cursor="pointer" title="发送表情"></v-icon>
-                            <el-collapse-transition>
-                                <div class="emoji-container" v-show="showEmoji.f">
-                                    <emoji @chooseEmoji="chooseEmoji" @chooseEmojiDefault="chooseEmojiDefault"></emoji>
-                                </div>
-                            </el-collapse-transition>
-                        </span>
+            <span class="tool-item" v-watchMouse="showEmoji">
+                <v-icon name="biaoqing1" :color="user.chatColor" @clickIcon="showEmoji.f = !showEmoji.f"
+                        cursor="pointer" title="发送表情"></v-icon>
+                <el-collapse-transition>
+                    <div class="emoji-container" v-show="showEmoji.f">
+                        <emoji @chooseEmoji="chooseEmoji" @chooseEmojiDefault="chooseEmojiDefault"></emoji>
+                    </div>
+                </el-collapse-transition>
+            </span>
             <span class="tool-item">
-                            <v-icon name="tupian2" :color="user.chatColor"></v-icon>
-                            <input type="file" title="选择图片" @change="InmageChange" ref="chooseInmage"
-                                   accept="image/png, image/jpeg, image/gif, image/jpg">
-                        </span>
+                <v-icon name="tupian2" :color="user.chatColor"></v-icon>
+                <input type="file" title="选择图片" @change="InmageChange" ref="chooseInmage"
+                       accept="image/png, image/jpeg, image/gif, image/jpg">
+            </span>
             <span class="tool-item">
-                            <v-upload-popover :visible="uplaodVisible.f" @handleSuccess="uploadFileSuccess"
-                                              v-watchMouse="uplaodVisible">
-                                <v-icon name="wenjian2" :color="user.chatColor"
-                                        @clickIcon="uplaodVisible.f = !uplaodVisible.f" title="选择文件"></v-icon>
-                            </v-upload-popover>
-                        </span>
+                <v-upload-popover :visible="uplaodVisible.f" @handleSuccess="uploadFileSuccess"
+                                  v-watchMouse="uplaodVisible">
+                    <v-icon name="wenjian2" :color="user.chatColor"
+                            @clickIcon="uplaodVisible.f = !uplaodVisible.f" title="选择文件"></v-icon>
+                </v-upload-popover>
+            </span>
+            <span class="tool-item" v-if="currSation.type !== 'group'">
+              <a target="_blank" :href="'https://scaledrone.github.io/webrtc/index.html#' + videoHash">
+                <v-icon @clickIcon="sendVideo" class="el-icon-video-camera" :color="user.chatColor" title="发起视频">
+                </v-icon>
+              </a>
+            </span>
           </div>
           <textarea v-model="message" @keyup.enter="send(false)" v-fontColor="user.chatColor"></textarea>
           <div class="enter">
@@ -129,6 +135,7 @@
         groupUserList: [], // 长列表渲染
         offset: 1, // 群成员页码
         limit: 50,
+        videoHash: 0xFFFFFF,
       };
     },
     components: {
@@ -244,8 +251,17 @@
       }
     },
     mounted() {
+      this.videoHash = Math.floor(Math.random() * 0xFFFFFF).toString(16);
     },
     methods: {
+      sendVideo() {
+        this.videoHash = Math.floor(Math.random() * 0xFFFFFF).toString(16);
+        console.log(this.videoHash);
+        let that = this;
+        that.message = "我向你发起了视频通话，点击进入";
+        //that.message = 'https://scaledrone.github.io/webrtc/index.html#' + that.videoHash;
+        this.send('https://scaledrone.github.io/webrtc/index.html#' + that.videoHash, 'video');
+      },
       lookPhoto(url) { // 查看原图
         this.photoSwipeUrl = url;
         this.photoSwipeFlag = true;
@@ -382,12 +398,15 @@
           val.style = 'file';
           val.mes = params.name;
           val.emoji = params.response.url.replace(/display/,"download");
+        } else if (type === 'video') {
+          val.style = 'video';
+          val.emoji = params;
         }
         // this.chatList.push(Object.assign({}, val, {type: 'mine'}));
         this.conversationsChat[this.currSation.id].push(Object.assign({}, val, {type: 'mine'}));
         this.$socket.emit('mes', val);
         this.$emit('NewMes', val);
-        if (type === 'mess') { // 发送文字
+        if (type === 'mess' || type === 'video') { // 发送文字
           this.message = '';
         }
       },
